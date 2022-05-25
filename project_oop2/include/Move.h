@@ -5,6 +5,6 @@ public:
 	Move() = default;
 	virtual ~Move()=0;
 	virtual void move() = 0;
-private:
+protected:
 
 };
