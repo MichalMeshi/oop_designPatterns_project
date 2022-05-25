@@ -9,7 +9,7 @@ public:
 	void draw(sf::RenderWindow& w) { m_display.draw(w); }
 	void setPosition(int x, int  y) { m_display.setPosition( x,y ); }
 
-private:
+protected:
 	Display m_display;
 	void handleColision();
 };

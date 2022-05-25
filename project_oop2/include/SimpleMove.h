@@ -1,5 +1,5 @@
 #pragma once
-#include Move;
+#include "SimpleMove.h"
 class SimpleMove :public Move
 {
 public:
