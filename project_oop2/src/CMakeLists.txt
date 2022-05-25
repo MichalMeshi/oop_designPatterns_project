@@ -1,0 +1,12 @@
+﻿target_sources (${CMAKE_PROJECT_NAME} PRIVATE "main.cpp"
+                                             "Graphics.cpp" 
+                                             "Display.cpp" 
+                                             "Menu.cpp" 
+                                             "StartMenu.cpp" 
+                                             "SettingsMenu.cpp" 
+                                             "ShowInstructions.cpp" 
+                                             "GameController.cpp" 
+                                             "Level.cpp" 
+                                             "Board.cpp" 
+                                             "Ball.cpp" 
+                                             "Settings.cpp" )
