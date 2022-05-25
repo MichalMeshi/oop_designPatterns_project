@@ -5,10 +5,9 @@
 class StartMenu:public Menu
 {
 public:
-	StartMenu();
+	StartMenu(GameController& );
 	~StartMenu()=default;
 private:
-	GameController m_game;
 };
 
 
