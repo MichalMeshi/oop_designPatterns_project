@@ -1,12 +1,18 @@
 #pragma once
-#include "DynamicObj.h"
-class Board;
-class Player :public DynamicObj
-{
+#include "Object.h"
+class Player :public Object{
 public:
-	Player(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2) :DynamicObj(t, f1, f2) { m_display.setOrigin({ 15,15 }); }
-	~Player() = default;
-	virtual bool move(Board& b) override { return false; }
+	Player(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2) :Object(t, f1, f2) { m_display.setOrigin(sf::Vector2f(15, 15)); }
+	~Player() {}
+	void moveP(int& x, int& y, int& dx, int&dy)
+	{
+		x += dx;
+		y += dy;
+		if (x < 0) x = 0; if (x > 44) x = 44;
+		if (y < 0) y = 0; if (y > 44) y = 44;
+		setPosition(sf::Vector2f(350 + (x * 20), 50 + (y * 20)));
+	}
+
 private:
 
 };

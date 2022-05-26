@@ -3,7 +3,7 @@
 class MoveFar:public Move
 {
 public:
-	MoveFar() = default;
-	~MoveFar() = default;
+	MoveFar() {}
+	~MoveFar() {}
 	virtual void move() override{}
 };

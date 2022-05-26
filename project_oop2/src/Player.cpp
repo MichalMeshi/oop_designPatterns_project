@@ -1,0 +1,1 @@
+#include "Player.h"//void Player::moveP(int& x, int& y, int& dx, int& dy)//{//	x += dx;//	y += dy;//	if (x < 0) x = 0; if (x > 44) x = 44;//	if (y < 0) y = 0; if (y > 44) y = 44;//	setPosition(sf::Vector2f(350 + (y * 20), 50 + (x * 20)));//}

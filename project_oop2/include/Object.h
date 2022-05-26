@@ -1,13 +1,12 @@
 #pragma once
 #include "Display.h"
-class Board;
 class Object 
 {
 public:
 	Object(sf::Texture& t,sf::Vector2f f1, sf::Vector2f f2):m_display(t,f1,f2) {}
 	~Object() = default;
 	void draw(sf::RenderWindow& w) { m_display.draw(w); }
-	void setPosition(int x, int  y) { m_display.setPosition( x,y ); }
+	void setPosition(sf::Vector2f v) { m_display.setPosition(v); }
 
 protected:
 	Display m_display;

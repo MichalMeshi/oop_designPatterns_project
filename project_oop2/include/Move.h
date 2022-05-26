@@ -1,10 +1,9 @@
 #pragma once
-class Move
-{
+class Move{
 public:
-	Move() = default;
-	virtual ~Move()=0;
-	virtual void move() = 0;
+	Move() {}
+	virtual ~Move()=0{}
+	virtual void move() = 0{}
 protected:
 
 };

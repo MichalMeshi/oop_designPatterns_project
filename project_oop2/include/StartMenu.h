@@ -6,7 +6,7 @@ class StartMenu:public Menu
 {
 public:
 	StartMenu(GameController& );
-	~StartMenu()=default;
+	~StartMenu() {}
 private:
 };
 

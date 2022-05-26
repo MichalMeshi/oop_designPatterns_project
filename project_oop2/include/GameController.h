@@ -3,8 +3,8 @@
 class GameController
 {
 public:
-	GameController()=default;
-	~GameController()= default;
+	GameController() {}
+	~GameController() {}
 	void runTheGame();
 private:
 	sf::RenderWindow m_window;

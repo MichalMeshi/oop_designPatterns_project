@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Ball.h"
+
 Board::Board(sf::RenderWindow& window)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(350, 50), sf::Vector2f(30, 30)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
@@ -31,11 +32,10 @@ void Board::draw(int x,int y)
 				rect.setFillColor(sf::Color::Green);
 			m_window.draw(rect);
 		}
-	m_player.setPosition(350 + (y * 20), 50 + (x * 20));
 	m_player.draw(m_window);
 	for (int i = 0; i < m_enemiesVec.size(); i++)
 	{
-		m_enemiesVec[i]->setPosition();
+		//m_enemiesVec[i]->setPosition();
 		m_enemiesVec[i]->draw(m_window);
 	}
 }
@@ -81,4 +81,26 @@ void Board::floodFill(sf::Vector2i v)
 bool Board::checkIfMatCellEqualTo(sf::Vector2i v,enum TileState state)
 {
 	return (m_matrix[v.x][v.y] == state);
+}
+//------------------------------------------------------------
+void Board::movePlayer(int& x, int& y, int& dx, int& dy)
+{
+	m_player.moveP( x, y, dx, dy);
+}
+//------------------------------------------------------------
+void Board::setDirection(sf::Keyboard::Key key, int& dx, int& dy)
+{
+	switch (key)
+	{
+	case sf::Keyboard::Key::Right:
+	{ dx = 1; dy = 0;  break; }
+	case sf::Keyboard::Key::Left:
+	{  dx = -1; dy = 0;  break; }
+	case sf::Keyboard::Key::Down:
+	{dx = 0; dy = 1;  break; }
+	case sf::Keyboard::Key::Up:
+	{dx = 0; dy = -1; break; }
+	default:
+		return;
+	}
 }

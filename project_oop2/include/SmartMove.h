@@ -1,9 +1,9 @@
 #pragma once
-#include "SmartMove.h"
+#include "Move.h"
 class SmartMove :public Move
 {
 public:
-	SmartMove() = default;
-	~SmartMove() = default;
+	SmartMove() {}
+	~SmartMove() {}
 	virtual void move() override {}
 };

@@ -8,6 +8,7 @@
                                              "GameController.cpp" 
                                              "Level.cpp" 
                                              "Controller.cpp" 
+                                             "Player.cpp" 
                                              "Board.cpp" 
                                              "Controller.cpp" 
                                              "Ball.cpp" 
