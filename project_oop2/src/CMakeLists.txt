@@ -11,5 +11,6 @@
                                              "Player.cpp" 
                                              "Board.cpp" 
                                              "Controller.cpp" 
+                                             "SimpleMove.cpp" 
                                              "Ball.cpp" 
                                              "Settings.cpp" )

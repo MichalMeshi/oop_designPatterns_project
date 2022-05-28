@@ -1,19 +1,19 @@
-#include "Ball.h"
+
+#include "SimpleMove.h"
 #include "Board.h"
-bool Ball::move(Board& b) 
+sf::Vector2f SimpleMove::move(Board& b)
 {
-	m_display.setPosition(m_move->move(b));
-	/*x += dx; 
+	x += dx;
 	if (b.checkIfMatCellEqualTo(sf::Vector2i((y - 50) / 20, (x - 350) / 20), BLOCKED))
 	{
-		dx = -dx; 
+		dx = -dx;
 		x += dx;
 	}
-	y += dy; 
+	y += dy;
 	if (b.checkIfMatCellEqualTo(sf::Vector2i((y - 50) / 20, (x - 350) / 20), BLOCKED))
-	{ 
-		dy = -dy; 
-		y += dy; 
-	}*/
-	return false;
+	{
+		dy = -dy;
+		y += dy;
+	}
+	return sf::Vector2f(x, y);
 }

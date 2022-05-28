@@ -1,8 +1,9 @@
 #pragma once
+#include <iostream>
 #include <vector>
 #include <utility>
 #include <memory>
-//#include "Gift.h"
+#include "Gift.h"
 #include "Enemies.h"
 #include "Player.h"
 class Board
@@ -23,7 +24,7 @@ private:
 	sf::RenderWindow& m_window;
 	int m_matrix[45][45] = { 0 };
 	sf::RectangleShape m_rec;
-	//std::vector<std::unique_ptr<Gift>> m_giftsVec;
+	std::vector<std::unique_ptr<Gift>> m_giftsVec;
 	std::vector<std::unique_ptr<Enemies>> m_enemiesVec;
 	Player m_player;
 	Display m_backgroundGame;
