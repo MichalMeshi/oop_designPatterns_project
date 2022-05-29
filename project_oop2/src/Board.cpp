@@ -1,5 +1,5 @@
 #include "Board.h"
-#include "Ball.h"
+#include "EnemyFactory.h"
 
 Board::Board(sf::RenderWindow& window)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(350, 50), sf::Vector2f(30, 30)),
@@ -12,7 +12,7 @@ Board::Board(sf::RenderWindow& window)
 	m_rec.setFillColor(sf::Color::White);
 	m_rec.setPosition(350, 50);
 	m_rec.setSize(sf::Vector2f(900, 900));
-	m_enemiesVec.emplace_back(std::move(std::make_unique<Ball> (Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30))));
+	m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30),SIMPLE_MOVE, MOVE_TO_UNBLOCKED));
 }
 //------------------------------------------
 void Board::draw(int x,int y)

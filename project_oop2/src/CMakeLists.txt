@@ -11,6 +11,11 @@
                                              "Player.cpp" 
                                              "Board.cpp" 
                                              "Controller.cpp" 
+                                             "EnemyFactory.cpp" 
                                              "SimpleMove.cpp" 
-                                             "Ball.cpp" 
+                                             "SmartMove.cpp" 
+                                             "MoveFar.cpp" 
+                                             "MoveToUnBlocked.cpp" 
+                                             "MoveToBlocked.cpp" 
+                                             "MoveEverywhere.cpp" 
                                              "Settings.cpp" )

@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Utilities.h"
+
 class Board;
 class Move{
 public:

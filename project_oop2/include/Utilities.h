@@ -13,3 +13,11 @@ enum Texture {
 enum TileState {
 	EMPTY = 0,BLOCKED,MIDDLE
 };
+//-------------------------
+enum MoveEnum {
+	SIMPLE_MOVE = 0, SMART_MOVE, MOVE_FAR,E_MOVE_MAX_SIZE
+};
+//-------------------------
+enum  WhereCanMoveEnum {
+	MOVE_TO_BLOCKED = 0, MOVE_TO_UNBLOCKED, MOVE_EVERYWHERE, E_WHERE_CAN_MOVE_MAX_SIZE
+};

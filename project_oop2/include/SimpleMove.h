@@ -1,6 +1,7 @@
 #pragma once
 #include "Move.h"
-class Board;
+#include "EnemyFactory.h"
+
 class SimpleMove :public Move
 {
 public:
@@ -8,4 +9,6 @@ public:
 	~SimpleMove() {}
 	virtual sf::Vector2f move(Board& b) override;
 private:
+	static bool m_register;
 };
+bool SimpleMove::m_register = EnemyFactory::registerMove(SIMPLE_MOVE, []()->std::unique_ptr<Move> { return std::make_unique<SimpleMove>(); });
