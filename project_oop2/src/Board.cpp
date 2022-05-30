@@ -1,7 +1,8 @@
 #include "Board.h"
 #include "EnemyFactory.h"
+#include "GiftFactory.h"
 
-Board::Board(sf::RenderWindow& window)
+Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(350, 50), sf::Vector2f(30, 30)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
@@ -12,7 +13,54 @@ Board::Board(sf::RenderWindow& window)
 	m_rec.setFillColor(sf::Color::White);
 	m_rec.setPosition(350, 50);
 	m_rec.setSize(sf::Vector2f(900, 900));
-	m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30),SIMPLE_MOVE, MOVE_TO_UNBLOCKED));
+	m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SMART_MOVE, MOVE_TO_UNBLOCKED));
+
+	int num;
+	switch (curentLevel)
+	{
+	case 1:
+	{
+		num = (rand() % 4) + 1;
+		creatSimpleEnemies(num);
+		//createGifts(num);
+		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(SEA), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
+		break;
+	}
+	case 2:
+	{
+		num = (rand() % 4) + 2;
+		creatSimpleEnemies(num);
+		//createGifts(num);
+		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(SEA), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
+		// לייצר אוכל שטחים פה
+		break;
+
+	}
+	case 3:
+	{
+		num = (rand() % 4) + 3;
+		creatSimpleEnemies(num);
+		//createGifts(num);
+		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(SEA), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
+		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(SEA), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SMART_MOVE, MOVE_TO_BLOCKED));
+		//אוכל שטחים חכם אולי
+		break;
+	}
+	default:
+		break;
+	}
+}
+//------------------------------------------
+void Board::creatSimpleEnemies(int num)
+{
+	for (int i = 1; i <= num; i++)
+		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED));
+}
+//------------------------------------------
+void Board::createGifts(int num)
+{
+	for (int i = 0; i <= num; i++)
+		m_giftsVec.emplace_back(GiftFactory::createGift(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30)));
 }
 //------------------------------------------
 void Board::draw(int x,int y)
@@ -34,10 +82,9 @@ void Board::draw(int x,int y)
 		}
 	m_player.draw(m_window);
 	for (int i = 0; i < m_enemiesVec.size(); i++)
-	{
-		//m_enemiesVec[i]->setPosition();
 		m_enemiesVec[i]->draw(m_window);
-	}
+	//for (int i = 0; i < m_giftsVec.size(); i++)
+	//	m_giftsVec[i]->draw(m_window);
 }
 //------------------------------------------------
 bool Board::checkIfPassedAlready(int y,int x)

@@ -1,7 +1,8 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel)
-    :m_window(window), m_board(window), m_infoMenu(char(curentLevel), m_window)
+    :m_window(window), m_board(window, curentLevel), m_infoMenu(char(curentLevel+48), m_window)
 {
+  
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
      m_timeOutTxt.setString("TIME-OUT");
      m_timeOutTxt.setPosition({ 150,90 });
@@ -47,6 +48,7 @@ enum EndOfLevelCondition Level::runLevel()
 
         m_window.clear();
         m_board.draw(y, x);
+        m_infoMenu.drawInfoMenu();
         m_window.display();
     }
     return FINISHLEVEL; // жд сън

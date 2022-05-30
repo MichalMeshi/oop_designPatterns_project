@@ -7,7 +7,7 @@
 class Board
 {
 public:
-	Board(sf::RenderWindow& window);
+	Board(sf::RenderWindow& window,int);
 	~Board() {}
 	void draw(int x,int y);
 	bool checkIfPassedAlready(int,int); 
@@ -17,6 +17,8 @@ public:
 	bool checkIfMatCellEqualTo(sf::Vector2i v, enum TileState state);
 	void movePlayer(int& x, int&, int&, int&);
 	void setDirection(sf::Keyboard::Key key, int& dx, int& dy);
+	void creatSimpleEnemies(int num);
+	void createGifts(int num);
 
 private:
 	sf::RenderWindow& m_window;
