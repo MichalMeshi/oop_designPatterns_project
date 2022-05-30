@@ -1,6 +1,6 @@
 #include "Level.h"
-Level::Level(sf::RenderWindow& window)
-    :m_window(window), m_board(window)
+Level::Level(sf::RenderWindow& window, int curentLevel)
+    :m_window(window), m_board(window), m_infoMenu(char(curentLevel), m_window)
 {
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
      m_timeOutTxt.setString("TIME-OUT");
@@ -8,9 +8,12 @@ Level::Level(sf::RenderWindow& window)
      m_timeOutTxt.setStyle(sf::Text::Style::Italic | sf::Text::Style::Bold);
      m_timeOutTxt.setCharacterSize(350);
      m_timeOutTxt.setColor(sf::Color::Black);*/
+
+    //בתוך כל שלב, גם לשנות את הטיימר באינפורמיישן
+   
 }
 //---------------------------------
-void Level::runLevel()
+enum EndOfLevelCondition Level::runLevel()
 {
     m_window.setFramerateLimit(60);
     int dx = 0, dy = 0, x = 0, y = 0;
@@ -24,17 +27,11 @@ void Level::runLevel()
             case sf::Event::Closed:
             {
                 m_window.close();
-                return;
+                return CLOSE;
             }
             case sf::Event::KeyPressed:
             {
-                if (event.key.code == sf::Keyboard::Escape)
-                {
-                    m_window.close();
-                    break;
-                }
-                else
-                    m_board.setDirection(event.key.code, dx, dy);
+                m_board.setDirection(event.key.code, dx, dy);
                 break;
             }
             }
@@ -52,4 +49,5 @@ void Level::runLevel()
         m_board.draw(y, x);
         m_window.display();
     }
+    return FINISHLEVEL; // זה סתם
 }

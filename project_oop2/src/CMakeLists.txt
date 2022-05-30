@@ -18,6 +18,7 @@
                                              "GiftFactory.cpp" 
                                              "SimpleMove.cpp" 
                                              "SmartMove.cpp" 
+                                             "InformationMenu.cpp" 
                                              "MoveFar.cpp" 
                                              "MoveToUnBlocked.cpp" 
                                              "MoveToBlocked.cpp" 
