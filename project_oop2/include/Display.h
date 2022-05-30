@@ -8,6 +8,7 @@ public:
 	void setPosition(sf::Vector2f v) { m_sprite.setPosition(v); }
 	void setOrigin(sf::Vector2f f) { m_sprite.setOrigin(f); }
 	void setColor(sf::Color c) { m_sprite.setColor(c); }
+	void rotate() { m_sprite.rotate(10); }
 private:
 	sf::Sprite m_sprite;
 

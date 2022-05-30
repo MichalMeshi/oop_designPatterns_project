@@ -11,6 +11,7 @@ public:
 		if (x < 0) x = 0; if (x > 44) x = 44;
 		if (y < 0) y = 0; if (y > 44) y = 44;
 		setPosition(sf::Vector2f(350 + (x * 20), 50 + (y * 20)));
+
 	}
 
 private:
