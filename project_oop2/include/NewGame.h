@@ -7,7 +7,7 @@ public:
 	NewGame(GameController& game) :m_game(game), Command() {}
 	~NewGame() = default;
 
-	virtual void execute()override { m_game.runTheGame(); }
+	virtual void execute(sf::RenderWindow& window)override { m_game.runTheGame(); }
 private:
 	GameController& m_game;
 };

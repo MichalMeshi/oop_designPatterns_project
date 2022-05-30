@@ -4,11 +4,11 @@ class ShowInstructions:public Command
 {
 
 public:
-	ShowInstructions()
-		: Command(),m_instructions(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(0, 0),sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW)) {}
+	ShowInstructions();
 	~ShowInstructions() = default;
-	virtual void execute() override;
-	void drawInstructions(sf::RenderWindow& window) { m_instructions.draw(window); }
+	virtual void execute(sf::RenderWindow& window) override;
+	void draw(sf::RenderWindow& window) {m_instructions.draw(window); m_back.draw(window);}
 private:
 	Display m_instructions;
+	Display m_back;
 };

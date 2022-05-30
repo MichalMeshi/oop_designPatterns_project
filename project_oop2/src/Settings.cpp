@@ -1,6 +1,6 @@
 #include "SettingsMenu.h"
 
-void Settings::execute()
+void Settings::execute(sf::RenderWindow& window)
 {
 	SettingsMenu().run();
 }
