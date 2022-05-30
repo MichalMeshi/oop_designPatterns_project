@@ -2,6 +2,7 @@
 //---------------------------
 int main()
 {
+	srand(time(NULL));
 	Controller c;
 	c.run();
 	return 0;//hi

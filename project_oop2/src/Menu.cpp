@@ -16,12 +16,27 @@ void Menu::run()
 			case sf::Event::MouseButtonReleased: {
 				handlePress(m_window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
 			}
+			case sf::Event::MouseMoved: {
+				handleMouseMove(m_window.mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y }));
+				break;
+			}
 			}
 		}
 	}
 }
+//-------------------------------------------------------------
+void  Menu::handleMouseMove(sf::Vector2f move_position)
+{
+	for (int i = 0; i < m_menu.size(); i++)
+	{
+		if (m_menu[i].second.getSprite().getGlobalBounds().contains(move_position))
+			m_menu[i].second.setColor(sf::Color::Yellow);
+		else
+			m_menu[i].second.setColor(sf::Color::White);
+	}
+}
 //=====================================================================
-//פונקציה המטפלת הניראות הלוח בכל איטרציה
+//פונקציה המטפלת בניראות הלוח בכל איטרציה
 //---------------------------------------
 void Menu::handleBoard()
 {
