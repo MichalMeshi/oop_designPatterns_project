@@ -12,6 +12,6 @@ public:
 
 protected:
 	int x = 500, y = 500;
-	int dx = 1;// 4 - rand() % 8;
-	int dy = 1;// 4 - rand() % 8;
+	int dx =  4 - rand() % 8;
+	int dy =  4 - rand() % 8;
 };
