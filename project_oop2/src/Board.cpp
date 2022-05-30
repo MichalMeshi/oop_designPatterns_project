@@ -6,6 +6,7 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(350, 50), sf::Vector2f(30, 30)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
+
 	for (int i = 0; i < 45; i++)
 		for (int j = 0; j < 45; j++)
 			if (i == 0 || j == 0 || i == 44 || j == 44)
@@ -23,6 +24,7 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 		num = (rand() % 4) + 1;
 		creatSimpleEnemies(num);
 		//createGifts(num);
+	
 		m_enemiesVec.emplace_back(EnemyFactory::createEnemy(Graphics::getGraphics().getTexture(SEA), sf::Vector2f(500, 300), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
 		break;
 	}

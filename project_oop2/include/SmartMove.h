@@ -7,7 +7,7 @@ class SmartMove :public Move
 public:
 	SmartMove() {}
 	~SmartMove() {}
-	virtual sf::Vector2f move(Board& b) override { return sf::Vector2f(x, y);}
+	virtual sf::Vector2f move(Board& b) override;
 private:
 	static bool m_register;
 };
