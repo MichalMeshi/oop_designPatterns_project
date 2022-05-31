@@ -6,4 +6,5 @@ public:
 	~Settings() = default;
 	virtual void execute(sf::RenderWindow& window)override;
 private:
+
 };

@@ -1,19 +1,17 @@
-
 #include "SimpleMove.h"
-#include "Board.h"
 sf::Vector2f SimpleMove::move(Board& b)
 {
-	x += dx;
-	if (b.checkIfMatCellEqualTo(sf::Vector2i((y - 50) / 20, (x - 350) / 20), BLOCKED))
+	m_x += m_dx;
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b))
 	{
-		dx = -dx;
-		x += dx;
+		m_dx = -m_dx;
+		m_x += m_dx;
 	}
-	y += dy;
-	if (b.checkIfMatCellEqualTo(sf::Vector2i((y - 50) / 20, (x - 350) / 20), BLOCKED))
+	m_y += m_dy;
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b))
 	{
-		dy = -dy;
-		y += dy;
+		m_dy = -m_dy;
+		m_y += m_dy;
 	}
-	return sf::Vector2f(x, y);
+	return sf::Vector2f(m_x, m_y);
 }

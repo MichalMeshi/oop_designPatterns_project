@@ -7,7 +7,7 @@ public:
 	virtual ~Object() = 0{}
 	void draw(sf::RenderWindow& w) { m_display.draw(w); }
 	void setPosition(sf::Vector2f v) { m_display.setPosition(v); }
-
+	Display& getDisplay() { return m_display; };
 protected:
 	Display m_display;
 	void handleColision();

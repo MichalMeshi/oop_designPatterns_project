@@ -1,6 +1,5 @@
 #include "Board.h"
-#include "EnemyFactory.h"
-#include "GiftFactory.h"
+#include "Enemies.h"
 
 Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(350, 50), sf::Vector2f(30, 30)),
@@ -65,7 +64,7 @@ void Board::createGifts(int num)
 		m_giftsVec.emplace_back(GiftFactory::createGift(Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(500, 300), sf::Vector2f(30, 30)));
 }
 //------------------------------------------
-void Board::draw(int x,int y)
+void Board::draw()
 {
 	m_backgroundGame.draw(m_window);
 	m_window.draw(m_rec);
@@ -89,7 +88,7 @@ void Board::draw(int x,int y)
 	//	m_giftsVec[i]->draw(m_window);
 }
 //------------------------------------------------
-bool Board::checkIfPassedAlready(int y,int x)
+bool Board::checkIfPassedAlready()
 {
 	if (m_matrix[y][x] == 2)return true;
 	if (m_matrix[y][x] == 0) m_matrix[y][x] = 2;
@@ -103,9 +102,9 @@ void Board::moveEnemies()
 
 }
 //-------------------------------------------------
-void Board::handleSpaceBlockage(int x,int y,int& dx,int& dy)
+void Board::handleSpaceBlockage()
 {
-	if (m_matrix[x][y] == 1)
+	if (m_matrix[y][x] == 1)
 	{
 		dx = dy = 0;
 		for (int i = 0; i < m_enemiesVec.size(); i++)
@@ -127,17 +126,12 @@ void Board::floodFill(sf::Vector2i v)
 	if (m_matrix[v.x][v.y + 1] == 0) floodFill(sf::Vector2i(v.x, v.y + 1));
 }
 //------------------------------------------------------------
-bool Board::checkIfMatCellEqualTo(sf::Vector2i v,enum TileState state)
-{
-	return (m_matrix[v.x][v.y] == state);
-}
-//------------------------------------------------------------
-void Board::movePlayer(int& x, int& y, int& dx, int& dy)
+void Board::movePlayer()
 {
 	m_player.moveP( x, y, dx, dy);
 }
 //------------------------------------------------------------
-void Board::setDirection(sf::Keyboard::Key key, int& dx, int& dy)
+void Board::setDirection(sf::Keyboard::Key key)
 {
 	switch (key)
 	{

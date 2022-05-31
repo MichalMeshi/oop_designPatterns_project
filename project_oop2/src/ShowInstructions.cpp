@@ -11,6 +11,7 @@ void ShowInstructions::execute(sf::RenderWindow& window)
 {
 	while (window.isOpen())
 	{
+		window.clear();
 		draw(window);
 		window.display();
 		if (auto event = sf::Event{}; window.waitEvent(event)) {

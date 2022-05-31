@@ -1,5 +1,4 @@
 #include "EnemyFactory.h"
-
  std::vector<moveFunc>& EnemyFactory::getMoveVec()
 {
 	static std::vector<moveFunc> m_moveVec(E_MOVE_MAX_SIZE);
@@ -24,5 +23,5 @@
 
  std::unique_ptr<Enemies> EnemyFactory::createEnemy(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2, enum MoveEnum e_move, enum WhereCanMoveEnum e_whereMove)
 {
-	return std::make_unique<Enemies>(t, f1, f2,getMoveVec()[e_move](), getWhereCanMoveVec()[e_whereMove]());
+	return std::make_unique<Enemies>(t, f1, f2,getMoveVec()[e_move](getWhereCanMoveVec()[e_whereMove]()));
 }

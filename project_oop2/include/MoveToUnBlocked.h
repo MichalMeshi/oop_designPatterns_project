@@ -1,13 +1,13 @@
 #pragma once
 #include "CanMoveToPlace.h"
 #include "EnemyFactory.h"
-
+#include "Board.h"
 class MoveToUnBlocked :public CanMoveToPlace
 {
 public:
 	MoveToUnBlocked() :CanMoveToPlace() {}
 	virtual ~MoveToUnBlocked() override {}
-	virtual bool ableToMoveToPlace()override { return false; }
+	virtual bool ableToMoveToPlace(sf::Vector2i pos, Board& b)override;
 private:
 	static bool m_register;
 };

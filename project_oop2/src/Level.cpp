@@ -17,7 +17,6 @@ Level::Level(sf::RenderWindow& window, int curentLevel)
 enum EndOfLevelCondition Level::runLevel()
 {
     m_window.setFramerateLimit(60);
-    int dx = 0, dy = 0, x = 0, y = 0;
     while (m_window.isOpen())
     {
         sf::Event event;
@@ -32,22 +31,22 @@ enum EndOfLevelCondition Level::runLevel()
             }
             case sf::Event::KeyPressed:
             {
-                m_board.setDirection(event.key.code, dx, dy);
+                m_board.setDirection(event.key.code);
                 break;
             }
             }
         }
-        m_board.movePlayer(x, y, dx, dy);
-        if (m_board.checkIfPassedAlready(y, x))
+        m_board.movePlayer();
+        if (m_board.checkIfPassedAlready())
             m_window.close();
 
         m_board.moveEnemies();
-        m_board.handleSpaceBlockage(y, x, dx, dy);
+        m_board.handleSpaceBlockage();
 
         //בדיקת התנגשות של שחקן מול אויבים
 
         m_window.clear();
-        m_board.draw(y, x);
+        m_board.draw();
         m_infoMenu.drawInfoMenu();
         m_window.display();
     }

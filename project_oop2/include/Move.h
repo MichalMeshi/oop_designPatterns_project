@@ -1,17 +1,15 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "Utilities.h"
-
-class Board;
+#include "CanMoveToPlace.h"
 class Move{
 public:
-	Move() {}
+	Move(std::unique_ptr<CanMoveToPlace> placeToMove); 
 	virtual ~Move()=0{}
 	virtual sf::Vector2f move(Board& b) = 0{}
-	sf::Vector2i getIndex()const { return sf::Vector2i((y - 50) / 20, (x - 350) / 20); }
+	sf::Vector2i getIndex()const; 
 
 protected:
-	int x = 500, y = 500;
-	int dx =  4 - rand() % 8;
-	int dy =  4 - rand() % 8;
+	int m_x = 500, m_y = 500;
+	int m_dx =   4 - rand() % 8;
+	int m_dy =  4 - rand() % 8;
+	std::unique_ptr<CanMoveToPlace> m_placeToMove;
 };

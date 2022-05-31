@@ -7,8 +7,7 @@ class MoveToBlocked:public CanMoveToPlace
 public:
 	MoveToBlocked() :CanMoveToPlace() {}
 	virtual ~MoveToBlocked() override{}
-	virtual bool ableToMoveToPlace()override { return true; }
-private:
+	virtual bool ableToMoveToPlace(sf::Vector2i pos, Board& b)override;
 	static bool m_register;
 
 };

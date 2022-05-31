@@ -2,7 +2,6 @@
 //---------------------------------------------------------------------------------------
 #include<vector>
 #include "Utilities.h"
-#include <SFML/Graphics.hpp>
 //------------------------------
 class Graphics {
 public:
@@ -19,5 +18,6 @@ private:
 	std::vector<sf::Texture> m_tex;
 	std::vector<sf::Text> m_text;
 	sf::Font m_font;
+	//sf::RenderWindow& m_window;
 };
 

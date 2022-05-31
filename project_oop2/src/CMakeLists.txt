@@ -13,6 +13,7 @@
                                              "Controller.cpp" 
                                              "Life.cpp" 
                                              "AddTime.cpp" 
+                                             "Enemies.cpp" 
                                              "FreezeEnemies.cpp" 
                                              "EnemyFactory.cpp" 
                                              "GiftFactory.cpp" 
@@ -22,5 +23,6 @@
                                              "MoveFar.cpp" 
                                              "MoveToUnBlocked.cpp" 
                                              "MoveToBlocked.cpp" 
+                                             "Move.cpp" 
                                              "MoveEverywhere.cpp" 
                                              "Settings.cpp" )

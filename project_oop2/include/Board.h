@@ -1,25 +1,26 @@
 #pragma once
 #include <utility>
 #include <memory>
-#include "Gift.h"
-#include "Enemies.h"
+#include "EnemyFactory.h"
 #include "Player.h"
+#include "GiftFactory.h"
+class Enemies;
 class Board
 {
 public:
 	Board(sf::RenderWindow& window,int);
 	~Board() {}
-	void draw(int x,int y);
-	bool checkIfPassedAlready(int,int); 
+	void draw();
+	bool checkIfPassedAlready(); 
 	void moveEnemies();
-	void handleSpaceBlockage(int x, int y, int& dx, int& dy);
+	void handleSpaceBlockage();
 	void floodFill(sf::Vector2i);
-	bool checkIfMatCellEqualTo(sf::Vector2i v, enum TileState state);
-	void movePlayer(int& x, int&, int&, int&);
-	void setDirection(sf::Keyboard::Key key, int& dx, int& dy);
+	void movePlayer();
+	void setDirection(sf::Keyboard::Key key);
 	void creatSimpleEnemies(int num);
 	void createGifts(int num);
-
+	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
+	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY); }
 private:
 	sf::RenderWindow& m_window;
 	int m_matrix[45][45] = { 0 };
@@ -28,4 +29,5 @@ private:
 	std::vector<std::unique_ptr<Enemies>> m_enemiesVec;
 	Player m_player;
 	Display m_backgroundGame;
+	int dx = 0, dy = 0, x = 0, y = 0;
 };

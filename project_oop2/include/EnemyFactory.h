@@ -2,7 +2,7 @@
 #include "Enemies.h"
 class Move;
 class CanMoveToPlace;
-typedef std::unique_ptr<Move>(*moveFunc)();
+typedef std::unique_ptr<Move>(*moveFunc)(std::unique_ptr<CanMoveToPlace>);
 typedef std::unique_ptr<CanMoveToPlace>(*WhereCanMoveFunc)();
 class EnemyFactory
 {
