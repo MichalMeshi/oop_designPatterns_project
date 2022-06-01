@@ -5,7 +5,7 @@
 class StartMenu:public Menu
 {
 public:
-	StartMenu(GameController& ,sf::RenderWindow&);
+	StartMenu(GameController& );
 	~StartMenu() {}
 private:
 };

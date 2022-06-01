@@ -25,3 +25,6 @@
 {
 	return std::make_unique<Enemies>(t, f1, f2,getMoveVec()[e_move](getWhereCanMoveVec()[e_whereMove]()));
 }
+ //להחזיר ווקטור
+ //לעשות לולאה
+ //...

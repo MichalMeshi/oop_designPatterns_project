@@ -7,10 +7,7 @@
 class SettingsMenu:public Menu
 {
 public:
-	SettingsMenu(sf::RenderWindow& w);
+	SettingsMenu();
 	~SettingsMenu()=default;
- virtual void handleBoard() override;
-
 private:
-	Display m_back;
 };

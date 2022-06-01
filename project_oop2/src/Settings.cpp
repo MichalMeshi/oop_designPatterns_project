@@ -2,5 +2,5 @@
 
 void Settings::execute(sf::RenderWindow& window)
 {
-	SettingsMenu(window).run();
+	SettingsMenu().run();
 }
