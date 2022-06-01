@@ -3,7 +3,7 @@
 class StaticObj : public Object
 {
 public:
-	StaticObj(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2) :Object(t,f1,f2) {}
+	StaticObj(sf::Texture& t, sf::Vector2f f) :Object(t,f) {}
 	virtual ~StaticObj()=0{}
 
 private:

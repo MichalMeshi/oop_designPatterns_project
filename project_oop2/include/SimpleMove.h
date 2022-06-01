@@ -5,10 +5,10 @@
 class SimpleMove :public Move
 {
 public:
-	SimpleMove(std::unique_ptr<CanMoveToPlace> placeToMove) :Move(std::move(placeToMove)) {}
+	SimpleMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) :Move(pos,std::move(placeToMove)) {}
 	~SimpleMove() {}
 	virtual sf::Vector2f move(Board& b) override;
 private:
 	static bool m_register;
 };
-bool SimpleMove::m_register = EnemyFactory::registerMove(SIMPLE_MOVE, [](std::unique_ptr<CanMoveToPlace> placeToMove)->std::unique_ptr<Move> { return std::make_unique<SimpleMove>(std::move(placeToMove)); });
+bool SimpleMove::m_register = EnemyFactory::registerMove(SIMPLE_MOVE, [](sf::Vector2i pos,std::unique_ptr<CanMoveToPlace> placeToMove)->std::unique_ptr<Move> { return std::make_unique<SimpleMove>(pos,std::move(placeToMove)); });

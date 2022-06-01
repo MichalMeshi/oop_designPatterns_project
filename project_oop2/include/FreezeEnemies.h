@@ -4,7 +4,7 @@
 class FreezeEnemies :public Gift
 {
 public:
-	FreezeEnemies(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2):Gift(t,f1,f2){}
+	FreezeEnemies(sf::Texture& t, sf::Vector2f f):Gift(t,f){}
 	virtual	~FreezeEnemies()override {}
 
 private:
@@ -12,4 +12,4 @@ private:
 };
 
 bool FreezeEnemies::m_register = GiftFactory::registerGift(
-	[](sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2)->std::unique_ptr<Gift> { return std::make_unique<FreezeEnemies>(t, f1, f2); });
+	[](sf::Texture& t, sf::Vector2f f)->std::unique_ptr<Gift> { return std::make_unique<FreezeEnemies>(t, f); });

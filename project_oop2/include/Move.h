@@ -2,7 +2,7 @@
 #include "CanMoveToPlace.h"
 class Move{
 public:
-	Move(std::unique_ptr<CanMoveToPlace> placeToMove); 
+	Move(sf::Vector2i pos,std::unique_ptr<CanMoveToPlace> placeToMove); 
 	virtual ~Move()=0{}
 	virtual sf::Vector2f move(Board& b) = 0{}
 	sf::Vector2i getIndex()const; 

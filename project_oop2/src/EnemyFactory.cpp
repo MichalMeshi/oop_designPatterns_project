@@ -21,10 +21,18 @@
 	return true;
 }
 
- std::unique_ptr<Enemies> EnemyFactory::createEnemy(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2, enum MoveEnum e_move, enum WhereCanMoveEnum e_whereMove)
+ std::unique_ptr<Enemies> EnemyFactory::createEnemy(sf::Vector2i pos,sf::Texture& t, sf::Vector2f f, enum MoveEnum e_move, enum WhereCanMoveEnum e_whereMove)
 {
-	return std::make_unique<Enemies>(t, f1, f2,getMoveVec()[e_move](getWhereCanMoveVec()[e_whereMove]()));
+	return std::make_unique<Enemies>(t, f,getMoveVec()[e_move](pos,getWhereCanMoveVec()[e_whereMove]()));
 }
- //להחזיר ווקטור
- //לעשות לולאה
- //...
+ std::vector<std::unique_ptr<Enemies>> EnemyFactory::createEnemies(int level_num)
+ {
+	 int num = (rand() % 4) + level_num;
+	  std::vector<std::unique_ptr<Enemies>> vec;
+	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(30, 30), SMART_MOVE, MOVE_TO_UNBLOCKED));
+	 for (int i = 1; i <= num; i++)
+		 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(INSTRUCTIONS), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED));
+	//vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(350, 50), Graphics::getGraphics().getTexture(SEA), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
+	//ליצור רק אחרי שמתקנים את התזוזה שלו
+	 return vec;
+ }

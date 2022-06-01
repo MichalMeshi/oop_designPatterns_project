@@ -17,8 +17,8 @@ public:
 	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
-	void creatSimpleEnemies(int num);
-	void createGifts(int num);
+	//void creatSimpleEnemies(int num);
+	//void createGifts(int num);
 	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
 	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY); }
 private:
