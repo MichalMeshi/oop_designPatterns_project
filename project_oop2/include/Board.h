@@ -21,6 +21,8 @@ public:
 	//void createGifts(int num);
 	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
 	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY); }
+	void handleCreateGifts(int& gift_num, int rand_time);
+
 private:
 	sf::RenderWindow& m_window;
 	int m_matrix[45][45] = { 0 };
@@ -30,4 +32,5 @@ private:
 	Player m_player;
 	Display m_backgroundGame;
 	int dx = 0, dy = 0, x = 0, y = 0;
+	sf::Clock clockForGifts;
 };

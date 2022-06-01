@@ -3,10 +3,10 @@
 class AddTime :public Gift
 {
 public:
-	AddTime(sf::Texture& t, sf::Vector2f f):Gift(t,f){}
+	AddTime() :Gift(Graphics::getGraphics().getTexture(INSTRUCTIONS), {20,20}) {}
 	virtual ~AddTime() override{}
 
 private:
 	static bool m_register;
 };
-bool AddTime::m_register = GiftFactory::registerGift([](sf::Texture& t, sf::Vector2f f)->std::unique_ptr<Gift> { return std::make_unique<AddTime>(t, f); });
+bool AddTime::m_register = GiftFactory::registerGift([]()->std::unique_ptr<Gift> { return std::make_unique<AddTime>(); });

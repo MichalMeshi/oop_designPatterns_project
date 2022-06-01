@@ -16,6 +16,8 @@ Level::Level(sf::RenderWindow& window, int curentLevel)
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
+    int gift_num = (rand() % 6) + 4;
+    int rand_time = (rand() % 6) + 5;
     m_window.setFramerateLimit(60);
     while (m_window.isOpen())
     {
@@ -42,7 +44,8 @@ enum EndOfLevelCondition Level::runLevel()
 
         m_board.moveEnemies();
         m_board.handleSpaceBlockage();
-
+        m_board.handleCreateGifts(gift_num, rand_time);
+        
         //בדיקת התנגשות של שחקן מול אויבים
 
         m_window.clear();

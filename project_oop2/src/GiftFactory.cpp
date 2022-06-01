@@ -12,9 +12,10 @@ bool GiftFactory::registerGift(giftFunc mf)
 	return true;
 }
 //--------------------------------------------------
-std::unique_ptr<Gift> GiftFactory::createGift(sf::Texture& t, sf::Vector2f f)
+std::unique_ptr<Gift> GiftFactory::createGift()
 {
 	int rand_gift = rand() % AMOUNT_OF_GIFTS;
-	return getGiftVec()[rand_gift](t, f);
+	return getGiftVec()[rand_gift]();
 }
+
 
