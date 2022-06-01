@@ -17,6 +17,7 @@ Graphics::Graphics()
 	m_tex[SETTING].loadFromFile("settings.png");
 	m_tex[CLOCKPICTURE].loadFromFile("clock.png");
 	m_tex[BACK].loadFromFile("back.png");
+	m_tex[BALL].loadFromFile("ball.png");
 	
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");
