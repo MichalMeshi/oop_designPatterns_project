@@ -5,7 +5,8 @@ class Enemies:public DynamicObj{
 public:
 	Enemies() = default;
 	Enemies(sf::Texture& t, sf::Vector2f f, std::unique_ptr<Move> m)
-		:DynamicObj(t, f), m_move(std::move(m)) {}
+		:DynamicObj(t, f), m_move(std::move(m)) {
+		m_display.setOrigin({ 15,15 });}
 	~Enemies() {}
 	virtual void move(Board& b)override;
 	sf::Vector2i getIndex()const { return m_move->getIndex(); }

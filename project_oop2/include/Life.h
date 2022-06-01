@@ -3,7 +3,7 @@
 class Life:public Gift
 {
 public:
-	Life(sf::Texture& t, sf::Vector2f f):Gift(t,f){}
+	Life(sf::Texture& t, sf::Vector2f f):Gift(t,f){	}
 	virtual ~Life() override{}
 
 private:

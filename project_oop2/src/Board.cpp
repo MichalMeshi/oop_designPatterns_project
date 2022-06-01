@@ -37,8 +37,8 @@ void Board::draw()
 	m_player.draw(m_window);
 	for (int i = 0; i < m_enemiesVec.size(); i++)
 		m_enemiesVec[i]->draw(m_window);
-	//for (int i = 0; i < m_giftsVec.size(); i++)
-	//	m_giftsVec[i]->draw(m_window);
+	for (int i = 0; i < m_giftsVec.size(); i++)
+		m_giftsVec[i]->draw(m_window);
 }
 //------------------------------------------------
 bool Board::checkIfPassedAlready()
