@@ -6,6 +6,7 @@ sf::Vector2f SimpleMove::move(Board& b)
 	{
 		m_dx = -m_dx;
 		m_x += m_dx;
+
 	}
 	m_y += m_dy;
 	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b))
