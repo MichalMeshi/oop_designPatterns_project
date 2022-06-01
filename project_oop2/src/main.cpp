@@ -2,7 +2,7 @@
 //---------------------------
 int main()
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned>(time(nullptr)));
 	Controller c;
 	c.run();
 	return 0;//hi
