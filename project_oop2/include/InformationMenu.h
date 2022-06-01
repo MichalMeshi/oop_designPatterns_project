@@ -3,7 +3,7 @@
 class InformationMenu
 {
 public:
-	InformationMenu(char ,sf::RenderWindow& window);
+	InformationMenu(char ,sf::RenderWindow& window,int);
 	~InformationMenu()=default;
 	void drawInfoMenu();
 	void setTimer(float time);
@@ -12,7 +12,7 @@ public:
 	void initializeTimeLeftTxt();
 
 private:
-	float m_timeLeftInLevel = 60; //to be changed
+	float m_timeLeftInLevel; //to be changed
 	int m_percentage=0;
 	int m_life=3;
 	Display m_heartPicture;

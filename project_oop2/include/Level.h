@@ -11,6 +11,7 @@ private:
 	Board m_board;
 	sf::RenderWindow& m_window;
 	InformationMenu m_infoMenu;
+	int m_timeForLevel;
 };
 
 

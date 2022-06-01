@@ -1,6 +1,6 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel)
-    :m_window(window), m_board(window, curentLevel), m_infoMenu(char(curentLevel+48), m_window)
+    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+40), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel)
 {
   
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
@@ -16,6 +16,7 @@ Level::Level(sf::RenderWindow& window, int curentLevel)
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
+    sf::Clock clock;
     int gift_num = (rand() % 6) + 4;
     int rand_time = (rand() % 6) + 5;
     m_window.setFramerateLimit(60);
@@ -45,7 +46,7 @@ enum EndOfLevelCondition Level::runLevel()
         m_board.moveEnemies();
         m_board.handleSpaceBlockage();
         m_board.handleCreateGifts(gift_num, rand_time);
-        
+        m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
         //בדיקת התנגשות של שחקן מול אויבים
 
         m_window.clear();

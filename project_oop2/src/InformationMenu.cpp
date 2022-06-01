@@ -9,10 +9,9 @@
 #include "Display.h"
 #include "Board.h"
 //---------------------------------------------------------------------------------------
-InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window)
+InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
 	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(60, 60))
-	, m_heartPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), sf::Vector2f(20, 200), sf::Vector2f(60, 60))
-{
+	, m_heartPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), sf::Vector2f(20, 200), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
 	initializeLevelTxt();
 	initializeNumLevelTxt(levelNum);
 	initializeTimeLeftTxt();
