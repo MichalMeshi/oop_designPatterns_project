@@ -2,14 +2,25 @@
 #include "Enemies.h"
 
 Board::Board(sf::RenderWindow& window,int curentLevel)
-	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(30, 30)),
+	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
+	//std::vector<int> rows(45);
+	/*std::vector< std::vector<int>> vec;
+	vec.resize(45);
+	m_matrix = vec;*/
+
+	
 	clockForGifts.restart();
 	for (int i = 0; i < 45; i++)
 		for (int j = 0; j < 45; j++)
+		{
+			//m_matrix[i].emplace_back(EMPTY);
+
 			if (i == 0 || j == 0 || i == 44 || j == 44)
 				m_matrix[i][j] = BLOCKED;
+		}
+
 	m_rec.setFillColor(sf::Color::White);
 	m_rec.setPosition(350, 50);
 	m_rec.setSize(sf::Vector2f(900, 900));
@@ -43,8 +54,8 @@ void Board::draw()
 //------------------------------------------------
 bool Board::checkIfPassedAlready()
 {
-	if (m_matrix[y][x] == 2)return true;
-	if (m_matrix[y][x] == 0) m_matrix[y][x] = 2;
+	if (m_matrix[y][x] == MIDDLE)return true;
+	if (m_matrix[y][x] == EMPTY) m_matrix[y][x] = MIDDLE;
 	return false;
 }
 //-------------------------------------------------
@@ -57,16 +68,24 @@ void Board::moveEnemies()
 //-------------------------------------------------
 void Board::handleSpaceBlockage()
 {
-	if (m_matrix[y][x] == 1)
+	if (m_matrix[y][x] == BLOCKED)
 	{
 		dx = dy = 0;
-		for (int i = 0; i < m_enemiesVec.size(); i++)
+		for (int i = 0; i < m_enemiesVec.size()-1; i++)
 			floodFill(m_enemiesVec[i]->getIndex());
 
 		for (int i = 0; i < 45; i++)
 			for (int j = 0; j < 45; j++)
 				if (m_matrix[i][j] == -1) m_matrix[i][j] = 0;
-				else m_matrix[i][j] = 1;
+				else
+				{
+					m_matrix[i][j] = 1;
+					if (++m_blockCounter == 21)
+					{
+						m_percentage++;
+						m_blockCounter = 0;
+					}
+				}
 	}
 }
 //----------------------------------------------------------

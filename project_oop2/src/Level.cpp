@@ -19,7 +19,7 @@ enum EndOfLevelCondition Level::runLevel()
     sf::Clock clock;
     int gift_num = (rand() % 6) + 4;
     int rand_time = (rand() % 6) + 5;
-    m_window.setFramerateLimit(60);
+    m_window.setFramerateLimit(1000);
     while (m_window.isOpen())
     {
         sf::Event event;

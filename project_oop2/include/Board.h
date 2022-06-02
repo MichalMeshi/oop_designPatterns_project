@@ -25,6 +25,7 @@ public:
 
 private:
 	sf::RenderWindow& m_window;
+	//std::vector< std::vector<int>>m_matrix;
 	int m_matrix[45][45] = { 0 };
 	sf::RectangleShape m_rec;
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
@@ -33,4 +34,9 @@ private:
 	Display m_backgroundGame;
 	int dx = 0, dy = 0, x = 0, y = 0;
 	sf::Clock clockForGifts;
+	int m_percentage=0;
+	int m_blockCounter=0;
+
+
+
 };

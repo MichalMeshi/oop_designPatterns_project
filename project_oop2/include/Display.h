@@ -8,7 +8,7 @@ public:
 	sf::Sprite getSprite() { return m_sprite; }
 	void draw(sf::RenderWindow& window) { window.draw(m_sprite); }
 	void setPosition(sf::Vector2f v) { m_sprite.setPosition(v); }
-	void setOrigin(sf::Vector2f f) { m_sprite.setOrigin(f); }
+	void setOrigin() { m_sprite.setOrigin({ m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height }); }
 	void setColor(sf::Color c) { m_sprite.setColor(c); }
 	void rotate() {  m_sprite.rotate(-10); }
 private:

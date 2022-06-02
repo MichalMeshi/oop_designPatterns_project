@@ -9,7 +9,7 @@ public:
 
 protected:
 	int m_x = 800, m_y = 500;
-	int m_dx =   4 - rand() % 8;
-	int m_dy =  4 - rand() % 8;
+	int m_dx =   5 - rand() % 10;
+	int m_dy =  5 - rand() % 10;
 	std::unique_ptr<CanMoveToPlace> m_placeToMove;
 };

@@ -3,7 +3,7 @@
 //------------------------------
 const int WIDTH_WINDOW = 1600;
 const int HIGTH_WINDOW = 1000;
-const int PICS_AMOUNT = 12;
+const int PICS_AMOUNT = 13;
 const int SPRITE_SIZE = 70;
 const int LEVEL_NUMBER_INDEX = 5;
 const int AMOUNT_OF_GIFTS = 3;
@@ -12,10 +12,9 @@ const sf::Vector2f CLOCK_ICON_POSITION = { 20,120 };
 const sf::Vector2f LEVEL_TXT_POSITION = { 20,20 };
 const sf::Vector2f NUM_LEVEL_TXT_POSITION = { 120,10 };
 const sf::Vector2f TIME_LEFT_TXT_POSITION = { 105,130 };
-
 //-------------------------
 enum Texture {
-	HELP = 0, PLAY, SOUND, START_VIEW, EXIT, INSTRUCTIONS, SEA, SETTING_VIEW, SETTING, CLOCKPICTURE,BACK,BALL
+	HELP = 0, PLAY, SOUND, START_VIEW, EXIT, INSTRUCTIONS, SEA, SETTING_VIEW, SETTING, CLOCKPICTURE,BACK,BALL,SPIDER
 };
 //-------------------------
 enum TileState {

@@ -2,7 +2,7 @@
 #include "Object.h"
 class Player :public Object{
 public:
-	Player(sf::Texture& t,sf::Vector2f f) :Object(t, f) { m_display.setOrigin(sf::Vector2f(15, 15)); }
+	Player(sf::Texture& t,sf::Vector2f f) :Object(t, f) { m_display.setOrigin(); }
 	~Player() {}
 	void moveP(int& x, int& y, int& dx, int&dy)
 	{
