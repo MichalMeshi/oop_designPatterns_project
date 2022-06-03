@@ -161,7 +161,7 @@ sf::Vector2f Board::findDirectionToMove(int x,int y)
 
 	if (m_player.isRight(x))
 		pos.x = 1;
-	if (m_player.isLeft(x))
+	else if (m_player.isLeft(x))
 		pos.x = -1;
 
 	//else if(m_player.isUp(y))
@@ -173,11 +173,7 @@ sf::Vector2f Board::findDirectionToMove(int x,int y)
 	//	pos.x = 1;
 	//	pos.y = 0;
 	//}
-	//else if (m_player.isDown(y) && m_player.isLeft(x))
-	//{
-	//	pos.x =-1;
-	//	pos.y = 0;
-	//}
+	
 	return pos;
 
 }
