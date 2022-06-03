@@ -17,9 +17,9 @@ bool Player::isLeft(int x_pos)
 }
 bool Player::isUp(int y_pos)
 {
-	return (m_y < ((m_y - 50) / 20));
+	return (m_y < ((y_pos - 50) / 20));
 }
 bool Player::isDown(int y_pos)
 {
-	return (m_y > ((m_y - 50) / 20));
+	return (m_y > ((y_pos - 50) / 20));
 }

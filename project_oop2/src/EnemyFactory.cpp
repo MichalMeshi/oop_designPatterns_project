@@ -34,7 +34,7 @@
 		 return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED); });
 	
 //	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(20, 20), SMART_MOVE, MOVE_TO_UNBLOCKED));
-	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 50), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
+	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 70), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
 	//ליצור רק אחרי שמתקנים את התזוזה שלו
 	
 	return vec;
