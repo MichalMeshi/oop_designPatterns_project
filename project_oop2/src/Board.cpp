@@ -5,17 +5,17 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
-	//std::vector<int> rows(45);
-	/*std::vector< std::vector<int>> vec;
+	std::vector<int> rows(45);
+	std::vector< std::vector<int>> vec;
 	vec.resize(45);
-	m_matrix = vec;*/
+	m_matrix = vec;
 
 	
 	clockForGifts.restart();
 	for (int i = 0; i < 45; i++)
 		for (int j = 0; j < 45; j++)
 		{
-			//m_matrix[i].emplace_back(EMPTY);
+			m_matrix[i].emplace_back(EMPTY);
 
 			if (i == 0 || j == 0 || i == 44 || j == 44)
 				m_matrix[i][j] = BLOCKED;
@@ -54,8 +54,8 @@ void Board::draw()
 //------------------------------------------------
 bool Board::checkIfPassedAlready()
 {
-	if (m_matrix[y][x] == MIDDLE)return true;
-	if (m_matrix[y][x] == EMPTY) m_matrix[y][x] = MIDDLE;
+	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == MIDDLE)return true;
+	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == EMPTY) m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] = MIDDLE;
 	return false;
 }
 //-------------------------------------------------
@@ -68,9 +68,11 @@ void Board::moveEnemies()
 //-------------------------------------------------
 void Board::handleSpaceBlockage()
 {
-	if (m_matrix[y][x] == BLOCKED)
+	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == BLOCKED)
 	{
-		dx = dy = 0;
+		m_player.setPlayerDx(0);
+		m_player.setPlayerDy(0);
+
 		for (int i = 0; i < m_enemiesVec.size()-1; i++)
 			floodFill(m_enemiesVec[i]->getIndex());
 
@@ -100,7 +102,7 @@ void Board::floodFill(sf::Vector2i v)
 //------------------------------------------------------------
 void Board::movePlayer()
 {
-	m_player.moveP( x, y, dx, dy);
+	m_player.moveP();
 }
 //------------------------------------------------------------
 void Board::setDirection(sf::Keyboard::Key key)
@@ -108,13 +110,30 @@ void Board::setDirection(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case sf::Keyboard::Key::Right:
-	{ dx = 1; dy = 0;  break; }
+	{ 
+		m_player.setPlayerDx(1);
+		m_player.setPlayerDy(0);
+		break;
+	 }
 	case sf::Keyboard::Key::Left:
-	{  dx = -1; dy = 0;  break; }
+	{
+		m_player.setPlayerDx(-1);
+		m_player.setPlayerDy(0);
+		break;
+	}
+
 	case sf::Keyboard::Key::Down:
-	{dx = 0; dy = 1;  break; }
+	{
+		m_player.setPlayerDx(0);
+		m_player.setPlayerDy(1);
+		break;
+	}
 	case sf::Keyboard::Key::Up:
-	{dx = 0; dy = -1; break; }
+	{
+		m_player.setPlayerDx(0);
+		m_player.setPlayerDy(-1);
+		break;
+	}
 	default:
 		return;
 	}
@@ -128,5 +147,38 @@ void Board::handleCreateGifts(int &gift_num, int rand_time)
 		gift_num--;
 		clockForGifts.restart();
 	}
+}
+sf::Vector2f Board::findDirectionToMove(int x,int y)
+{
+
+
+	//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	sf::Vector2f pos={0,0};
+
+	if (m_player.isRight(x))
+		pos.x = 1;
+	if (m_player.isLeft(x))
+		pos.x = -1;
+
+	//else if(m_player.isUp(y))
+	//	pos.y = -1;
+	////else if (m_player.isDown(y))
+	////	pos.y = 1;
+	//if(m_player.isUp(y) && m_player.isRight(x))
+	//{
+	//	pos.x = 1;
+	//	pos.y = 0;
+	//}
+	//else if (m_player.isDown(y) && m_player.isLeft(x))
+	//{
+	//	pos.x =-1;
+	//	pos.y = 0;
+	//}
+	return pos;
+
 }
 

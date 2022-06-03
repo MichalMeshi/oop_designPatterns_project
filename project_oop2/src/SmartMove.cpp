@@ -2,20 +2,30 @@
 #include "Board.h"
 sf::Vector2f SmartMove::move(Board& b)
 {
-	m_x += m_dx;
-	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20),b))
+	sf::Vector2f direction;
+	direction = b.findDirectionToMove(m_x,m_y);
+	m_y += direction.y * std::abs(m_dy);
+	m_x += direction.x * std::abs(m_dx);
+
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b) ||
+		(m_x < 350) || (m_x > 1250)|| (m_y < 50) || (m_y > 950))
 	{
-		m_dx = -m_dx;
-		m_x += m_dx;
+		m_x -= direction.x * std::abs(m_dx);
+		m_y -= direction.y * std::abs(m_dy);
+
 	}
-	m_y += m_dy;
-	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b))
+	/*m_y += direction.y * std::abs(m_dy);
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b) ||
+		(m_y < 50) || (m_y > 950))
 	{
-		m_dy = -m_dy;
-		m_y += m_dy;
-	}
-	//if (((m_x - 350) / 20 < 0)) m_x = 350; if (((m_x - 350) / 20) > 44) m_x = 1230;//μϊχο
-	//if (((m_y - 50) / 20 < 0)) m_y = 50; if (((m_y - 50) / 20 > 44)) m_y = 930;
+		m_y -= direction.y * std::abs(m_dy);
+
+	}*/
+
+
+
+
+
 	return sf::Vector2f(m_x, m_y);
 }
 

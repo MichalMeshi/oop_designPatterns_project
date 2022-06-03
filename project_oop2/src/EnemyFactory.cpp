@@ -33,8 +33,8 @@
 	 std::generate_n(std::back_inserter(vec), num, [] {
 		 return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED); });
 	
-	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(20, 20), SMART_MOVE, MOVE_TO_UNBLOCKED));
-	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(350, 50), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_BLOCKED));
+//	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(20, 20), SMART_MOVE, MOVE_TO_UNBLOCKED));
+	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(370, 50), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
 	//ליצור רק אחרי שמתקנים את התזוזה שלו
 	
 	return vec;
