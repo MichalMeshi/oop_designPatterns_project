@@ -3,6 +3,8 @@
 #include <memory>
 #include "EnemyFactory.h"
 #include "Player.h"
+#include "EnemiesInLevel.h"
+
 #include "GiftFactory.h"
 class Enemies;
 class Board
@@ -36,7 +38,6 @@ private:
 	sf::Clock clockForGifts;
 	int m_percentage=0;
 	int m_blockCounter=0;
-
-
+	EnemiesInLevel m_amountEnemiesInLevelMatrix;
 
 };

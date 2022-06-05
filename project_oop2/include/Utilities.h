@@ -32,3 +32,7 @@ enum  WhereCanMoveEnum {
 enum  EndOfLevelCondition {
 	CLOSE = 0, FINISHLEVEL, FAIL_LEVEL
 };
+//-------------------------
+enum  EnemiesInLevels {
+	TERRITORY_EATER = 0,MONSTER
+};

@@ -2,7 +2,7 @@
 #include "Enemies.h"
 
 Board::Board(sf::RenderWindow& window,int curentLevel)
-	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
+	:m_amountEnemiesInLevelMatrix(),m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
 
@@ -21,8 +21,6 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 	m_rec.setPosition(350, 50);
 	m_rec.setSize(sf::Vector2f(900, 900));
 	m_enemiesVec = EnemyFactory::createEnemies(curentLevel);
-//להגריל מספר לשלב, ואז להגריל זמן, כל פעם שהזמן הזה עובר, להגריל עוד מתנה
-	//עד שהוגרלו כולם.
 }
 void Board::draw()
 {

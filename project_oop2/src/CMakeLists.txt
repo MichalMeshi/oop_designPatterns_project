@@ -25,4 +25,5 @@
                                              "MoveToBlocked.cpp" 
                                              "Move.cpp" 
                                              "MoveEverywhere.cpp" 
+                                             "EnemiesInLevel.cpp" 
                                              "Settings.cpp" )
