@@ -5,12 +5,8 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
-	std::vector<int> rows(45);
-	std::vector< std::vector<int>> vec;
-	vec.resize(45);
-	m_matrix = vec;
 
-	
+	m_matrix.resize(45);
 	clockForGifts.restart();
 	for (int i = 0; i < 45; i++)
 		for (int j = 0; j < 45; j++)
