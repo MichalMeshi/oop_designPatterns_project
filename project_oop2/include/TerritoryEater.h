@@ -4,8 +4,8 @@ class Board;
 class TerritoryEater : public Enemies
 {
 public:
-	TerritoryEater(sf::Texture& t, sf::Vector2f f1, sf::Vector2f f2):Enemies(t,f1,f2){}
+	TerritoryEater(sf::Texture& t, sf::Vector2f f1, std::unique_ptr<Move> m):Enemies(t,f1,std::move(m)){}
 	~TerritoryEater() {}
-	virtual bool move(Board& b) override { return false; }
+	virtual void move(Board& b) override;
 private:
 };

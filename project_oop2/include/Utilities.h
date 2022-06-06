@@ -22,7 +22,7 @@ enum TileState {
 };
 //-------------------------
 enum MoveEnum {
-	SIMPLE_MOVE = 0, SMART_MOVE, MOVE_FAR,E_MOVE_MAX_SIZE
+	SIMPLE_MOVE = 0, SMART_MOVE, MOVE_FAR, RANDOM_MOVE,E_MOVE_MAX_SIZE
 };
 //-------------------------
 enum  WhereCanMoveEnum {
@@ -34,5 +34,5 @@ enum  EndOfLevelCondition {
 };
 //-------------------------
 enum  EnemiesInLevels {
-	TERRITORY_EATER = 0,MONSTER
+	TERRITORY_EATER = 0,DOMB_MONSTER,SMART_MONSTER
 };

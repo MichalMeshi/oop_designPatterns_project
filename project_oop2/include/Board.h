@@ -24,6 +24,7 @@ public:
 	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
 	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY); }
 	void handleCreateGifts(int& gift_num, int rand_time);
+	void eatCellInMatrix(int i, int j);
 	sf::Vector2f findDirectionToMove(int x, int y);
 private:
 	sf::RenderWindow& m_window;
@@ -38,6 +39,5 @@ private:
 	sf::Clock clockForGifts;
 	int m_percentage=0;
 	int m_blockCounter=0;
-	EnemiesInLevel m_amountEnemiesInLevelMatrix;
 
 };

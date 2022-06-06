@@ -26,4 +26,6 @@
                                              "Move.cpp" 
                                              "MoveEverywhere.cpp" 
                                              "EnemiesInLevel.cpp" 
+                                             "RandomMove.cpp" 
+                                             "TerritoryEater.cpp" 
                                              "Settings.cpp" )

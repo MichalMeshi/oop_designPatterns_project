@@ -2,7 +2,7 @@
 #include "Enemies.h"
 
 Board::Board(sf::RenderWindow& window,int curentLevel)
-	:m_amountEnemiesInLevelMatrix(),m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
+	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
 
@@ -31,7 +31,7 @@ void Board::draw()
 		{
 			sf::RectangleShape rect({ 20,20 });
 			rect.setPosition(j*20+350,i*20+50);
-			if (m_matrix[i][j] == EMPTY)
+			if (m_matrix[i][j] == EMPTY || m_matrix[i][j] == 3)
 				rect.setFillColor(sf::Color::White);
 			if (m_matrix[i][j] == BLOCKED)
 				rect.setFillColor(sf::Color::Black);
@@ -67,31 +67,40 @@ void Board::handleSpaceBlockage()
 		m_player.setPlayerDx(0);
 		m_player.setPlayerDy(0);
 
-		for (int i = 0; i < m_enemiesVec.size()-1; i++)
+		for (int i = 0; i < m_enemiesVec.size(); i++)
 			floodFill(m_enemiesVec[i]->getIndex());
 
 		for (int i = 0; i < 45; i++)
 			for (int j = 0; j < 45; j++)
-				if (m_matrix[i][j] == -1) m_matrix[i][j] = 0;
+			{
+				
+				if (m_matrix[i][j] == -1 )
+					m_matrix[i][j] = EMPTY;
 				else
 				{
-					m_matrix[i][j] = 1;
+					m_matrix[i][j] = BLOCKED;
 					if (++m_blockCounter == 21)
 					{
 						m_percentage++;
 						m_blockCounter = 0;
 					}
 				}
+					
+			}
 	}
 }
 //----------------------------------------------------------
 void Board::floodFill(sf::Vector2i v)
 {
-	if (m_matrix[v.x][v.y] == 0) m_matrix[v.x][v.y] = -1;
-	if (m_matrix[v.x - 1][v.y] == 0) floodFill(sf::Vector2i(v.x - 1, v.y));
-	if (m_matrix[v.x + 1][v.y] == 0) floodFill(sf::Vector2i(v.x + 1, v.y));
-	if (m_matrix[v.x][v.y - 1] == 0) floodFill(sf::Vector2i(v.x, v.y - 1));
-	if (m_matrix[v.x][v.y + 1] == 0) floodFill(sf::Vector2i(v.x, v.y + 1));
+	if (v.x>0 && v.x<44 && v.y>0 && v.y<44 && m_matrix[v.x][v.y] == EMPTY ) m_matrix[v.x][v.y] = -1;
+	if (((v.x-1) >0) && v.y > 0 && v.y < 44 && m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
+	if (((v.x + 1)<44) && v.y > 0 && v.y < 44 && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
+	if (((v.y - 1)>0) && v.x > 0 && v.x < 44 && m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
+	if (((v.y + 1) < 44) && v.x > 0 && v.x < 44  && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
+//	if (((v.x-1) >0) &&  m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
+//if (((v.x + 1)<44)  && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
+//if (((v.y - 1)>0)&& m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
+//if (((v.y + 1) < 44) && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
 }
 //------------------------------------------------------------
 void Board::movePlayer()
@@ -144,12 +153,6 @@ void Board::handleCreateGifts(int &gift_num, int rand_time)
 }
 sf::Vector2f Board::findDirectionToMove(int x,int y)
 {
-
-
-	//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 	sf::Vector2f pos={0,0};
 
 	if (m_player.isRight(x))
@@ -166,8 +169,13 @@ sf::Vector2f Board::findDirectionToMove(int x,int y)
 		pos.x = 1;
 		pos.y = 0;
 	}
-	
 	return pos;
-
 }
+void Board::eatCellInMatrix(int i, int j)
+{
+	if(!(i<=0 || i>=44 || j<=0||j>=44))
+		//if(m_matrix[i][j] == BLOCKED || m_matrix[i][j] ==MIDDLE )
+			m_matrix[i][j] = 0;
+}
+
 

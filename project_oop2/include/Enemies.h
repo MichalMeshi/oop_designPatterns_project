@@ -12,5 +12,6 @@ public:
 	sf::Vector2i getIndex()const { return m_move->getIndex(); }
 protected:	
 	std::unique_ptr<Move> m_move;
+	std::unique_ptr<Move> m_prevMove=NULL;
 };
 

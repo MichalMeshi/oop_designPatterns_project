@@ -1,4 +1,5 @@
 #include "EnemyFactory.h"
+#include "TerritoryEater.h"
  std::vector<moveFunc>& EnemyFactory::getMoveVec()
 {
 	static std::vector<moveFunc> m_moveVec(E_MOVE_MAX_SIZE);
@@ -34,8 +35,9 @@
 		 return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED); });
 	
 //	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(20, 20), SMART_MOVE, MOVE_TO_UNBLOCKED));
-	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 70), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
+	//vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 70), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
 	//ליצור רק אחרי שמתקנים את התזוזה שלו
-	
+		vec.emplace_back(std::make_unique<TerritoryEater>(Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), getMoveVec()[SIMPLE_MOVE](sf::Vector2i(1200, 50), getWhereCanMoveVec()[MOVE_EVERYWHERE]())));
+
 	return vec;
  }
