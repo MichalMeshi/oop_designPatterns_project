@@ -1,11 +1,10 @@
 #include "Board.h"
-#include "Enemies.h"
+#include "CollisionHandling.h"
 
 Board::Board(sf::RenderWindow& window,int curentLevel)
 	:m_window(window),m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW })
 {
-
 	m_matrix.resize(45);
 	clockForGifts.restart();
 	for (int i = 0; i < 45; i++)
@@ -16,12 +15,11 @@ Board::Board(sf::RenderWindow& window,int curentLevel)
 			if (i == 0 || j == 0 || i == 44 || j == 44)
 				m_matrix[i][j] = BLOCKED;
 		}
-
 	m_rec.setFillColor(sf::Color::White);
 	m_rec.setPosition(350, 50);
 	m_rec.setSize(sf::Vector2f(900, 900));
-	m_enemiesVec = EnemyFactory::createEnemies(curentLevel);
 }
+//-----------------------------------------------
 void Board::draw()
 {
 	m_backgroundGame.draw(m_window);
@@ -31,7 +29,7 @@ void Board::draw()
 		{
 			sf::RectangleShape rect({ 20,20 });
 			rect.setPosition(j*20+350,i*20+50);
-			if (m_matrix[i][j] == EMPTY || m_matrix[i][j] == 3)
+			if (m_matrix[i][j] == EMPTY)
 				rect.setFillColor(sf::Color::White);
 			if (m_matrix[i][j] == BLOCKED)
 				rect.setFillColor(sf::Color::Black);
@@ -73,7 +71,6 @@ void Board::handleSpaceBlockage()
 		for (int i = 0; i < 45; i++)
 			for (int j = 0; j < 45; j++)
 			{
-				
 				if (m_matrix[i][j] == -1 )
 					m_matrix[i][j] = EMPTY;
 				else
@@ -92,11 +89,11 @@ void Board::handleSpaceBlockage()
 //----------------------------------------------------------
 void Board::floodFill(sf::Vector2i v)
 {
-	if (v.x>0 && v.x<44 && v.y>0 && v.y<44 && m_matrix[v.x][v.y] == EMPTY ) m_matrix[v.x][v.y] = -1;
-	if (((v.x-1) >0) && v.y > 0 && v.y < 44 && m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
-	if (((v.x + 1)<44) && v.y > 0 && v.y < 44 && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
-	if (((v.y - 1)>0) && v.x > 0 && v.x < 44 && m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
-	if (((v.y + 1) < 44) && v.x > 0 && v.x < 44  && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
+	if (v.x>=0 && v.x<=44 && v.y>=0 && v.y<=44 && m_matrix[v.x][v.y] == EMPTY ) m_matrix[v.x][v.y] = -1;
+	if (((v.x-1) >=0) && v.y >= 0 && v.y <= 44 && m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
+	if (((v.x + 1)<=44) && v.y >= 0 && v.y <= 44 && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
+	if (((v.y - 1)>=0) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
+	if (((v.y + 1) <= 44) && v.x >= 0 && v.x <= 44  && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
 //	if (((v.x-1) >0) &&  m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
 //if (((v.x + 1)<44)  && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
 //if (((v.y - 1)>0)&& m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
@@ -142,11 +139,11 @@ void Board::setDirection(sf::Keyboard::Key key)
 	}
 }
 //--------------------------------------------
-void Board::handleCreateGifts(int &gift_num, int rand_time)
+void Board::handleCreateGifts(int &gift_num, int rand_time,Level* l)
 {
 	if (clockForGifts.getElapsedTime().asSeconds() >= rand_time && gift_num != 0)
 	{
-		m_giftsVec.emplace_back(GiftFactory::createGift());
+		m_giftsVec.emplace_back(GiftFactory::createGift(l));
 		gift_num--;
 		clockForGifts.restart();
 	}
@@ -171,11 +168,32 @@ sf::Vector2f Board::findDirectionToMove(int x,int y)
 	}
 	return pos;
 }
+//--------------------------------------------------------
 void Board::eatCellInMatrix(int i, int j)
 {
 	if(!(i<=0 || i>=44 || j<=0||j>=44))
 		//if(m_matrix[i][j] == BLOCKED || m_matrix[i][j] ==MIDDLE )
 			m_matrix[i][j] = 0;
+}
+//---------------------------------------------------------
+void Board::handleCollision()
+{
+	for (auto& enemy : m_enemiesVec)
+		if (colide(*enemy, m_player))
+			processCollision(*enemy, m_player);		
+}
+//-------------------------------------------------------------
+bool Board::colide(Object& obj1, Object& obj2)
+{
+	sf::FloatRect res;
+	return (obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition()));
+	//auto player = sf::FloatRect(obj2.getDisplay().getSprite().getGlobalBounds());
+	//return (player.intersects(obj1.getDisplay().getSprite().getGlobalBounds(),res));
+}
+//-------------------------------------------------------------
+void Board::createEnemiesInBoard(int curentLevel,Level* l)
+{
+	m_enemiesVec = EnemyFactory::createEnemies(curentLevel,l);
 }
 
 

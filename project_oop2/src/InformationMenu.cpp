@@ -1,13 +1,11 @@
 #include "InformationMenu.h"
-#include "Graphics.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iomanip>
 #include <math.h>
 #include <cmath>
 #include <sstream>
-#include "Display.h"
-#include "Board.h"
+
 //---------------------------------------------------------------------------------------
 InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
 	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(60, 60))

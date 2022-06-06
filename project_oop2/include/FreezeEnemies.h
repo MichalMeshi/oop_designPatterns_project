@@ -4,7 +4,7 @@
 class FreezeEnemies :public Gift
 {
 public:
-	FreezeEnemies() :Gift(Graphics::getGraphics().getTexture(SEA), { 20,20 }) {	}
+	FreezeEnemies(Level* l) :Gift(Graphics::getGraphics().getTexture(SEA), { 20,20 },l) {	}
 	virtual	~FreezeEnemies()override {}
 
 private:
@@ -12,4 +12,4 @@ private:
 };
 
 bool FreezeEnemies::m_register = GiftFactory::registerGift(
-	[]()->std::unique_ptr<Gift> { return std::make_unique<FreezeEnemies>(); });
+	[](Level* l)->std::unique_ptr<Gift> { return std::make_unique<FreezeEnemies>(l); });

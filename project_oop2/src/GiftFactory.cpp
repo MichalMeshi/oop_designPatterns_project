@@ -12,10 +12,10 @@ bool GiftFactory::registerGift(giftFunc mf)
 	return true;
 }
 //--------------------------------------------------
-std::unique_ptr<Gift> GiftFactory::createGift()
+std::unique_ptr<Gift> GiftFactory::createGift(Level* l)
 {
 	int rand_gift = rand() % AMOUNT_OF_GIFTS;
-	return getGiftVec()[rand_gift]();
+	return getGiftVec()[rand_gift](l);
 }
 
 

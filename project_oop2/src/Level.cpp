@@ -1,8 +1,8 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel)
-    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+40), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel)
+    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+40), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel), m_life(3)
 {
-  
+    m_board.createEnemiesInBoard(curentLevel,this);
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
      m_timeOutTxt.setString("TIME-OUT");
      m_timeOutTxt.setPosition({ 150,90 });
@@ -45,10 +45,12 @@ enum EndOfLevelCondition Level::runLevel()
 
         m_board.moveEnemies();
         m_board.handleSpaceBlockage();
-        m_board.handleCreateGifts(gift_num, rand_time);
+        m_board.handleCreateGifts(gift_num, rand_time,this);
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
         //בדיקת התנגשות של שחקן מול אויבים
-
+        m_board.handleCollision();
+        if (m_life < 0)
+             return FAIL_LEVEL;
         m_window.clear();
         m_board.draw();
         m_infoMenu.drawInfoMenu();

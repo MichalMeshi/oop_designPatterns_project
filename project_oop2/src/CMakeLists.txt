@@ -7,6 +7,7 @@
                                              "ShowInstructions.cpp" 
                                              "GameController.cpp" 
                                              "Level.cpp" 
+                                             "CollisionHandling.cpp" 
                                              "Controller.cpp" 
                                              "Player.cpp" 
                                              "Board.cpp" 

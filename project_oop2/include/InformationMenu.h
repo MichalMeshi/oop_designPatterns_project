@@ -1,5 +1,6 @@
 #pragma once
 #include "Display.h"
+#include "Board.h"
 class InformationMenu
 {
 public:
@@ -14,7 +15,6 @@ public:
 private:
 	float m_timeLeftInLevel; //to be changed
 	int m_percentage=0;
-	int m_life=3;
 	Display m_heartPicture;
 	Display m_clockPicture;
 	sf::Text m_timeLeftTxt;
