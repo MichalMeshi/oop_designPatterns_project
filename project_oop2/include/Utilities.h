@@ -36,3 +36,7 @@ enum  EndOfLevelCondition {
 enum  EnemiesInLevels {
 	TERRITORY_EATER = 0,DOMB_MONSTER,SMART_MONSTER
 };
+//-------------------------
+enum  DirectionEnum {
+	UP = 0, DOWN, RIGHT,LEFT
+};

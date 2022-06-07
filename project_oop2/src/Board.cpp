@@ -46,7 +46,10 @@ void Board::draw()
 //------------------------------------------------
 bool Board::checkIfPassedAlready()
 {
-	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == MIDDLE)return true;
+	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == MIDDLE) {
+		m_inFailure = true;
+		return true;
+	}
 	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == EMPTY) m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] = MIDDLE;
 	return false;
 }
