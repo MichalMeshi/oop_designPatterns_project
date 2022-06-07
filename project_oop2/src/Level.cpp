@@ -47,7 +47,6 @@ enum EndOfLevelCondition Level::runLevel()
         }
 
         m_board.moveEnemies();
-        m_board.handleSpaceBlockage();
         m_board.handleCreateGifts(gift_num, rand_time,this);
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
@@ -59,6 +58,7 @@ enum EndOfLevelCondition Level::runLevel()
         m_board.handleCollision();
         if (m_life < 0)
              return FAIL_LEVEL;
+        m_board.handleSpaceBlockage();
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
             m_board.unFreeze();
         m_window.clear();

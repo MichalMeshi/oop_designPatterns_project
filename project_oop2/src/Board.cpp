@@ -75,7 +75,10 @@ void Board::handleSpaceBlockage()
 					m_matrix[i][j] = EMPTY;
 				else
 				{
-					m_matrix[i][j] = BLOCKED;
+					if(m_matrix[i][j] == 2 && m_inFailure)
+						m_matrix[i][j] = EMPTY;
+					else
+					  m_matrix[i][j] = BLOCKED;
 					if (++m_blockCounter == 21)
 					{
 						m_percentage++;
@@ -84,6 +87,7 @@ void Board::handleSpaceBlockage()
 				}
 					
 			}
+		m_inFailure = false;
 	}
 }
 //----------------------------------------------------------
@@ -177,7 +181,10 @@ void Board::handleCollision()
 
 	for (auto& enemy : m_enemiesVec)
 		if (colide(*enemy, m_player))
+		{
 			processCollision(*enemy, m_player);
+			m_inFailure = true;
+		}
 	for (int i=0;i<m_giftsVec.size();i++)
 		if (colide(*m_giftsVec[i], m_player))
 		{

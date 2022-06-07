@@ -42,5 +42,7 @@ private:
 	sf::Clock clockForGifts;
 	int m_percentage=0;
 	int m_blockCounter=0;
+	bool m_inFailure = false;
+
 
 };
