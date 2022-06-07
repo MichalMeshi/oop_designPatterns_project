@@ -1,4 +1,9 @@
 #include "CollisionHandling.h"
+#include "TerritoryEater.h"
+#include "Player.h"
+#include "Life.h"
+#include "AddTime.h"
+#include "FreezeEnemies.h"
 
 namespace // anonymous namespace — the standard way to make function "static"
 {
@@ -7,53 +12,21 @@ namespace // anonymous namespace — the standard way to make function "static"
         Enemies& anEnemy= static_cast<Enemies&>(enemy);
         anEnemy.reduceLife();
     }
-
-   /* void playerTerritoryEater(Object& player,
-        Object& enemy)
+    void playerLife(Object& life, Object& player)
     {
-      
-    }*/
-
-    //void player(GameObject& spaceShip,
-    //    GameObject& spaceStation)
-    //{
-    //    std::cout << "SpaceShip and SpaceStation collision!\n";
-    //}
-
-    //void asteroidStation(GameObject& asteroid,
-    //    GameObject& spaceStation)
-    //{
-    //    std::cout << "Asteroid and SpaceStation collision!\n";
-    //}
-
-    //void shipShip(GameObject& spaceShip1,
-    //    GameObject& spaceShip2)
-    //{
-    //    std::cout << "Two SpaceShips collision!\n";
-    //}
-
-    ////...
-
-    //// secondary collision-processing functions that just
-    //// implement symmetry: swap the parameters and call a
-    //// primary function
-    //void asteroidShip(GameObject& asteroid,
-    //    GameObject& spaceShip)
-    //{
-    //    shipAsteroid(spaceShip, asteroid);
-    //}
-    //void stationShip(GameObject& spaceStation,
-    //    GameObject& spaceShip)
-    //{
-    //    shipStation(spaceShip, spaceStation);
-    //}
-    //void stationAsteroid(GameObject& spaceStation,
-    //    GameObject& asteroid)
-    //{
-    //    asteroidStation(asteroid, spaceStation);
-    //}
-    ////...
-
+        Life& lifeGift = static_cast<Life&>(life);
+        lifeGift.addLife();
+    }
+    void playerAddTime(Object& addTime, Object& player)
+    {
+        AddTime& addTimeGift = static_cast<AddTime&>(addTime);
+        addTimeGift.addTime();
+    }
+    void playerFreezeEnemies(Object& freezeEnemies, Object& player)
+    {
+        FreezeEnemies& freezeEnemiesGift = static_cast<FreezeEnemies&>(freezeEnemies);
+        freezeEnemiesGift.freezeEnemies();
+    }
     using HitFunctionPtr = void (*)(Object&, Object&);
     // typedef void (*HitFunctionPtr)(GameObject&, GameObject&);
     using Key = std::pair<std::type_index, std::type_index>;
@@ -65,12 +38,10 @@ namespace // anonymous namespace — the standard way to make function "static"
         HitMap phm;
         phm[Key(typeid(Enemies), typeid(Player))] = &playerEnemy;
         phm[Key(typeid(TerritoryEater), typeid(Player))] = &playerEnemy;
-        /*phm[Key(typeid(SpaceShip), typeid(SpaceStation))] = &shipStation;
-        phm[Key(typeid(Asteroid), typeid(SpaceStation))] = &asteroidStation;
-        phm[Key(typeid(SpaceShip), typeid(SpaceShip))] = &shipShip;
-        phm[Key(typeid(Asteroid), typeid(SpaceShip))] = &asteroidShip;
-        phm[Key(typeid(SpaceStation), typeid(SpaceShip))] = &stationShip;
-        phm[Key(typeid(SpaceStation), typeid(Asteroid))] = &stationAsteroid;*/
+        phm[Key(typeid(Life), typeid(Player))] = &playerLife;
+        phm[Key(typeid(AddTime), typeid(Player))] = &playerAddTime;
+        phm[Key(typeid(FreezeEnemies), typeid(Player))] = &playerFreezeEnemies;
+        
         //...
         return phm;
     }

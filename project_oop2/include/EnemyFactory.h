@@ -3,7 +3,7 @@
 class Move;
 class Level;
 class CanMoveToPlace;
-typedef std::unique_ptr<Move>(*moveFunc)(sf::Vector2i,std::unique_ptr<CanMoveToPlace>);
+typedef std::shared_ptr<Move>(*moveFunc)(sf::Vector2i,std::unique_ptr<CanMoveToPlace>);
 typedef std::unique_ptr<CanMoveToPlace>(*WhereCanMoveFunc)();
 class EnemyFactory
 {

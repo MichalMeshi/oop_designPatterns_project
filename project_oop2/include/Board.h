@@ -19,8 +19,6 @@ public:
 	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
-	//void creatSimpleEnemies(int num);
-	//void createGifts(int num);
 	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
 	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY); }
 	void handleCreateGifts(int& gift_num, int rand_time,Level* l);
@@ -29,10 +27,12 @@ public:
 	void createEnemiesInBoard(int,Level*);
 	void handleCollision();
 	bool colide(Object& obj1, Object& obj2);
+	void freezeEnemies();
+	void unFreeze();
+	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה
 private:
 	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;
-	//int m_matrix[45][45] = { 0 };
 	sf::RectangleShape m_rec;
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
 	std::vector<std::unique_ptr<Enemies>> m_enemiesVec;

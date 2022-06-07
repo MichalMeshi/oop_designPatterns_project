@@ -5,6 +5,5 @@
 #include <string>
 #include <typeinfo>
 #include <typeindex>
-#include "TerritoryEater.h"
-#include "Player.h"
+class Object;
 void processCollision(Object& object1, Object& object2);

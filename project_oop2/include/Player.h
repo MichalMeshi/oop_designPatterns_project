@@ -10,6 +10,7 @@ public:
 	int getPlayerYpos()const { return m_y; }
 	void setPlayerDx(int x) {  m_dx= x; }
 	void setPlayerDy(int y) {  m_dy=y; }
+	void setPlayerPosition(sf::Vector2f v) { m_x = v.x; m_y = v.y; }
 
 	bool isRight(int x);
 	bool isUp(int y);

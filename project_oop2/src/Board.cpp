@@ -94,10 +94,6 @@ void Board::floodFill(sf::Vector2i v)
 	if (((v.x + 1)<=44) && v.y >= 0 && v.y <= 44 && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
 	if (((v.y - 1)>=0) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
 	if (((v.y + 1) <= 44) && v.x >= 0 && v.x <= 44  && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
-//	if (((v.x-1) >0) &&  m_matrix[v.x - 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x - 1, v.y));
-//if (((v.x + 1)<44)  && m_matrix[v.x + 1][v.y] == EMPTY ) floodFill(sf::Vector2i(v.x + 1, v.y));
-//if (((v.y - 1)>0)&& m_matrix[v.x][v.y - 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y - 1));
-//if (((v.y + 1) < 44) && m_matrix[v.x][v.y + 1] == EMPTY ) floodFill(sf::Vector2i(v.x, v.y + 1));
 }
 //------------------------------------------------------------
 void Board::movePlayer()
@@ -173,14 +169,21 @@ void Board::eatCellInMatrix(int i, int j)
 {
 	if(!(i<=0 || i>=44 || j<=0||j>=44))
 		//if(m_matrix[i][j] == BLOCKED || m_matrix[i][j] ==MIDDLE )
-			m_matrix[i][j] = 0;
+			m_matrix[i][j] = EMPTY;
 }
 //---------------------------------------------------------
 void Board::handleCollision()
 {
+
 	for (auto& enemy : m_enemiesVec)
 		if (colide(*enemy, m_player))
-			processCollision(*enemy, m_player);		
+			processCollision(*enemy, m_player);
+	for (int i=0;i<m_giftsVec.size();i++)
+		if (colide(*m_giftsVec[i], m_player))
+		{
+			processCollision(*m_giftsVec[i], m_player);
+			m_giftsVec.erase(m_giftsVec.begin()+i);
+		}
 }
 //-------------------------------------------------------------
 bool Board::colide(Object& obj1, Object& obj2)
@@ -194,6 +197,18 @@ bool Board::colide(Object& obj1, Object& obj2)
 void Board::createEnemiesInBoard(int curentLevel,Level* l)
 {
 	m_enemiesVec = EnemyFactory::createEnemies(curentLevel,l);
+}
+//-------------------------------------------------------------
+void Board::freezeEnemies()
+{
+	for (auto& enemy : m_enemiesVec)
+		enemy->freeze();
+}
+//-------------------------------------------------------------
+void Board::unFreeze()
+{
+	for (auto& enemy : m_enemiesVec)
+		enemy->unFreeze();
 }
 
 

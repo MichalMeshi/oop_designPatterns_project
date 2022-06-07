@@ -15,12 +15,18 @@ InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int tim
 	initializeTimeLeftTxt();
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::drawInfoMenu()
+void InformationMenu::drawInfoMenu(int lifeAmount)
 {
-	
+	float xPos = 20;
     m_window.draw(m_levelTxt);
 	m_clockPicture.draw(m_window);
-	m_heartPicture.draw(m_window);
+	for (int i = 0; i < lifeAmount; i++)
+	{
+
+		m_heartPicture.setPosition(sf::Vector2f(xPos, 200));
+		m_heartPicture.draw(m_window);
+		xPos += 80;
+	}
 	m_window.draw(m_timeLeftTxt);
 	m_window.draw(m_numLevelTxt);
 }

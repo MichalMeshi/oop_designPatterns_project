@@ -6,12 +6,12 @@ class InformationMenu
 public:
 	InformationMenu(char ,sf::RenderWindow& window,int);
 	~InformationMenu()=default;
-	void drawInfoMenu();
+	void drawInfoMenu(int life);
 	void setTimer(float time);
 	void initializeLevelTxt();
 	void initializeNumLevelTxt(char nameFile);
 	void initializeTimeLeftTxt();
-
+	
 private:
 	float m_timeLeftInLevel; //to be changed
 	int m_percentage=0;

@@ -10,4 +10,4 @@ public:
 private:
 	static bool m_register;
 };
-bool MoveFar::m_register = EnemyFactory::registerMove(MOVE_FAR,[](sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove)->std::unique_ptr<Move> { return std::make_unique<MoveFar>(pos,std::move(placeToMove)); });
+bool MoveFar::m_register = EnemyFactory::registerMove(MOVE_FAR,[](sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove)->std::shared_ptr<Move> { return std::make_shared<MoveFar>(pos,std::move(placeToMove)); });

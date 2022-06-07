@@ -1,6 +1,6 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel)
-    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+40), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel), m_life(3)
+    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+35), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel), m_life(3)
 {
     m_board.createEnemiesInBoard(curentLevel,this);
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
@@ -41,19 +41,29 @@ enum EndOfLevelCondition Level::runLevel()
         }
         m_board.movePlayer();
         if (m_board.checkIfPassedAlready())
-            m_window.close();
+        {
+            m_life--;
+            m_board.setPlayerPositionToBegining();
+        }
 
         m_board.moveEnemies();
         m_board.handleSpaceBlockage();
         m_board.handleCreateGifts(gift_num, rand_time,this);
+        if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
+        {
+            m_life--;
+            m_board.setPlayerPositionToBegining();
+            clock.restart();
+        }
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
-        //בדיקת התנגשות של שחקן מול אויבים
         m_board.handleCollision();
         if (m_life < 0)
              return FAIL_LEVEL;
+        if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
+            m_board.unFreeze();
         m_window.clear();
         m_board.draw();
-        m_infoMenu.drawInfoMenu();
+        m_infoMenu.drawInfoMenu(m_life);
         m_window.display();
     }
     return FINISHLEVEL; // זה סתם

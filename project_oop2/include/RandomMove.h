@@ -11,4 +11,4 @@ public:
 private:
 	static bool m_register;
 };
-bool RandomMove::m_register = EnemyFactory::registerMove(RANDOM_MOVE, [](sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> p)->std::unique_ptr<Move> { return std::make_unique<RandomMove>(pos, std::move(p)); });
+bool RandomMove::m_register = EnemyFactory::registerMove(RANDOM_MOVE, [](sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> p)->std::shared_ptr<Move> { return std::make_shared<RandomMove>(pos, std::move(p)); });
