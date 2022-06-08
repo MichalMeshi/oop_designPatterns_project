@@ -1,8 +1,9 @@
 #include "Level.h"
-Level::Level(sf::RenderWindow& window, int curentLevel)
-    :m_window(window), m_board(window, curentLevel), m_timeForLevel((rand()%30)+35), m_infoMenu(char(curentLevel+48), m_window, m_timeForLevel), m_life(3)
+Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
+    :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
+        m_window, m_timeForLevel), m_life(3), m_infoOfLevel(i)
 {
-    m_board.createEnemiesInBoard(curentLevel,this);
+    m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
      m_timeOutTxt.setString("TIME-OUT");
      m_timeOutTxt.setPosition({ 150,90 });
@@ -10,8 +11,8 @@ Level::Level(sf::RenderWindow& window, int curentLevel)
      m_timeOutTxt.setCharacterSize(350);
      m_timeOutTxt.setColor(sf::Color::Black);*/
 
-    //בתוך כל שלב, גם לשנות את הטיימר באינפורמיישן
-   
+     //בתוך כל שלב, גם לשנות את הטיימר באינפורמיישן
+
 }
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
@@ -40,14 +41,19 @@ enum EndOfLevelCondition Level::runLevel()
             }
         }
         m_board.movePlayer();
+
+        if (m_board.moveEnemies())
+        {
+            m_life--;
+            m_board.setPlayerPositionToBegining();
+        }
+        m_board.handleSpaceBlockage();
         if (m_board.checkIfPassedAlready())
         {
             m_life--;
             m_board.setPlayerPositionToBegining();
         }
-
-        m_board.moveEnemies();
-        m_board.handleCreateGifts(gift_num, rand_time,this);
+        m_board.handleCreateGifts(gift_num, rand_time, this);
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
             m_life--;
@@ -55,10 +61,10 @@ enum EndOfLevelCondition Level::runLevel()
             clock.restart();
         }
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
+        m_infoMenu.setPercentage(m_percentage);/////
         m_board.handleCollision();
         if (m_life < 0)
-             return FAIL_LEVEL;
-        m_board.handleSpaceBlockage();
+            return FAIL_LEVEL;
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
             m_board.unFreeze();
         m_window.clear();

@@ -29,7 +29,7 @@
 	return std::make_unique<Enemies>(t, f,getMoveVec()[e_move](pos,getWhereCanMoveVec()[e_whereMove]()),l);
 }
  //----------------------------------------------------------------------------------------------
- std::vector<std::unique_ptr<Enemies>> EnemyFactory::createEnemies(int level_num, Level* l)
+ std::vector<std::unique_ptr<Enemies>> EnemyFactory::createEnemies(int level_num, Level* l,std::vector<int> v)
  {
 	 int num = (rand() % 4) + level_num;
 	 std::vector<std::unique_ptr<Enemies>> vec;
@@ -38,11 +38,11 @@
 
 	 //std::generate_n(std::back_inserter(vec), num, [] {
 		// return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), sf::Vector2f(30, 30), SIMPLE_MOVE, MOVE_TO_UNBLOCKED,l); });
-	
+	//for(int i=0;i<v[])
 //	 vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(BACK), sf::Vector2f(20, 20), SMART_MOVE, MOVE_TO_UNBLOCKED));
-	//vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 70), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), SMART_MOVE, MOVE_EVERYWHERE));
+	vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(1200, 70), Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30),SMART_MOVE, MOVE_EVERYWHERE,l));
 	//ליצור רק אחרי שמתקנים את התזוזה שלו
-		vec.emplace_back(std::make_unique<TerritoryEater>(Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), getMoveVec()[RANDOM_MOVE](sf::Vector2i(800, 500), getWhereCanMoveVec()[MOVE_EVERYWHERE]()),l));
+//vec.emplace_back(std::make_unique<TerritoryEater>(Graphics::getGraphics().getTexture(SPIDER), sf::Vector2f(30, 30), getMoveVec()[RANDOM_MOVE](sf::Vector2i(800, 500), getWhereCanMoveVec()[MOVE_EVERYWHERE]()),l));
 
 	return vec;
  }

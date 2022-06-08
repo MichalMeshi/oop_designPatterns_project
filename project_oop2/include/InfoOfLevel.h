@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Utilities.h"
-struct EnemiesInLevel {
-	EnemiesInLevel();
+struct InfoOfLevel {
+	InfoOfLevel();
 	std::vector <std::vector<int>> m_amountEnemiesInLevelMatrix;
 };

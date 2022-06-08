@@ -8,7 +8,6 @@ void Enemies::move(Board& b)
 		m_display.setPosition(m_move->move(b));
 		m_display.rotate();
 	}
-
 }
 void Enemies::reduceLife() { m_level->reduceLife(); }
 

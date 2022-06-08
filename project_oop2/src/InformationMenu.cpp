@@ -5,6 +5,7 @@
 #include <math.h>
 #include <cmath>
 #include <sstream>
+#include <string>
 
 //---------------------------------------------------------------------------------------
 InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
@@ -13,6 +14,7 @@ InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int tim
 	initializeLevelTxt();
 	initializeNumLevelTxt(levelNum);
 	initializeTimeLeftTxt();
+	initializePercentagLeftTxt();
 }
 //---------------------------------------------------------------------------------------
 void InformationMenu::drawInfoMenu(int lifeAmount)
@@ -28,6 +30,7 @@ void InformationMenu::drawInfoMenu(int lifeAmount)
 		xPos += 80;
 	}
 	m_window.draw(m_timeLeftTxt);
+	m_window.draw(m_percentageTxt);
 	m_window.draw(m_numLevelTxt);
 }
 //---------------------------------------------------------------------------------------
@@ -39,6 +42,13 @@ void InformationMenu::setTimer(float time)
 	m_timeLeftTxt.setString(stream.str());
 }
 //---------------------------------------------------------------------------------------
+void InformationMenu::setPercentage(int percent)
+{
+	std::string per = std::to_string(percent);
+	m_percentageTxt.setString(per +="%");
+
+}
+//---------------------------------------------------------------------------------------
 void InformationMenu::initializeLevelTxt()
 {
 	m_levelTxt.setFont(Graphics::getGraphics().getFont());
@@ -46,6 +56,15 @@ void InformationMenu::initializeLevelTxt()
 	m_levelTxt.setPosition(20,5);
 	m_levelTxt.setCharacterSize(40);
 	m_levelTxt.setColor(sf::Color::Black);
+}
+//---------------------------------------------------------------------------------------
+void InformationMenu::initializePercentagLeftTxt()
+{
+	m_percentageTxt.setFont(Graphics::getGraphics().getFont());
+	m_percentageTxt.setString("%");
+	m_percentageTxt.setPosition(20, 100);
+	m_percentageTxt.setCharacterSize(40);
+	m_percentageTxt.setColor(sf::Color::Black);
 }
 //---------------------------------------------------------------------------------------
 void InformationMenu::initializeNumLevelTxt(char nameFile)

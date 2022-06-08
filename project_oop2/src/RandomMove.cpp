@@ -7,20 +7,26 @@ RandomMove::RandomMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeTo
 	m_dy = 12;
 	m_clockForMove.restart();
 	//להפוך לסוויצ
-	if (m_directionEnum == UP)
+	std::vector<sf::Vector2i> directionsVec = { { 0, -1 }, { 0,1 }, { 1,0 }, { -1,0 } };
+
+	m_directions = directionsVec;
+
+	/*if (m_directionEnum == UP)
 		m_direction = { 0,-1 };
 	if (m_directionEnum == DOWN)
 		m_direction = { 0,1 };
 	if (m_directionEnum == RIGHT)
 		m_direction = { 1,0 };
 	if (m_directionEnum == LEFT)
-		m_direction = { -1,0 };
+		m_direction = { -1,0 };*/
 }
 
 sf::Vector2f RandomMove::move(Board& b)
 {
+	//לעשות מערך, של 2 אינטים, עם אינדקס אינמ. ויש עוד משתנה ששווה לאחד התאים.
+	//וכל פעם מגרילים לו ומשתנים אותו 
 	int f = m_clockForMove.getElapsedTime().asMilliseconds();
-	if (f % 100 == 0)
+	if (f % 50 == 0)
 		moveDifferently();
 	
 		m_y += m_direction.y * (m_dy);
@@ -125,16 +131,17 @@ sf::Vector2f RandomMove::move(Board& b)
 //}
 void RandomMove::moveDifferently()//יכול להיות שזה יהיה observer
 {
+	//לשנות את הסוויצ
 	int i = rand() % 2;
 	switch (m_directionEnum)
 	{
 	case UP:
 	{
 
-			m_directionEnum = DOWN;//שינוי כיוון הגמד
-			if (i == 0 && (m_x + 20< 1230))
+			m_directionEnum = DOWN;//שינוי כיוון 
+			if (/*i == 0 &&*/ (m_x <= 800)&& m_x + 20< 1230)
 				m_x += 20;
-			else if( (m_x - 20>370))
+			else if ((m_x  > 800)&& m_x - 21> 370)
 				m_x -= 20;
 			m_direction = { 0,1 };
 
@@ -145,9 +152,9 @@ void RandomMove::moveDifferently()//יכול להיות שזה יהיה observer
 	{
 		
 			m_directionEnum = LEFT;
-			if (i == 0 && (m_y +20<930))
+			if (/*i == 0 &&*/ (m_y <=500)&& m_y + 20<930)
 				m_y += 20;
-			else if( (m_y-20>70))
+			else if( (m_y>500)&&m_y -20 > 70)
 				m_y -= 20;
 			m_direction = { -1,0 };
 
@@ -156,9 +163,9 @@ void RandomMove::moveDifferently()//יכול להיות שזה יהיה observer
 	case DOWN:
 	{
 			m_directionEnum = UP;
-			if (i == 0 && (m_x+20< 1230))
+			if (/*i == 0 &&*/ (m_x <= 800) && m_x + 20 < 1230)
 				m_x += 20;
-			else if( (m_x - 20 > 370))
+			else if ((m_x  > 800) && m_x - 20 > 370)
 				m_x -= 20;
 			m_direction = { 0,-1 };
 
@@ -169,9 +176,9 @@ void RandomMove::moveDifferently()//יכול להיות שזה יהיה observer
 	{
 	
 			m_directionEnum = RIGHT;
-			if (i == 0 && (m_y + 20 < 930))
+			if (/*i == 0 &&*/ (m_y  <= 500) && m_y + 20 < 930)
 				m_y += 20;
-			else if ( (m_y - 20 > 70))
+			else if ((m_y > 500) && m_y - 20 > 70)
 				m_y -= 20;
 			m_direction = { 1,0 };
 

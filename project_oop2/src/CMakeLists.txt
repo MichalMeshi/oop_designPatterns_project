@@ -26,7 +26,7 @@
                                              "MoveToBlocked.cpp" 
                                              "Move.cpp" 
                                              "MoveEverywhere.cpp" 
-                                             "EnemiesInLevel.cpp" 
+                                             "InfoOfLevel.cpp" 
                                              "RandomMove.cpp" 
                                              "TerritoryEater.cpp" 
                                              "Settings.cpp" )

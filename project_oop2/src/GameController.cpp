@@ -1,4 +1,5 @@
 #include "GameController.h"
+#include "InfoOfLevel.h"
 void GameController::runTheGame()
 {
 	enum EndOfLevelCondition endLevelCondition;
@@ -8,7 +9,7 @@ void GameController::runTheGame()
 		m_window.create(sf::VideoMode({ WIDTH_WINDOW,HIGTH_WINDOW }), "Xonix");
 	//	m_window.setFramerateLimit(FRAME_LIMIT_SPEED);
 		//m_nameFile[LEVEL_NUMBER_INDEX] = char(curentLevel + 48);//מחשב בקלות את מספר השלב הנוכחי על פי קוד אסקי
-		Level level(m_window, curentLevel); //בשביל הסרגל של השלב
+		Level level(m_window, curentLevel, m_infoOfLevel.m_amountEnemiesInLevelMatrix[curentLevel]); //בשביל הסרגל של השלב
 		endLevelCondition = level.runLevel();
 		if (endLevelCondition == FAIL_LEVEL)
 		{

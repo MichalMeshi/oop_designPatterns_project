@@ -15,8 +15,5 @@ sf::Vector2f SimpleMove::move(Board& b)
 		m_dy = -m_dy;
 		m_y += m_dy;
 	}
-	//if (((m_x - 350) / 20 < 0)) m_x += 20; if (((m_x - 350) / 20) > 44) m_x -= 20;//μϊχο
-	//if (((m_y - 50) / 20 < 0)) m_y+=20; if (((m_y - 50) / 20 > 44)) m_y -=20;
-	//if(b.checkIfContainedInRec(m_x))
 	return sf::Vector2f(m_x, m_y);
 }
