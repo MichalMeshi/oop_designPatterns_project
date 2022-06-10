@@ -11,7 +11,7 @@ InfoOfLevel::InfoOfLevel()
 	m_amountEnemiesInLevelMatrix[1].emplace_back(0);//SMART_MONSTER
 	m_amountEnemiesInLevelMatrix[2].emplace_back(0);
 	m_amountEnemiesInLevelMatrix[3].emplace_back(1);
-	m_amountEnemiesInLevelMatrix[1].emplace_back(75);//PERCENTAGE
+	m_amountEnemiesInLevelMatrix[1].emplace_back(70);//PERCENTAGE
 	m_amountEnemiesInLevelMatrix[2].emplace_back(80);
 	m_amountEnemiesInLevelMatrix[3].emplace_back(90);
 

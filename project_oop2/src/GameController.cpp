@@ -25,7 +25,8 @@ void GameController::runTheGame()
 	//if(curentLevel<4)
 	//	//תמונה של כשלון
 	// וטבלת שיאים 
-	//	else if(curentLevel==4)
+	/*else*/ if(curentLevel==4)
+		m_window.close();
 	//	//תמונה של ניצחון
 	//וטבלת שיאים
 	// או טבלת שיאים אחת

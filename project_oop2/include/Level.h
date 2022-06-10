@@ -21,7 +21,7 @@ private:
 	InformationMenu m_infoMenu;
 	sf::Clock m_clockForGift;
 	int m_timeForLevel;
-	int m_life = 3;
+	int m_life = 10;//to be changed
 	int m_percentage = 8;
 	std::vector<int> m_infoOfLevel;
 };

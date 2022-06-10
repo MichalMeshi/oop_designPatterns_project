@@ -1,9 +1,10 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
-        m_window, m_timeForLevel), m_life(3), m_infoOfLevel(i)
+        m_window, m_timeForLevel),  m_infoOfLevel(i)
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
+    m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     /* m_timeOutTxt.setFont(Graphics::getGraphics().getFont());
      m_timeOutTxt.setString("TIME-OUT");
      m_timeOutTxt.setPosition({ 150,90 });
@@ -47,18 +48,23 @@ enum EndOfLevelCondition Level::runLevel()
             m_life--;
             m_board.setPlayerPositionToBegining();
         }
-        m_board.handleSpaceBlockage();
         if (m_board.checkIfPassedAlready())
         {
             m_life--;
             m_board.setPlayerPositionToBegining();
         }
+        m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
+   
         m_board.handleCreateGifts(gift_num, rand_time, this);
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
             m_life--;
             m_board.setPlayerPositionToBegining();
             clock.restart();
+        }
+        if (m_percentage >= m_infoOfLevel[PERCENTAGE])
+        {
+            return FINISHLEVEL;
         }
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
         m_infoMenu.setPercentage(m_percentage);/////
