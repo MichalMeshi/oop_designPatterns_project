@@ -45,12 +45,12 @@ enum EndOfLevelCondition Level::runLevel()
 
         if (m_board.moveEnemies())
         {
-            m_life--;
+            m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
         }
         if (m_board.checkIfPassedAlready())
         {
-            m_life--;
+            m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
         }
         m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
@@ -58,7 +58,7 @@ enum EndOfLevelCondition Level::runLevel()
         m_board.handleCreateGifts(gift_num, rand_time, this);
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
-            m_life--;
+            m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
             clock.restart();
         }
@@ -69,13 +69,13 @@ enum EndOfLevelCondition Level::runLevel()
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
         m_infoMenu.setPercentage(m_percentage);/////
         m_board.handleCollision();
-        if (m_life < 0)
+        if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
             m_board.unFreeze();
         m_window.clear();
         m_board.draw();
-        m_infoMenu.drawInfoMenu(m_life);
+        m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
         m_window.display();
     }
     return FINISHLEVEL; // жд сън

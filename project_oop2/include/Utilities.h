@@ -35,7 +35,7 @@ enum  EndOfLevelCondition {
 };
 //-------------------------
 enum  InfoOfLevelEnum {
-	TERRITORY_EATER = 0,DOMB_MONSTER,SMART_MONSTER, PERCENTAGE
+	TERRITORY_EATER = 0,DOMB_MONSTER,SMART_MONSTER, PERCENTAGE,LIFE_AMOUNT
 };
 //-------------------------
 enum  DirectionEnum {

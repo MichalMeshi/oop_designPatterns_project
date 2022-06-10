@@ -9,8 +9,8 @@ public:
 	Level(sf::RenderWindow& window, int curentLevel, std::vector<int>);
 	~ Level()= default;
 	enum EndOfLevelCondition runLevel();
-	void reduceLife() { --m_life; m_board.setPlayerPositionToBegining(); }
-	void addLife() { m_life++; }
+	void reduceLife() { --m_infoOfLevel[LIFE_AMOUNT]; m_board.setPlayerPositionToBegining(); }
+	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
 	void addTime() { m_timeForLevel += ((rand() % 5) +6); }
 	void freezeEnemies() { m_board.freezeEnemies(); m_clockForGift.restart(); }
 	int getPercentage()const { return m_percentage; }
@@ -21,7 +21,7 @@ private:
 	InformationMenu m_infoMenu;
 	sf::Clock m_clockForGift;
 	int m_timeForLevel;
-	int m_life = 10;//to be changed
+	//int m_life = 10;//to be changed
 	int m_percentage = 8;
 	std::vector<int> m_infoOfLevel;
 };
