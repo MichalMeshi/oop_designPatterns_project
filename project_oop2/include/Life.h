@@ -4,7 +4,7 @@
 class Life:public Gift
 {
 public:
-	Life(Level* l):Gift(Graphics::getGraphics().getTexture(SEA), { 20,20 },l){	}
+	Life(Level* l):Gift(Graphics::getGraphics().getTexture(HEART), { 20,20 },l){	}
 	virtual ~Life() override{}
 	void addLife() { m_level->addLife(); }
 

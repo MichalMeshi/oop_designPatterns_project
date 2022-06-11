@@ -10,7 +10,7 @@
 //---------------------------------------------------------------------------------------
 InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
 	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(60, 60))
-	, m_heartPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), sf::Vector2f(20, 200), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
+	, m_heartPicture(Graphics::getGraphics().getTexture(HEART), sf::Vector2f(20, 200), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
 	initializeLevelTxt();
 	initializeNumLevelTxt(levelNum);
 	initializeTimeLeftTxt();
@@ -27,7 +27,7 @@ void InformationMenu::drawInfoMenu(int lifeAmount)
 
 		m_heartPicture.setPosition(sf::Vector2f(xPos, 200));
 		m_heartPicture.draw(m_window);
-		xPos += 80;
+		xPos += 40;
 	}
 	m_window.draw(m_timeLeftTxt);
 	m_window.draw(m_percentageTxt);

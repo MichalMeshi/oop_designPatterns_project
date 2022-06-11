@@ -8,6 +8,8 @@ public:
 	~NewGame() = default;
 
 	virtual void execute(sf::RenderWindow& window)override { m_game.runTheGame(); }
+	virtual void unExecute(sf::RenderWindow& window) override {}
+
 private:
 	GameController& m_game;
 };

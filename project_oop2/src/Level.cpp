@@ -63,9 +63,7 @@ enum EndOfLevelCondition Level::runLevel()
             clock.restart();
         }
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
-        {
             return FINISHLEVEL;
-        }
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
         m_infoMenu.setPercentage(m_percentage);/////
         m_board.handleCollision();

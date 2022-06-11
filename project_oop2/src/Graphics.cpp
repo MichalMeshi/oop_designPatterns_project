@@ -6,6 +6,8 @@ Graphics::Graphics()
 {
 
 	m_tex.resize(PICS_AMOUNT);
+	m_soundBufferVec.resize(1);
+	m_soundVec.resize(1);
 	m_tex[HELP].loadFromFile("help.png");
 	m_tex[PLAY].loadFromFile("play.png");
 	m_tex[SOUND].loadFromFile("sound.png");
@@ -19,6 +21,10 @@ Graphics::Graphics()
 	m_tex[BACK].loadFromFile("back.png");
 	m_tex[BALL].loadFromFile("ball.png");
 	m_tex[SPIDER].loadFromFile("spider.png");
+	m_tex[HEART].loadFromFile("heart.png");
+
+	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
+
 	
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");

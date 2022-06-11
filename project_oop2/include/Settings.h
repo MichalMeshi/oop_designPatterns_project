@@ -5,6 +5,8 @@ public:
 	Settings():Command(){}
 	~Settings() = default;
 	virtual void execute(sf::RenderWindow& window)override;
+	virtual void unExecute(sf::RenderWindow& window) override {}
+
 private:
 
 };

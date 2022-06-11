@@ -10,6 +10,7 @@ public:
 		 float x = (rand() % 890) + 350;
 		 float y = (rand() % 890) + 50;
 		 m_display.setPosition(sf::Vector2f(x, y));
+		 m_display.rotate();
 	 }
 	 virtual ~Gift() = 0 {}
 

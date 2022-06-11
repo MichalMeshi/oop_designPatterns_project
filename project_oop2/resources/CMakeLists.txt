@@ -13,4 +13,8 @@ configure_file ("settings.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("clock.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("back.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("ball.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("spider.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("ball.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("heart.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
+configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+
