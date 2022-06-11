@@ -56,6 +56,7 @@ enum EndOfLevelCondition Level::runLevel()
         m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
    
         m_board.handleCreateGifts(gift_num, rand_time, this);
+        m_board.rotateGifts();
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
             m_infoOfLevel[LIFE_AMOUNT]--;

@@ -7,7 +7,7 @@ ShowInstructions::ShowInstructions()
 	m_back(Graphics::getGraphics().getTexture(BACK),
 		sf::Vector2f(10, 10), sf::Vector2f(100, 70)){}
 
-void ShowInstructions::execute(sf::RenderWindow& window)
+void ShowInstructions::execute(sf::RenderWindow& window, Display& d)
 {
 	while (window.isOpen())
 	{

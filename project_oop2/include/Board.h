@@ -30,6 +30,7 @@ public:
 	void freezeEnemies();
 	void unFreeze();
 	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה
+	void rotateGifts();
 private:
 	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;

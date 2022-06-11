@@ -54,7 +54,5 @@ void Menu::handlePress(sf::Vector2f press_position)
 {
 	for (int i = 0; i < m_menu.size(); i++)
 		if (m_menu[i].second.getSprite().getGlobalBounds().contains(press_position))
-			m_menu[i].first->execute(m_window);
-		else
-			m_menu[i].first->unExecute(m_window);
+			m_menu[i].first->execute(m_window, m_menu[i].second);
 }

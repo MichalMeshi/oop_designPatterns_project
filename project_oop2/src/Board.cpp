@@ -261,3 +261,9 @@ void Board::unFreeze()
 	for (auto& enemy : m_territoryEaterVec)
 		enemy->unFreeze();
 }
+//-------------------------------------------------------------
+void Board::rotateGifts()
+{
+	for (int i = 0; i < m_giftsVec.size(); i++)
+		m_giftsVec[i]->rotate();
+}

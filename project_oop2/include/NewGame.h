@@ -6,9 +6,7 @@ class NewGame:public Command
 public:
 	NewGame(GameController& game) :m_game(game), Command() {}
 	~NewGame() = default;
-
-	virtual void execute(sf::RenderWindow& window)override { m_game.runTheGame(); }
-	virtual void unExecute(sf::RenderWindow& window) override {}
+	virtual void execute(sf::RenderWindow& window, Display& d)override { m_game.runTheGame(); }
 
 private:
 	GameController& m_game;

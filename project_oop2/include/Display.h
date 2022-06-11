@@ -11,6 +11,7 @@ public:
 	void setOrigin() { m_sprite.setOrigin({ m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height }); }
 	void setColor(sf::Color c) { m_sprite.setColor(c); }
 	void rotate() {  m_sprite.rotate(-10); }
+	void setTexture(sf::Texture& t) { m_sprite.setTexture(t); }
 private:
 	sf::Sprite m_sprite;
 
