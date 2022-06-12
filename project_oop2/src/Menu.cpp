@@ -33,7 +33,7 @@ void  Menu::handleMouseMove(sf::Vector2f move_position)
 	for (int i = 0; i < m_menu.size(); i++)
 	{
 		if (m_menu[i].second.getSprite().getGlobalBounds().contains(move_position))
-			m_menu[i].second.scale(1.5,1.5);
+			m_menu[i].second.scale(1.3,1.3);
 		else
 			m_menu[i].second.scale(1, 1);
 	}
