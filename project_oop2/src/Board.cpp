@@ -2,7 +2,7 @@
 #include "CollisionHandling.h"
 
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
-	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(20, 20)),
+	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(40, 40)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent)
 {
 	m_matrix.resize(45);
@@ -139,12 +139,14 @@ void Board::setDirection(sf::Keyboard::Key key)
 	{
 	case sf::Keyboard::Key::Right:
 	{
+		m_player.setRotation(270);
 		m_player.setPlayerDx(1);
 		m_player.setPlayerDy(0);
 		break;
 	}
 	case sf::Keyboard::Key::Left:
 	{
+		m_player.setRotation(90);
 		m_player.setPlayerDx(-1);
 		m_player.setPlayerDy(0);
 		break;
@@ -152,12 +154,14 @@ void Board::setDirection(sf::Keyboard::Key key)
 
 	case sf::Keyboard::Key::Down:
 	{
+		m_player.setRotation(0);
 		m_player.setPlayerDx(0);
 		m_player.setPlayerDy(1);
 		break;
 	}
 	case sf::Keyboard::Key::Up:
 	{
+		m_player.setRotation(180);
 		m_player.setPlayerDx(0);
 		m_player.setPlayerDy(-1);
 		break;
