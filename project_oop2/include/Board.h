@@ -11,7 +11,7 @@ class Board
 public:
 	Board(sf::RenderWindow& window, int, int&);
 	~Board() {}
-	void draw();
+	void draw(std::vector<int>);
 	bool checkIfPassedAlready();
 	bool moveEnemies();
 	void handleSpaceBlockage(int, int);

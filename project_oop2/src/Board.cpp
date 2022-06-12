@@ -20,8 +20,9 @@ Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
 	m_rec.setSize(sf::Vector2f(900, 900));
 }
 //-----------------------------------------------
-void Board::draw()
+void Board::draw(std::vector<int> infoVec)
 {
+	
 	m_backgroundGame.draw(m_window);
 	m_window.draw(m_rec);
 	for (int i = 0; i < 45; i++)
@@ -30,11 +31,11 @@ void Board::draw()
 			sf::RectangleShape rect({ 20,20 });
 			rect.setPosition(j * 20 + 350, i * 20 + 50);
 			if (m_matrix[i][j] == EMPTY)
-				rect.setFillColor(sf::Color::White);
+				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_EMPTY])));
 			if (m_matrix[i][j] == BLOCKED)
-				rect.setFillColor(sf::Color::Black);
+				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_BLOCKED])));
 			if (m_matrix[i][j] == MIDDLE)
-				rect.setFillColor(sf::Color::Green);
+				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_MIDDLE])));
 			m_window.draw(rect);
 		}
 	m_player.draw(m_window);

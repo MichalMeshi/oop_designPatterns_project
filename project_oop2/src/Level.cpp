@@ -73,7 +73,7 @@ enum EndOfLevelCondition Level::runLevel()
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
             m_board.unFreeze();
         m_window.clear();
-        m_board.draw();
+        m_board.draw(m_infoOfLevel);
         m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
         m_window.display();
     }
