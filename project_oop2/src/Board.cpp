@@ -116,7 +116,7 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 //----------------------------------------------------------
 void Board::floodFill(sf::Vector2i v)
 {
-	if (v.x >= 0 && v.x <= 44 && v.y >= 0 && v.y <= 44 && m_matrix[v.x][v.y] == EMPTY) m_matrix[v.x][v.y] = AROUND_ENEMY;
+	if (v.x >= ZERO && v.x <= MATRIX_SIZE-1 && v.y >= ZERO && v.y <= MATRIX_SIZE-1 && m_matrix[v.x][v.y] == EMPTY) m_matrix[v.x][v.y] = AROUND_ENEMY;
 	if (((v.x - 1) >= 0) && v.y >= 0 && v.y <= 44 && m_matrix[v.x - 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x - 1, v.y));
 	if (((v.x + 1) <= 44) && v.y >= 0 && v.y <= 44 && m_matrix[v.x + 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x + 1, v.y));
 	if (((v.y - 1) >= 0) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y - 1] == EMPTY) floodFill(sf::Vector2i(v.x, v.y - 1));
@@ -135,30 +135,26 @@ void Board::setDirection(sf::Keyboard::Key key)
 	case sf::Keyboard::Key::Right:
 	{
 		m_player.setRotation(270);
-		m_player.setPlayerDx(1);
-		m_player.setPlayerDy(0);
+		m_player.setPlayerDx(1);m_player.setPlayerDy(0);
 		break;
 	}
 	case sf::Keyboard::Key::Left:
 	{
 		m_player.setRotation(90);
-		m_player.setPlayerDx(-1);
-		m_player.setPlayerDy(0);
+		m_player.setPlayerDx(-1);m_player.setPlayerDy(0);
 		break;
 	}
 
 	case sf::Keyboard::Key::Down:
 	{
 		m_player.setRotation(0);
-		m_player.setPlayerDx(0);
-		m_player.setPlayerDy(1);
+		m_player.setPlayerDx(0);m_player.setPlayerDy(1);
 		break;
 	}
 	case sf::Keyboard::Key::Up:
 	{
 		m_player.setRotation(180);
-		m_player.setPlayerDx(0);
-		m_player.setPlayerDy(-1);
+		m_player.setPlayerDx(0);m_player.setPlayerDy(-1);
 		break;
 	}
 	default:
@@ -199,8 +195,7 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 void Board::eatCellInMatrix(int i, int j)
 {
 	if ((!(i <= ZERO || i >= MATRIX_SIZE-1 || j <= ZERO || j >= MATRIX_SIZE - 1))
-		&& (m_matrix[i][j] == BLOCKED || m_matrix[i][j] == MIDDLE))
-	{
+		&& (m_matrix[i][j] == BLOCKED || m_matrix[i][j] == MIDDLE)){
 		if (--m_blockCounter <= ZERO)
 		{
 			m_percentage--;
@@ -212,7 +207,6 @@ void Board::eatCellInMatrix(int i, int j)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
-
 	for (auto& enemy : m_enemiesVec)
 		if (colide(*enemy, m_player))
 		{
