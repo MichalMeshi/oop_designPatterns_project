@@ -43,7 +43,7 @@ private:
 	//int dx = 0, dy = 0, x = 0, y = 0;
 	sf::Clock clockForGifts;
 	int& m_percentage;
-	int m_blockCounter = 8;
+	int m_blockCounter = 0;
 	bool m_inFailure = false;
 
 
