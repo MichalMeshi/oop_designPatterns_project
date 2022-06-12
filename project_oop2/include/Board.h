@@ -28,7 +28,7 @@ public:
 	void handleCollision();
 	bool colide(Object& obj1, Object& obj2)const;
 	void freezeEnemies();
-	void unFreeze();
+	void unFreezeEnemies();
 	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה
 	void rotateGifts();
 private:

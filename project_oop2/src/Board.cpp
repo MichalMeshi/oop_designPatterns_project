@@ -258,7 +258,7 @@ void Board::freezeEnemies()
 		enemy->freeze();
 }
 //-------------------------------------------------------------
-void Board::unFreeze()
+void Board::unFreezeEnemies()
 {
 	for (auto& enemy : m_enemiesVec)
 		enemy->unFreeze();

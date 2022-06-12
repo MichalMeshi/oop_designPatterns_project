@@ -71,7 +71,7 @@ enum EndOfLevelCondition Level::runLevel()
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
-            m_board.unFreeze();
+            m_board.unFreezeEnemies();
         m_window.clear();
         m_board.draw(m_infoOfLevel);
         m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
