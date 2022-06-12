@@ -29,9 +29,16 @@ Graphics::Graphics()
 	m_tex[LEVEL1_BLOCKED_TILE].loadFromFile("level1_blocked_tile.png");
 	m_tex[LEVEL1_EMPTY_TILE].loadFromFile("level1_empty_tile.png");
 	m_tex[LEVEL1_MIDDLE_TILE].loadFromFile("level1_middle_tile.png");
+	m_tex[LEVEL2_BLOCKED_TILE].loadFromFile("level2_blocked_tile.png");
+	m_tex[LEVEL2_EMPTY_TILE].loadFromFile("level2_empty_tile.png");
+	m_tex[LEVEL2_MIDDLE_TILE].loadFromFile("level2_middle_tile.png");
+	m_tex[LEVEL3_BLOCKED_TILE].loadFromFile("level3_blocked_tile.png");
+	m_tex[LEVEL3_EMPTY_TILE].loadFromFile("level3_empty_tile.png");
+	m_tex[LEVEL3_MIDDLE_TILE].loadFromFile("level3_middle_tile.png");
+	m_tex[TERRITORY_EATER_PIC].loadFromFile("territoryEater.png");
+
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
-
 	
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");

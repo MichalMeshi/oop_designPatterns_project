@@ -18,9 +18,18 @@ configure_file ("noise.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("unNoise.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("unSound.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("player.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("territoryEater.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("level1_blocked_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("level1_empty_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("level1_middle_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level2_blocked_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level2_empty_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level2_middle_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level3_blocked_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level3_empty_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level3_middle_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("spider.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
 
 configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
 

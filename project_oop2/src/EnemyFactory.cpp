@@ -54,6 +54,6 @@ std::vector<std::unique_ptr<TerritoryEater>> EnemyFactory::createTerritoryEaters
 {
 	std::vector<std::unique_ptr<TerritoryEater>> vec;
 	for (int i = 0; i < v[TERRITORY_EATER]; i++)
-		vec.emplace_back(EnemyFactory::createTerritoryEater(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BACK), RANDOM_MOVE, MOVE_EVERYWHERE, l));
+		vec.emplace_back(EnemyFactory::createTerritoryEater(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(TERRITORY_EATER_PIC), RANDOM_MOVE, MOVE_EVERYWHERE, l));
 	return vec;
 }
