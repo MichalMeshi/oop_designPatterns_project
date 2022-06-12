@@ -10,7 +10,11 @@ Graphics::Graphics()
 	m_soundVec.resize(1);
 	m_tex[HELP].loadFromFile("help.png");
 	m_tex[PLAY].loadFromFile("play.png");
+	m_tex[PLAYER].loadFromFile("player.png");
 	m_tex[SOUND].loadFromFile("sound.png");
+	m_tex[UN_SOUND].loadFromFile("unSound.png");
+	m_tex[NOISE].loadFromFile("noise.png");
+	m_tex[UN_NOISE].loadFromFile("unNoise.png");
 	m_tex[START_VIEW].loadFromFile("startView.png");
 	m_tex[EXIT].loadFromFile("exit.png");
 	m_tex[INSTRUCTIONS].loadFromFile("instructions.png");
@@ -22,6 +26,9 @@ Graphics::Graphics()
 	m_tex[BALL].loadFromFile("ball.png");
 	m_tex[SPIDER].loadFromFile("spider.png");
 	m_tex[HEART].loadFromFile("heart.png");
+	m_tex[LEVEL1_BLOCKED_TILE].loadFromFile("level1_blocked_tile.png");
+	m_tex[LEVEL1_EMPTY_TILE].loadFromFile("level1_empty_tile.png");
+	m_tex[LEVEL1_MIDDLE_TILE].loadFromFile("level1_middle_tile.png");
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
 

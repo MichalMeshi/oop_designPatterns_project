@@ -6,12 +6,12 @@ void Noise::execute(sf::RenderWindow& window, Display& d)
 	{
 		if (Graphics::getGraphics().getSoundVec()[i].getVolume() == 100)
 		{
-			d.setTexture(Graphics::getGraphics().getTexture(SEA));
+			d.setTexture(Graphics::getGraphics().getTexture(UN_NOISE));
 			Graphics::getGraphics().getSoundVec()[i].setVolume(0);
 		}
 		else
 		{
-			d.setTexture(Graphics::getGraphics().getTexture(INSTRUCTIONS));
+			d.setTexture(Graphics::getGraphics().getTexture(NOISE));
 			Graphics::getGraphics().getSoundVec()[i].setVolume(100);
 		}
 	}

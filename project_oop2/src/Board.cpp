@@ -2,7 +2,7 @@
 #include "CollisionHandling.h"
 
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
-	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAY), sf::Vector2f(40, 40)),
+	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent)
 {
 	m_matrix.resize(45);
