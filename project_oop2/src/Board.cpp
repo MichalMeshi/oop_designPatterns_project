@@ -224,6 +224,12 @@ void Board::handleCollision()
 			processCollision(*enemy, m_player);
 			m_inFailure = true;
 		}
+	for (auto& territoryEater : m_territoryEaterVec)
+		if (colide(*territoryEater, m_player))
+		{
+			processCollision(*territoryEater, m_player);
+			m_inFailure = true;
+		}
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], m_player))
 		{
