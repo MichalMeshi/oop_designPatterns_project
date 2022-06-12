@@ -18,15 +18,15 @@ public:
 	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
-	bool checkIfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == BLOCKED); }
-	bool checkIUnfBlocked(sf::Vector2i pos) { return (m_matrix[pos.x][pos.y] == EMPTY || m_matrix[pos.x][pos.y] == MIDDLE); }
+	bool checkIfBlocked(sf::Vector2i pos) const{ return (m_matrix[pos.x][pos.y] == BLOCKED); }
+	bool checkIUnfBlocked(sf::Vector2i pos)const { return (m_matrix[pos.x][pos.y] == EMPTY || m_matrix[pos.x][pos.y] == MIDDLE); }
 	void handleCreateGifts(int& gift_num, int rand_time, Level* l);
 	void eatCellInMatrix(int i, int j);
 	sf::Vector2f findDirectionToMove(int x, int y);
 	void createEnemiesInBoard(int, Level*, std::vector<int>);
 	void createTerritoryEnemiesInBoard(int, Level*, std::vector<int>);
 	void handleCollision();
-	bool colide(Object& obj1, Object& obj2);
+	bool colide(Object& obj1, Object& obj2)const;
 	void freezeEnemies();
 	void unFreeze();
 	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה

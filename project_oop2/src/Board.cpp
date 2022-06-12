@@ -239,12 +239,12 @@ void Board::handleCollision()
 		}
 }
 //-------------------------------------------------------------
-bool Board::colide(Object& obj1, Object& obj2)
+bool Board::colide(Object& obj1, Object& obj2)const
 {
 	sf::FloatRect res;
-	return (obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition()));
-	//auto player = sf::FloatRect(obj2.getDisplay().getSprite().getGlobalBounds());
-	//return (player.intersects(obj1.getDisplay().getSprite().getGlobalBounds(),res));
+	//return (obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition()));
+	auto player = sf::FloatRect(obj2.getDisplay().getSprite().getGlobalBounds());
+	return (player.intersects(obj1.getDisplay().getSprite().getGlobalBounds(),res));
 }
 //-------------------------------------------------------------
 void Board::createEnemiesInBoard(int curentLevel, Level* l, std::vector<int> vec)
