@@ -11,7 +11,6 @@ public:
 	~Menu() = default;
 	void addCellToVec(std::pair<std::unique_ptr<Command>, Display>&& p) { m_menu.emplace_back(std::move(p)); }
 	void run();
-
 private:
 	sf::RenderWindow m_window;
 	std::vector <std::pair<std::unique_ptr<Command>, Display>> m_menu;

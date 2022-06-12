@@ -18,5 +18,4 @@ public:
 	static std::unique_ptr<TerritoryEater> createTerritoryEater(sf::Vector2i pos, sf::Texture& t, enum MoveEnum e_move, enum WhereCanMoveEnum e_whereMove, Level* l);
 	static std::vector<std::unique_ptr<TerritoryEater>> createTerritoryEaters(int level_num, Level* l, std::vector<int> v);
 private:
-	//לחשוב איפה לשים את המטריצה של כל האנמיז
 };

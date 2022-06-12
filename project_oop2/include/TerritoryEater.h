@@ -5,9 +5,7 @@ class Level;
 class TerritoryEater : public Enemies
 {
 public:
-	TerritoryEater(sf::Texture& t, std::shared_ptr<Move> m, Level* l) :Enemies(t,  m, l) {
-	
-	}
+	TerritoryEater(sf::Texture& t, std::shared_ptr<Move> m, Level* l) :Enemies(t,  m, l) {}
 	~TerritoryEater() {}
 	virtual void move(Board& b) override;
 private:

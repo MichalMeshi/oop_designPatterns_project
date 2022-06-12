@@ -22,7 +22,7 @@ private:
 	sf::Text m_levelTxt;
 	sf::Text m_numLevelTxt;
 	sf::Text m_percentageTxt;
-	sf::Vector2f m_firstHeartPosition= sf::Vector2f(10,5);
+	sf::Vector2f m_firstHeartPosition = FIRST_HEART_POSITION;
 	sf::RenderWindow& m_window;
 };
 

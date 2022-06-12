@@ -5,19 +5,18 @@ Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
 	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent)
 {
-	m_matrix.resize(45);
+	m_matrix.resize(MATRIX_SIZE);
 	clockForGifts.restart();
-	for (int i = 0; i < 45; i++)
-		for (int j = 0; j < 45; j++)
+	for (int i = 0; i < MATRIX_SIZE; i++)
+		for (int j = 0; j < MATRIX_SIZE; j++)
 		{
 			m_matrix[i].emplace_back(EMPTY);
-
-			if (i == 0 || j == 0 || i == 44 || j == 44)
+			if (i == ZERO || j == ZERO || i == MATRIX_SIZE-1 || j == MATRIX_SIZE-1)
 				m_matrix[i][j] = BLOCKED;
 		}
 	m_rec.setFillColor(sf::Color::White);
-	m_rec.setPosition(350, 50);
-	m_rec.setSize(sf::Vector2f(900, 900));
+	m_rec.setPosition(BEGGINING_OF_BOARD_X, BEGGINING_OF_BOARD_Y);
+	m_rec.setSize(sf::Vector2f(BOARD_GAME_LENGTH, BOARD_GAME_LENGTH));
 }
 //-----------------------------------------------
 void Board::draw(std::vector<int> infoVec)
@@ -25,11 +24,11 @@ void Board::draw(std::vector<int> infoVec)
 	
 	m_backgroundGame.draw(m_window);
 	m_window.draw(m_rec);
-	for (int i = 0; i < 45; i++)
-		for (int j = 0; j < 45; j++)
+	for (int i = 0; i < MATRIX_SIZE; i++)
+		for (int j = 0; j < MATRIX_SIZE; j++)
 		{
-			sf::RectangleShape rect({ 20,20 });
-			rect.setPosition(j * 20 + 350, i * 20 + 50);
+			sf::RectangleShape rect(BOARD_GAME_CELL);
+			rect.setPosition(j * BOARD_GAME_CELL_SIZE + BEGGINING_OF_BOARD_X, i * BOARD_GAME_CELL_SIZE + BEGGINING_OF_BOARD_Y);
 			if (m_matrix[i][j] == EMPTY)
 				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_EMPTY])));
 			if (m_matrix[i][j] == BLOCKED)
@@ -60,19 +59,19 @@ bool Board::checkIfPassedAlready()
 bool Board::moveEnemies()
 {
 	bool isColide = false;
-	for (int i = 0; i < m_enemiesVec.size(); i++)
+	for(auto& enemy: m_enemiesVec)
 	{
-		m_enemiesVec[i]->move(*this);
-		if (m_matrix[m_enemiesVec[i]->getIndex().x][m_enemiesVec[i]->getIndex().y] == MIDDLE)
+		enemy->move(*this);
+		if (m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
 		{
 			m_inFailure = true;
 			isColide = true;
 		}
 	}
-	for (int i = 0; i < m_territoryEaterVec.size(); i++)
+	for (auto& territoryEater : m_territoryEaterVec)
 	{
-		m_territoryEaterVec[i]->move(*this);
-		if (m_matrix[m_territoryEaterVec[i]->getIndex().x][m_territoryEaterVec[i]->getIndex().y] == MIDDLE)
+		territoryEater->move(*this);
+		if (m_matrix[territoryEater->getIndex().x][territoryEater->getIndex().y] == MIDDLE)
 		{
 			m_inFailure = true;
 			isColide = true;
@@ -85,35 +84,30 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 {
 	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == BLOCKED)
 	{
-		m_player.setPlayerDx(0);
-		m_player.setPlayerDy(0);
+		m_player.setPlayerDx(ZERO);
+		m_player.setPlayerDy(ZERO);
 
-		for (int i = 0; i < m_enemiesVec.size() - (smartMonstersAmount + dombMonstersAmount); i++)//להוציא מכאן את החכמים והטפשים..
+		for (int i = 0; i < m_enemiesVec.size() - (smartMonstersAmount + dombMonstersAmount); i++)
 			floodFill(m_enemiesVec[i]->getIndex());
 		for (int i = 0; i < m_territoryEaterVec.size(); i++)
 			floodFill(m_territoryEaterVec[i]->getIndex());
 
-		for (int i = 0; i < 45; i++)
-			for (int j = 0; j < 45; j++)
+		for (int i = 0; i < MATRIX_SIZE; i++)
+			for (int j = 0; j < MATRIX_SIZE; j++)
 			{
-				/*if (m_matrix[i][j] == -1)
-					m_matrix[i][j] = EMPTY;
-				else
-				{*/
-					if ((m_matrix[i][j] == 2 && m_inFailure) || m_matrix[i][j] == -1)
+					if ((m_matrix[i][j] == MIDDLE && m_inFailure) || m_matrix[i][j] == AROUND_ENEMY)
 						m_matrix[i][j] = EMPTY;
 						
-					else if ((m_matrix[i][j] == EMPTY || m_matrix[i][j] == 2) && !m_inFailure)
+					else if ((m_matrix[i][j] == EMPTY || m_matrix[i][j] == MIDDLE) && !m_inFailure)
 					{
-						if (++m_blockCounter >= 18)
+						if (++m_blockCounter >= AMOUNT_FOR_ONE_PERCENT)
 						{
 							m_percentage++;
-							m_blockCounter = 0;
+							m_blockCounter = ZERO;
 						}
 						m_matrix[i][j] = BLOCKED;
 
 					}
-			/*	}*/
 			}
 		m_inFailure = false;
 	}
@@ -122,7 +116,7 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 //----------------------------------------------------------
 void Board::floodFill(sf::Vector2i v)
 {
-	if (v.x >= 0 && v.x <= 44 && v.y >= 0 && v.y <= 44 && m_matrix[v.x][v.y] == EMPTY) m_matrix[v.x][v.y] = -1;
+	if (v.x >= 0 && v.x <= 44 && v.y >= 0 && v.y <= 44 && m_matrix[v.x][v.y] == EMPTY) m_matrix[v.x][v.y] = AROUND_ENEMY;
 	if (((v.x - 1) >= 0) && v.y >= 0 && v.y <= 44 && m_matrix[v.x - 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x - 1, v.y));
 	if (((v.x + 1) <= 44) && v.y >= 0 && v.y <= 44 && m_matrix[v.x + 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x + 1, v.y));
 	if (((v.y - 1) >= 0) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y - 1] == EMPTY) floodFill(sf::Vector2i(v.x, v.y - 1));
@@ -204,13 +198,13 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 //--------------------------------------------------------
 void Board::eatCellInMatrix(int i, int j)
 {
-	if ((!(i <= 0 || i >= 44 || j <= 0 || j >= 44)) 
+	if ((!(i <= ZERO || i >= MATRIX_SIZE-1 || j <= ZERO || j >= MATRIX_SIZE - 1))
 		&& (m_matrix[i][j] == BLOCKED || m_matrix[i][j] == MIDDLE))
 	{
-		if (--m_blockCounter <= 0)
+		if (--m_blockCounter <= ZERO)
 		{
 			m_percentage--;
-			m_blockCounter = 18;
+			m_blockCounter = AMOUNT_FOR_ONE_PERCENT;
 		}
 		m_matrix[i][j] = EMPTY;
 	}
@@ -242,7 +236,6 @@ void Board::handleCollision()
 bool Board::colide(Object& obj1, Object& obj2)const
 {
 	sf::FloatRect res;
-	//return (obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition()));
 	auto player = sf::FloatRect(obj2.getDisplay().getSprite().getGlobalBounds());
 	return (player.intersects(obj1.getDisplay().getSprite().getGlobalBounds(),res));
 }

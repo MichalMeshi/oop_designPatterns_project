@@ -5,9 +5,7 @@ class Level;
 class Enemies:public DynamicObj   {
 public:
 	Enemies() = default;
-	Enemies(sf::Texture& t, std::shared_ptr<Move> m,Level* l)
-		:DynamicObj(t, sf::Vector2f(30, 30)), m_move(m), m_prevMove(m_move), m_level(l) {
-		m_display.setOrigin();}
+	Enemies(sf::Texture& t, std::shared_ptr<Move> m, Level* l);
 	~Enemies() {}
 	virtual void move(Board& b)override;
 	sf::Vector2i getIndex()const {
