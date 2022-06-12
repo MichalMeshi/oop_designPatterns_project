@@ -66,7 +66,7 @@ enum EndOfLevelCondition Level::runLevel()
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
             return FINISHLEVEL;
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
-        m_infoMenu.setPercentage(m_percentage);/////
+        m_infoMenu.setPercentage(m_percentage, m_infoOfLevel[PERCENTAGE]);/////
         m_board.handleCollision();
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;

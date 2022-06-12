@@ -42,10 +42,11 @@ void InformationMenu::setTimer(float time)
 	m_timeLeftTxt.setString(stream.str());
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::setPercentage(int percent)
+void InformationMenu::setPercentage(int percent,int max_per)
 {
 	std::string per = std::to_string(percent);
-	m_percentageTxt.setString(per +="%");
+	std::string max = std::to_string(max_per);
+	m_percentageTxt.setString(per +="% of "+ max +"%");
 
 }
 //---------------------------------------------------------------------------------------

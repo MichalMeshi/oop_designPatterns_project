@@ -8,7 +8,7 @@ public:
 	~InformationMenu()=default;
 	void drawInfoMenu(int life);
 	void setTimer(float time);
-	void setPercentage(int);
+	void setPercentage(int, int);
 	void initializeLevelTxt();
 	void initializeNumLevelTxt(char nameFile);
 	void initializeTimeLeftTxt();
