@@ -134,26 +134,22 @@ void Board::setDirection(sf::Keyboard::Key key)
 	{
 	case sf::Keyboard::Key::Right:
 	{
-		m_player.setRotation(270);
 		m_player.setPlayerDx(1);m_player.setPlayerDy(0);
 		break;
 	}
 	case sf::Keyboard::Key::Left:
 	{
-		m_player.setRotation(90);
 		m_player.setPlayerDx(-1);m_player.setPlayerDy(0);
 		break;
 	}
 
 	case sf::Keyboard::Key::Down:
 	{
-		m_player.setRotation(0);
 		m_player.setPlayerDx(0);m_player.setPlayerDy(1);
 		break;
 	}
 	case sf::Keyboard::Key::Up:
 	{
-		m_player.setRotation(180);
 		m_player.setPlayerDx(0);m_player.setPlayerDy(-1);
 		break;
 	}

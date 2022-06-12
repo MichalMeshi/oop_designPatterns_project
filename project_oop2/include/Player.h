@@ -13,7 +13,6 @@ public:
 	void setPlayerDx(int x) {  m_dx= x; }
 	void setPlayerDy(int y) {  m_dy=y; }
 	void setPlayerPosition(sf::Vector2f v) { m_x = v.x; m_y = v.y; }
-	void setRotation(int x) { m_display.setRotation(x); }
 	bool isRight(int x)const;
 	bool isUp(int y)const;
 	bool isLeft(int y)const;

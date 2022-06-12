@@ -12,7 +12,6 @@ public:
 	void setOrigin(float x, float y) { m_sprite.setOrigin({x, y}); }
 	void setColor(sf::Color c) { m_sprite.setColor(c); }
 	void rotate() {  m_sprite.rotate(-10); }
-	void setRotation(int x) {  m_sprite.setRotation(x); }
 	void setTexture(sf::Texture& t) { m_sprite.setTexture(t); }
 	void scale(float x, float y) { m_sprite.setOrigin(250,60); m_sprite.setScale(x, y); }
 private:
