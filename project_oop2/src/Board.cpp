@@ -104,7 +104,7 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 						
 					else if ((m_matrix[i][j] == EMPTY || m_matrix[i][j] == 2) && !m_inFailure)
 					{
-						if (++m_blockCounter == 21)
+						if (++m_blockCounter == 18)
 						{
 							m_percentage++;
 							m_blockCounter = 0;
@@ -209,7 +209,7 @@ void Board::eatCellInMatrix(int i, int j)
 		if (--m_blockCounter == 0)
 		{
 			m_percentage--;
-			m_blockCounter = 21;
+			m_blockCounter = 18;
 		}
 		m_matrix[i][j] = EMPTY;
 	}
