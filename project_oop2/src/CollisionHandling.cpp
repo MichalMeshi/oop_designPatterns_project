@@ -11,6 +11,7 @@ namespace // anonymous namespace — the standard way to make function "static"
     {
         Enemies& anEnemy= static_cast<Enemies&>(enemy);
         anEnemy.reduceLife();
+        anEnemy.playAnimation();
     }
     void playerLife(Object& life, Object& player)
     {

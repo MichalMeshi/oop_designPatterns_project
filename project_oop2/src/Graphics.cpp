@@ -36,6 +36,8 @@ Graphics::Graphics()
 	m_tex[LEVEL3_EMPTY_TILE].loadFromFile("level3_empty_tile.png");
 	m_tex[LEVEL3_MIDDLE_TILE].loadFromFile("level3_middle_tile.png");
 	m_tex[TERRITORY_EATER_PIC].loadFromFile("territoryEater.png");
+	m_tex[EXPLOSION_ANIMATION].loadFromFile("explosionAnimation.png");
+	m_tex[CRUMB_ANIMATION].loadFromFile("crumbAnimation.png");
 
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");

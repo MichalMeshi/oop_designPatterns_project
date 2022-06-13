@@ -14,6 +14,7 @@ public:
 	void reduceLife();
 	void freeze() { m_move = NULL; }
 	void unFreeze() { m_move = m_prevMove; }
+	void playAnimation(); 
 protected:	
 	std::shared_ptr<Move> m_move;
 	std::shared_ptr<Move> m_prevMove;

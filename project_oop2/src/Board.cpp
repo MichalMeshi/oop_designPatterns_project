@@ -1,9 +1,11 @@
 #include "Board.h"
 #include "CollisionHandling.h"
+#include "Level.h"
 
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
 	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40)),
-	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent)
+	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
+	m_crumbAnimation(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, {500,100})
 {
 	m_matrix.resize(MATRIX_SIZE);
 	clockForGifts.restart();
@@ -188,7 +190,7 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 	return pos;
 }
 //--------------------------------------------------------
-void Board::eatCellInMatrix(int i, int j)
+void Board::eatCellInMatrix(int i, int j,Level* level)
 {
 	if ((!(i <= ZERO || i >= MATRIX_SIZE-1 || j <= ZERO || j >= MATRIX_SIZE - 1))
 		&& (m_matrix[i][j] == BLOCKED || m_matrix[i][j] == MIDDLE)){
@@ -198,6 +200,7 @@ void Board::eatCellInMatrix(int i, int j)
 			m_blockCounter = AMOUNT_FOR_ONE_PERCENT;
 		}
 		m_matrix[i][j] = EMPTY;
+		handleAnimationCrumb(i,j,level);
 	}
 }
 //---------------------------------------------------------
@@ -260,4 +263,22 @@ void Board::rotateGifts()
 {
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		m_giftsVec[i]->rotate();
+}
+//-------------------------------------------------------------
+void Board::handleAnimationCrumb(int i,int j,Level* level)
+{
+	sf::Vector2f pos;
+	pos.x = 20*j+350-15;
+	pos.y = 20*i+50-15;
+	m_crumbAnimation.setPosition(pos);
+	//for (int index = 0; index < 5; index++)
+	//{
+		m_crumbAnimation.update(posAnimation.x,100);
+		m_crumbAnimation.draw(m_window);
+		m_window.display();
+		posAnimation.x += 100;
+		if (posAnimation.x == 500)
+			posAnimation.x = 0;
+	//}
+
 }

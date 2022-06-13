@@ -1,7 +1,7 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
-        m_window, m_timeForLevel),  m_infoOfLevel(i)
+        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionAnimation(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900})
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
@@ -47,11 +47,13 @@ enum EndOfLevelCondition Level::runLevel()
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
+            handleAnimationExplosion();
         }
         if (m_board.checkIfPassedAlready())
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
+            handleAnimationExplosion();
         }
         m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
    
@@ -61,6 +63,7 @@ enum EndOfLevelCondition Level::runLevel()
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
+            handleAnimationExplosion();
             clock.restart();
         }
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
@@ -73,9 +76,28 @@ enum EndOfLevelCondition Level::runLevel()
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
             m_board.unFreezeEnemies();
         m_window.clear();
-        m_board.draw(m_infoOfLevel);
-        m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
+        drawing();
         m_window.display();
     }
     return FINISHLEVEL; // жд сън
+}
+void Level::drawing()
+{
+    m_board.draw(m_infoOfLevel);
+    m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
+}
+
+void Level::handleAnimationExplosion()
+{
+    m_animationPos.x = 0;
+    m_animationPos.y = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        m_window.clear();
+        drawing();
+        m_explosionAnimation.update(m_animationPos.x, 900);
+        m_explosionAnimation.draw(m_window);
+        m_window.display();
+        m_animationPos.x += 900;
+    }
 }

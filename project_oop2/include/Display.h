@@ -14,6 +14,7 @@ public:
 	void rotate() {  m_sprite.rotate(-10); }
 	void setTexture(sf::Texture& t) { m_sprite.setTexture(t); }
 	void scale(float x, float y) { m_sprite.setOrigin(250,60); m_sprite.setScale(x, y); }
+	void update(float posX,int length) { m_sprite.setTextureRect(sf::IntRect(posX, 0, length, length)); }
 private:
 	sf::Sprite m_sprite;
 
