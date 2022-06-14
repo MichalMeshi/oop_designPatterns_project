@@ -3,9 +3,7 @@
 
 void Menu::run()
 {
-	sf::Sound music(Graphics::getGraphics().getSound(FIRST_MUSIC));
-	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC] = music;
-	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC].play();
+
 	while (m_window.isOpen())
 	{
 		handleBoard();
