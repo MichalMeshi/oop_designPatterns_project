@@ -40,8 +40,10 @@ void Board::draw(std::vector<int> infoVec)
 			m_window.draw(rect);
 		}
 	m_player->draw(m_window);
-	for (int i = 0; i < m_enemiesVec.size(); i++)
-		m_enemiesVec[i]->draw(m_window);
+	for (int i = 0; i < m_ballsVec.size(); i++)
+		m_ballsVec[i]->draw(m_window);
+	for (int i = 0; i < m_spidersVec.size(); i++)
+		m_spidersVec[i]->draw(m_window);
 	for (int i = 0; i < m_territoryEaterVec.size(); i++)
 		m_territoryEaterVec[i]->draw(m_window);
 	for (int i = 0; i < m_giftsVec.size(); i++)
@@ -63,10 +65,19 @@ bool Board::checkIfPassedAlready()
 bool Board::moveEnemies()
 {
 	bool isColideWithMiddle = false;
-	for(auto& enemy: m_enemiesVec)
+	for(auto& enemy: m_ballsVec)
 	{
 		enemy->move(*this);
 		if ((typeid(*m_player)==typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
+		{
+			updateFailure(true);
+			isColideWithMiddle = true;
+		}
+	}
+	for (auto& enemy : m_spidersVec)
+	{
+		enemy->move(*this);
+		if ((typeid(*m_player) == typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
 		{
 			updateFailure(true);
 			isColideWithMiddle = true;
@@ -84,18 +95,18 @@ bool Board::moveEnemies()
 	return isColideWithMiddle;
 }
 //-------------------------------------------------
-void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
+void Board::handleSpaceBlockage()
 {
 	if (m_matrix[m_player->getPlayerYpos()][m_player->getPlayerXpos()] == BLOCKED)
 	{
 		m_player->setPlayerDx(ZERO);
 		m_player->setPlayerDy(ZERO);
-		if (m_enemiesVec.size() == 0)
+		if (m_ballsVec.size() == 0)
 		{
 			m_matrix[0][0] = EMPTY;
 	  }
-		for (int i = 0; i < m_enemiesVec.size() - (smartMonstersAmount + dombMonstersAmount); i++)
-			floodFill(m_enemiesVec[i]->getIndex());
+		for (int i = 0; i < m_ballsVec.size(); i++)
+			floodFill(m_ballsVec[i]->getIndex());
 		for (int i = 0; i < m_territoryEaterVec.size(); i++)
 			floodFill(m_territoryEaterVec[i]->getIndex());
 
@@ -173,6 +184,7 @@ void Board::handleCreateGifts(int& gift_num, int rand_time, Level* l)
 		gift_num--;
 		clockForGifts.restart();
 	}
+	rotateGifts();
 }
 sf::Vector2f Board::findDirectionToMove(int x, int y)
 {
@@ -211,16 +223,20 @@ void Board::eatCellInMatrix(int i, int j)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
-	for (int i = 0; i < m_enemiesVec.size(); i++)
-		if (colide(*m_enemiesVec[i], *m_player))
-			processCollision(*m_enemiesVec[i], *m_player);
+	for (int i = 0; i < m_ballsVec.size(); i++)
+		if (colide(*m_ballsVec[i], *m_player))
+			processCollision(*m_ballsVec[i], *m_player);
+	for (int i = 0; i < m_spidersVec.size(); i++)
+		if (colide(*m_spidersVec[i], *m_player))
+			processCollision(*m_spidersVec[i], *m_player);
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], *m_player))
 		{
 			processCollision(*m_giftsVec[i], *m_player);
 			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
-	std::erase_if(m_enemiesVec, [](const auto& enemy) { return enemy->isDead(); });
+	std::erase_if(m_ballsVec, [](const auto& ball) { return ball->isDead(); });
+	std::erase_if(m_spidersVec, [](const auto& spider) { return spider->isDead(); });
 	std::erase_if(m_giftsVec, [](const auto& gift) { return gift->isDead(); });
 }
 //-------------------------------------------------------------
@@ -233,7 +249,8 @@ bool Board::colide(Object& obj1, Object& obj2)const
 //-------------------------------------------------------------
 void Board::createEnemiesInBoard(int curentLevel, Level* l, std::vector<int> vec)
 {
-	m_enemiesVec = EnemyFactory::createEnemies(curentLevel, l, vec);
+	m_ballsVec = EnemyFactory::createBalls(curentLevel, l);
+	m_spidersVec = EnemyFactory::createSpiders(curentLevel, l, vec);
 }
 //-------------------------------------------------------------
 void Board::createTerritoryEnemiesInBoard(int curentLevel, Level* l, std::vector<int> vec)
@@ -243,7 +260,9 @@ void Board::createTerritoryEnemiesInBoard(int curentLevel, Level* l, std::vector
 //-------------------------------------------------------------
 void Board::freezeEnemies()
 {
-	for (auto& enemy : m_enemiesVec)
+	for (auto& enemy : m_ballsVec)
+		enemy->freeze();
+	for (auto& enemy : m_spidersVec)
 		enemy->freeze();
 	for (auto& enemy : m_territoryEaterVec)
 		enemy->freeze();
@@ -251,7 +270,9 @@ void Board::freezeEnemies()
 //-------------------------------------------------------------
 void Board::unFreezeEnemies()
 {
-	for (auto& enemy : m_enemiesVec)
+	for (auto& enemy : m_ballsVec)
+		enemy->unFreeze();
+	for (auto& enemy : m_spidersVec)
 		enemy->unFreeze();
 	for (auto& enemy : m_territoryEaterVec)
 		enemy->unFreeze();
@@ -263,19 +284,15 @@ void Board::rotateGifts()
 		m_giftsVec[i]->handleAnimation();
 }
 //-------------------------------------------------------------
-void Board::handleAnimationCrumb(int i,int j)//לשים אולי באוביקט כזה
+void Board::handleAnimationCrumb(int i,int j)
 {
 	sf::Vector2f pos;
 	pos.x = 20*j+350-15;
 	pos.y = 20*i+50-15;
 	m_crumbPic.setPosition(pos);
 	m_crumbAnimation.handleAnimation();
-	//m_crumbPic.update(posAnimation.x,100);
 	m_crumbPic.draw(m_window);
 	m_window.display();
-	/*posAnimation.x += 100;
-	if (posAnimation.x == 500)
-		posAnimation.x = 0;*/
 }
 
 void Board::setPlayer()

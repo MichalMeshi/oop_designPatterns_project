@@ -17,7 +17,7 @@ public:
 	void draw(std::vector<int>);
 	bool checkIfPassedAlready();
 	bool moveEnemies();
-	void handleSpaceBlockage(int, int);
+	void handleSpaceBlockage();
 	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
@@ -50,7 +50,8 @@ private:
 	std::vector< std::vector<int>>m_matrix;
 	sf::RectangleShape m_rec;
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
-	std::vector<std::unique_ptr<Enemies>> m_enemiesVec;
+	std::vector<std::unique_ptr<Enemies>> m_ballsVec;
+	std::vector<std::unique_ptr<Enemies>> m_spidersVec;
 	std::vector<std::unique_ptr<TerritoryEater>> m_territoryEaterVec;
 	std::unique_ptr<Player> m_player;
 	Display m_backgroundGame;

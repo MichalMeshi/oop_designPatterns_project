@@ -29,19 +29,26 @@ std::unique_ptr<Enemies> EnemyFactory::createEnemy(sf::Vector2i pos, sf::Texture
 	return std::make_unique<Enemies>(t, getMoveVec()[e_move](pos, getWhereCanMoveVec()[e_whereMove]()), l);
 }
 //----------------------------------------------------------------------------------------------
-std::vector<std::unique_ptr<Enemies>> EnemyFactory::createEnemies(int level_num, Level* l, std::vector<int> v)
+std::vector<std::unique_ptr<Enemies>> EnemyFactory::createBalls(int level_num, Level* l)
 {
-	int num = (rand() % 5) + level_num;
+	int num = (rand() % 5) + (level_num+2);
 	std::vector<std::unique_ptr<Enemies>> vec;
 	for (int i = 0; i < num; i++)
 		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), SIMPLE_MOVE, MOVE_TO_UNBLOCKED, l));
 	//std::generate_n(std::back_inserter(vec), num, [] {
 	// // return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), SIMPLE_MOVE, MOVE_TO_UNBLOCKED,l); });
-	for(int i=0;i<v[SMART_MONSTER];i++)//להחזיר דחוף
-		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(SMART_SPIDER), SMART_MOVE, MOVE_EVERYWHERE,l));
-	for(int i=0;i<v[DOMB_MONSTER];i++)//להחזיר דחוף
-		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(SPIDER), SIMPLE_MOVE, MOVE_EVERYWHERE,l));
+	
 	return vec;
+}
+std::vector<std::unique_ptr<Enemies>> EnemyFactory::createSpiders(int level_num, Level* l, std::vector<int> v)
+{
+	std::vector<std::unique_ptr<Enemies>> vec;
+	for (int i = 0; i < v[SMART_MONSTER]; i++)//להחזיר דחוף
+		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(SMART_SPIDER), SMART_MOVE, MOVE_EVERYWHERE, l));
+	for (int i = 0; i < v[DOMB_MONSTER]; i++)//להחזיר דחוף
+		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(SPIDER), SIMPLE_MOVE, MOVE_EVERYWHERE, l));
+	return vec;
+
 }
 //----------------------------------------------------------------------------------------------
 
