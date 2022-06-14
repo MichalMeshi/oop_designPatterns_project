@@ -38,7 +38,7 @@ enum Texture {
 };
 //-------------------------
 enum Sounds {
-	FIRST_MUSIC =0
+	FIRST_MUSIC =0,CLICK_SOUND,CLOCK_SOUND,WIN_SOUND,GIFT_SOUND
 };
 //-------------------------
 enum TileState {
