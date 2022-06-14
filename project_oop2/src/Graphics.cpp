@@ -4,7 +4,6 @@
 //---------------------------------------------------------------------------------------
 Graphics::Graphics()
 {
-
 	m_tex.resize(PICS_AMOUNT);
 	m_soundBufferVec.resize(AMOUNT_OF_SOUNDS);
 	m_soundVec.resize(AMOUNT_OF_SOUNDS);
@@ -39,6 +38,7 @@ Graphics::Graphics()
 	m_tex[TERRITORY_EATER_PIC].loadFromFile("territoryEater.png");
 	m_tex[EXPLOSION_ANIMATION].loadFromFile("explosionAnimation.png");
 	m_tex[CRUMB_ANIMATION].loadFromFile("crumbAnimation.png");
+	m_tex[GUN_ANIMATION].loadFromFile("gunAnimation.png");
 	m_tex[FREEZE_ENEMIES].loadFromFile("freezeEnemies.png");
 	m_tex[ADD_TIME].loadFromFile("addTime.png");
 	m_tex[HEART_ICON].loadFromFile("heartIcon.png");
