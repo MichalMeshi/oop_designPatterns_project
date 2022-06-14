@@ -9,7 +9,7 @@ public:
 	Level(sf::RenderWindow& window, int curentLevel, std::vector<int>);
 	~ Level()= default;
 	enum EndOfLevelCondition runLevel();
-	void reduceLife() { --m_infoOfLevel[LIFE_AMOUNT]; m_board.setPlayerPositionToBegining(); }
+	void reduceLife() { --m_infoOfLevel[LIFE_AMOUNT]; handleAnimationExplosion(); m_board.setPlayerPositionToBegining(); }
 	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
 	void addTime() { m_timeForLevel += ((rand() % 5) +6); }
 	void freezeEnemies() {m_board.freezeEnemies(); restartClockForGift();}

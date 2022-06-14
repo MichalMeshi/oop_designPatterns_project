@@ -6,6 +6,7 @@ public:
 	Display(const sf::Texture& t,sf::Vector2f scale);
 
 	sf::Sprite getSprite()const { return m_sprite; }
+	const sf::Texture* getTexture() { return (m_sprite.getTexture()); }
 	void draw(sf::RenderWindow& window) { window.draw(m_sprite); }
 	void setPosition(sf::Vector2f v) { m_sprite.setPosition(v); }
 	void setOrigin() { m_sprite.setOrigin({15,15/* m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height*/ }); }

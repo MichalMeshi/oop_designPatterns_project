@@ -209,11 +209,16 @@ void Board::handleCollision()
 	sf::Sound music(Graphics::getGraphics().getSound(GIFT_SOUND));
 	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = music;
 
-	for (auto& enemy : m_enemiesVec)
-		if (colide(*enemy, m_player))
+	for (int i = 0; i < m_enemiesVec.size(); i++)
+		if (colide(*m_enemiesVec[i], m_player))
 		{
-			processCollision(*enemy, m_player);
-			m_inFailure = true;
+			if(m_player.getTexture() == &Graphics::getGraphics().getTexture(KILLING_PLAYER))
+				m_enemiesVec.erase(m_enemiesVec.begin() + i);
+			else
+			{
+				processCollision(*m_enemiesVec[i], m_player);
+				m_inFailure = true;
+			}
 		}
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], m_player))

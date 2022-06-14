@@ -50,13 +50,13 @@ enum EndOfLevelCondition Level::runLevel()
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
-            handleAnimationExplosion();
+           // handleAnimationExplosion();
         }
         if (m_board.checkIfPassedAlready())
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
             m_board.setPlayerPositionToBegining();
-            handleAnimationExplosion();
+           // handleAnimationExplosion();
         }
         m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
    
@@ -70,7 +70,7 @@ enum EndOfLevelCondition Level::runLevel()
             m_infoOfLevel[LIFE_AMOUNT]--;
             Graphics::getGraphics().getSoundVec()[CLOCK_SOUND].pause();
             m_board.setPlayerPositionToBegining();
-            handleAnimationExplosion();
+           // handleAnimationExplosion();
             clock.restart();
         }
         //
@@ -82,7 +82,10 @@ enum EndOfLevelCondition Level::runLevel()
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
+        {
             m_board.unFreezeEnemies();
+            m_board.setTexturePlayer();
+        }
         m_window.clear();
         drawing();
         m_window.display();

@@ -4,7 +4,7 @@
 class KillEnemy :public Gift
 {
 public:
-	KillEnemy(Level* l) :Gift(Graphics::getGraphics().getTexture(HEART), { 270,30 }, l) {
+	KillEnemy(Level* l) :Gift(Graphics::getGraphics().getTexture(GUN_ANIMATION), { 270,30 }, l) {
 		m_display.update(0, 30);
 	}
 	virtual ~KillEnemy() override {}

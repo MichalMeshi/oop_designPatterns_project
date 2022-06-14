@@ -5,6 +5,7 @@
 #include "AddTime.h"
 #include "FreezeEnemies.h"
 #include "KillEnemy.h"
+#include "Graphics.h"
 
 namespace // anonymous namespace — the standard way to make function "static"
 {
@@ -12,7 +13,6 @@ namespace // anonymous namespace — the standard way to make function "static"
     {
         Enemies& anEnemy= static_cast<Enemies&>(enemy);
         anEnemy.reduceLife();
-        anEnemy.playAnimation();
     }
     void playerLife(Object& life, Object& player)
     {
@@ -28,7 +28,7 @@ namespace // anonymous namespace — the standard way to make function "static"
     {
         KillEnemy& killEnemyGift = static_cast<KillEnemy&>(killEnemy);
         Player& p = static_cast<Player&>(player);
-
+        p.setTexture(Graphics::getGraphics().getTexture(KILLING_PLAYER));
         killEnemyGift.kill();
     }
  
@@ -51,6 +51,7 @@ namespace // anonymous namespace — the standard way to make function "static"
         phm[Key(typeid(Life), typeid(Player))] = &playerLife;
         phm[Key(typeid(AddTime), typeid(Player))] = &playerAddTime;
         phm[Key(typeid(FreezeEnemies), typeid(Player))] = &playerFreezeEnemies;
+        phm[Key(typeid(KillEnemy), typeid(Player))] = &playerKillEnemy;
         
         //...
         return phm;
