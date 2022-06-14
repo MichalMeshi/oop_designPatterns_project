@@ -5,7 +5,7 @@
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
 	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
-	m_crumbAnimation(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, {500,100})
+	m_crumbPic(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, {500,100}), m_crumbAnimation(m_crumbPic,500,100)
 {
 	m_matrix.resize(MATRIX_SIZE);
 	clockForGifts.restart();
@@ -268,11 +268,12 @@ void Board::handleAnimationCrumb(int i,int j)//לשים אולי באוביקט כזה
 	sf::Vector2f pos;
 	pos.x = 20*j+350-15;
 	pos.y = 20*i+50-15;
-	m_crumbAnimation.setPosition(pos);
-	m_crumbAnimation.update(posAnimation.x,100);
-	m_crumbAnimation.draw(m_window);
+	m_crumbPic.setPosition(pos);
+	m_crumbAnimation.handleAnimation();
+	//m_crumbPic.update(posAnimation.x,100);
+	m_crumbPic.draw(m_window);
 	m_window.display();
-	posAnimation.x += 100;
+	/*posAnimation.x += 100;
 	if (posAnimation.x == 500)
-		posAnimation.x = 0;
+		posAnimation.x = 0;*/
 }

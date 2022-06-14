@@ -26,8 +26,10 @@ private:
 	int m_timeForLevel;
 	int m_percentage = 0;
 	std::vector<int> m_infoOfLevel;
-	Display m_explosionAnimation;
-	sf::Vector2f m_animationPos;
+	Display m_explosionPic;
+	Animation m_explosionAnimation;
+//	sf::Vector2f m_animationPos;
+
 };
 
 
