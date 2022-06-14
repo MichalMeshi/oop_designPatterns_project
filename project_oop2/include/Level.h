@@ -34,7 +34,7 @@ private:
 	Animation m_explosionAnimation;
 
 	enum EndOfLevelCondition handleEvents();
-	void handleTime(sf::Clock clock);
+	void handleTime(sf::Clock& clock);
 	void movesObjects();
 	enum EndOfLevelCondition handlePercentage();
 

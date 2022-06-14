@@ -23,6 +23,7 @@ enum EndOfLevelCondition Level::runLevel()
 
         if (m_board.checkIfPassedAlready()) 
             handleFailure();
+        m_board.handleCollision();
 
         m_board.handleSpaceBlockage();
         
@@ -30,7 +31,6 @@ enum EndOfLevelCondition Level::runLevel()
 
         handleTime(clock);
 
-        m_board.handleCollision();
 
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;
@@ -67,7 +67,7 @@ enum EndOfLevelCondition Level::handleEvents()
 }
 //פונקציה האחראית על כל מה שקשור לזמן של השלב
 //------------------------------------------------
-void Level::handleTime(sf::Clock clock)
+void Level::handleTime(sf::Clock& clock)
 {
     if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->play();
