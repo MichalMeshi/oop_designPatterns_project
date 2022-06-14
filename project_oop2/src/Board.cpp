@@ -62,14 +62,14 @@ bool Board::checkIfPassedAlready()
 //-------------------------------------------------
 bool Board::moveEnemies()
 {
-	bool isColide = false;
+	bool isColideWithMiddle = false;
 	for(auto& enemy: m_enemiesVec)
 	{
 		enemy->move(*this);
 		if ((typeid(*m_player)==typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
 		{
 			updateFailure(true);
-			isColide = true;
+			isColideWithMiddle = true;
 		}
 	}
 	for (auto& territoryEater : m_territoryEaterVec)
@@ -78,10 +78,10 @@ bool Board::moveEnemies()
 		if (m_matrix[territoryEater->getIndex().x][territoryEater->getIndex().y] == MIDDLE)
 		{
 			updateFailure(true);
-			isColide = true;
+			isColideWithMiddle = true;
 		}
 	}
-	return isColide;
+	return isColideWithMiddle;
 }
 //-------------------------------------------------
 void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
@@ -90,7 +90,10 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 	{
 		m_player->setPlayerDx(ZERO);
 		m_player->setPlayerDy(ZERO);
-
+		if (m_enemiesVec.size() == 0)
+		{
+			m_matrix[0][0] = EMPTY;
+	  }
 		for (int i = 0; i < m_enemiesVec.size() - (smartMonstersAmount + dombMonstersAmount); i++)
 			floodFill(m_enemiesVec[i]->getIndex());
 		for (int i = 0; i < m_territoryEaterVec.size(); i++)
