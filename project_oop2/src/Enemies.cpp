@@ -13,7 +13,7 @@ void Enemies::move(Board& b)
 		m_display.rotate();
 	}
 }
-void Enemies::reduceLife() { m_level->reduceLife(); }
+void Enemies::reduceLife() { m_level->handleFailure(); }
 
 void Enemies::playAnimation() { m_level->handleAnimationExplosion(); }
 

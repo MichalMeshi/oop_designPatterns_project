@@ -9,7 +9,7 @@ public:
 	Level(sf::RenderWindow& window, int curentLevel, std::vector<int>);
 	~ Level()= default;
 	enum EndOfLevelCondition runLevel();
-	void reduceLife();
+	void handleFailure();
 	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
 	void addTime() { m_timeForLevel += ((rand() % 5) +7); }
 	void freezeEnemies() {m_board.freezeEnemies(); restartClockForGift();}
@@ -21,6 +21,7 @@ public:
 	void immuneThePlayer(){m_board.immuneThePlayer();}
 	void changePlayerToKilling() { m_board.changePlayerToKilling(); }
 	void updateFailure(bool b) { m_board.updateFailure(b); }
+
 private:
 	Board m_board;
 	sf::RenderWindow& m_window;
@@ -31,7 +32,14 @@ private:
 	std::vector<int> m_infoOfLevel;
 	Display m_explosionPic;
 	Animation m_explosionAnimation;
-//	sf::Vector2f m_animationPos;
+
+	enum EndOfLevelCondition handleEvents();
+	void handleTime(sf::Clock clock);
+	void movesObjects();
+	enum EndOfLevelCondition handlePercentage();
+
+
+
 
 };
 
