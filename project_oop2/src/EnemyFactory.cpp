@@ -38,7 +38,7 @@ std::vector<std::unique_ptr<Enemies>> EnemyFactory::createEnemies(int level_num,
 	//std::generate_n(std::back_inserter(vec), num, [] {
 	// // return createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), SIMPLE_MOVE, MOVE_TO_UNBLOCKED,l); });
 	for(int i=0;i<v[SMART_MONSTER];i++)//להחזיר דחוף
-		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(SPIDER), SMART_MOVE, MOVE_EVERYWHERE,l));
+		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800,500),Graphics::getGraphics().getTexture(SMART_SPIDER), SMART_MOVE, MOVE_EVERYWHERE,l));
 	for(int i=0;i<v[DOMB_MONSTER];i++)//להחזיר דחוף
 		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(SPIDER), SIMPLE_MOVE, MOVE_EVERYWHERE,l));
 	return vec;

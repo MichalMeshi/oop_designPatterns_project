@@ -36,6 +36,7 @@ configure_file ("crumbAnimation.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("freezeEnemies.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("addTime.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("heartIcon.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("smartSpider.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)

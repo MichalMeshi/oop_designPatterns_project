@@ -42,6 +42,7 @@ Graphics::Graphics()
 	m_tex[FREEZE_ENEMIES].loadFromFile("freezeEnemies.png");
 	m_tex[ADD_TIME].loadFromFile("addTime.png");
 	m_tex[HEART_ICON].loadFromFile("heartIcon.png");
+	m_tex[SMART_SPIDER].loadFromFile("smartSpider.png");
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
 	m_soundBufferVec[WIN_SOUND].loadFromFile("winSound.ogg");
