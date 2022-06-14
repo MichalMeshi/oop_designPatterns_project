@@ -15,7 +15,7 @@ const sf::Vector2f NUM_LEVEL_TXT_POSITION = { 120,10 };
 const sf::Vector2f TIME_LEFT_TXT_POSITION = { 105,130 };
 const sf::Vector2f FIRST_HEART_POSITION = { 10, 5 };
 const sf::Vector2f BOARD_GAME_CELL = { 20,20 };
-
+const int AMOUNT_OF_SOUNDS = 5;
 const int MIDDLE_BOARD_X = 800;
 const int MIDDLE_BOARD_Y = 500;
 const int DIRECTIONS_AMOUNT = 4;

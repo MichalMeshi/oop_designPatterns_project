@@ -37,4 +37,7 @@ configure_file ("heartIcon.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
-
+configure_file ("winSound.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("click.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("gift.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("clock.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
