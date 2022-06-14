@@ -73,7 +73,7 @@ enum EndOfLevelCondition Level::runLevel()
             handleAnimationExplosion();
             clock.restart();
         }
-
+        //
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
             return FINISHLEVEL;
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
