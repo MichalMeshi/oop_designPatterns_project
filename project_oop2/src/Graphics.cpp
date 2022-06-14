@@ -11,6 +11,7 @@ Graphics::Graphics()
 	m_tex[HELP].loadFromFile("help.png");
 	m_tex[PLAY].loadFromFile("play.png");
 	m_tex[PLAYER].loadFromFile("player.png");
+	m_tex[KILLING_PLAYER].loadFromFile("killingPlayer.png");
 	m_tex[SOUND].loadFromFile("sound.png");
 	m_tex[UN_SOUND].loadFromFile("unSound.png");
 	m_tex[NOISE].loadFromFile("noise.png");
