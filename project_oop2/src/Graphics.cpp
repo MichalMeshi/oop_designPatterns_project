@@ -6,8 +6,8 @@ Graphics::Graphics()
 {
 
 	m_tex.resize(PICS_AMOUNT);
-	m_soundBufferVec.resize(1);
-	m_soundVec.resize(1);
+	m_soundBufferVec.resize(AMOUNT_OF_SOUNDS);
+	m_soundVec.resize(AMOUNT_OF_SOUNDS);
 	m_tex[HELP].loadFromFile("help.png");
 	m_tex[PLAY].loadFromFile("play.png");
 	m_tex[PLAYER].loadFromFile("player.png");
@@ -39,8 +39,11 @@ Graphics::Graphics()
 	m_tex[EXPLOSION_ANIMATION].loadFromFile("explosionAnimation.png");
 	m_tex[CRUMB_ANIMATION].loadFromFile("crumbAnimation.png");
 
-
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
+	m_soundBufferVec[WIN_SOUND].loadFromFile("winSound.ogg");
+	m_soundBufferVec[CLICK_SOUND].loadFromFile("click.ogg");
+	m_soundBufferVec[GIFT_SOUND].loadFromFile("gift.ogg");
+	m_soundBufferVec[CLOCK_SOUND].loadFromFile("clock.ogg");
 	
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");

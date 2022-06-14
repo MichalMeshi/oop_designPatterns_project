@@ -2,6 +2,9 @@
 #include "InfoOfLevel.h"
 void GameController::runTheGame()
 {
+	sf::Sound music(Graphics::getGraphics().getSound(WIN_SOUND));
+	Graphics::getGraphics().getSoundVec()[WIN_SOUND] = music;
+
 	enum EndOfLevelCondition endLevelCondition;
 	int curentLevel = 1;
 	while (curentLevel <= LEVELS_AMOUNT )   //לטפל בזה...
@@ -19,7 +22,11 @@ void GameController::runTheGame()
 		else if (endLevelCondition == CLOSE)
 			return;
 		else if (endLevelCondition == FINISHLEVEL)
+		{
+			Graphics::getGraphics().getSoundVec()[WIN_SOUND].play();
+			//להוסיף הודעה עבור מעבר לשלב הבא
 			curentLevel++;
+		}
 	}
 
 	//if(curentLevel<4)

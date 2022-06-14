@@ -206,6 +206,9 @@ void Board::eatCellInMatrix(int i, int j,Level* level)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
+	sf::Sound music(Graphics::getGraphics().getSound(GIFT_SOUND));
+	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = music;
+
 	for (auto& enemy : m_enemiesVec)
 		if (colide(*enemy, m_player))
 		{
@@ -223,6 +226,7 @@ void Board::handleCollision()
 		{
 			processCollision(*m_giftsVec[i], m_player);
 			m_giftsVec.erase(m_giftsVec.begin() + i);
+			Graphics::getGraphics().getSoundVec()[GIFT_SOUND].play();
 		}
 }
 //-------------------------------------------------------------

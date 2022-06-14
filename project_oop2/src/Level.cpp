@@ -19,6 +19,9 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
 enum EndOfLevelCondition Level::runLevel()
 {
     sf::Clock clock;
+    sf::Sound music(Graphics::getGraphics().getSound(CLOCK_SOUND));
+    Graphics::getGraphics().getSoundVec()[CLOCK_SOUND] = music;
+
     int gift_num = (rand() % 6) + 4;
     int rand_time = (rand() % 6) + 5;
     m_window.setFramerateLimit(1000);
@@ -59,13 +62,18 @@ enum EndOfLevelCondition Level::runLevel()
    
         m_board.handleCreateGifts(gift_num, rand_time, this);
         m_board.rotateGifts();
+        if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
+            Graphics::getGraphics().getSoundVec()[CLOCK_SOUND].play();
+
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
             m_infoOfLevel[LIFE_AMOUNT]--;
+            Graphics::getGraphics().getSoundVec()[CLOCK_SOUND].pause();
             m_board.setPlayerPositionToBegining();
             handleAnimationExplosion();
             clock.restart();
         }
+
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
             return FINISHLEVEL;
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));

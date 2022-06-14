@@ -52,7 +52,13 @@ void Menu::handleBoard()
 //---------------------------------------------------------------------
 void Menu::handlePress(sf::Vector2f press_position)
 {
+	sf::Sound music(Graphics::getGraphics().getSound(CLICK_SOUND));
+	Graphics::getGraphics().getSoundVec()[CLICK_SOUND] = music;
+
 	for (int i = 0; i < m_menu.size(); i++)
 		if (m_menu[i].second.getSprite().getGlobalBounds().contains(press_position))
+		{
+			Graphics::getGraphics().getSoundVec()[CLICK_SOUND].play();
 			m_menu[i].first->execute(m_window, m_menu[i].second);
+		}
 }
