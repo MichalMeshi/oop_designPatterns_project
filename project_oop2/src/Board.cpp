@@ -206,7 +206,6 @@ void Board::eatCellInMatrix(int i, int j)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
-	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(GIFT_SOUND));
 	for (int i = 0; i < m_enemiesVec.size(); i++)
 		if (colide(*m_enemiesVec[i], m_player))
 		{
