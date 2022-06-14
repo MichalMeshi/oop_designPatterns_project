@@ -4,6 +4,9 @@
 #include "EnemyFactory.h"
 #include "Player.h"
 #include "GiftFactory.h"
+#include "ImmunePlayer.h"
+#include "KillingPlayer.h"
+#include <algorithm>
 class Enemies;
 class Gift;
 class Board
@@ -29,10 +32,19 @@ public:
 	bool colide(Object& obj1, Object& obj2)const;
 	void freezeEnemies();
 	void unFreezeEnemies();
-	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה
 	void rotateGifts();
+	void updateFailure(bool b) { m_inFailure = b; }
 	void handleAnimationCrumb(int i, int j);
-	void setTexturePlayer() { m_player.setTexture(Graphics::getGraphics().getTexture(PLAYER)); }
+	void setPlayerPositionToBegining() { m_player->setPlayerPosition(sf::Vector2f(22, 0)); }//לשנות למרכז למטה
+	void immuneThePlayer() {
+		//m_player = nullptr;
+		m_player = std::make_unique < ImmunePlayer>(m_player->getPlayerXpos(), m_player->getPlayerYpos(), m_player->getPlayerDx(), m_player->getPlayerDy());
+	}
+	void changePlayerToKilling(){
+		//m_player = nullptr;
+		m_player = std::make_unique < KillingPlayer>(m_player->getPlayerXpos(), m_player->getPlayerYpos(), m_player->getPlayerDx(), m_player->getPlayerDy());
+	}
+	void setPlayer();
 private:
 	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;
@@ -40,7 +52,7 @@ private:
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
 	std::vector<std::unique_ptr<Enemies>> m_enemiesVec;
 	std::vector<std::unique_ptr<TerritoryEater>> m_territoryEaterVec;
-	Player m_player;
+	std::unique_ptr<Player> m_player;
 	Display m_backgroundGame;
 	Display m_crumbPic;
 	//int dx = 0, dy = 0, x = 0, y = 0;
@@ -50,4 +62,10 @@ private:
 	bool m_inFailure = false;
 	//sf::Vector2f posAnimation = { 0,0 };
 	Animation m_crumbAnimation;
+
+	void setBackPlayer() { 
+		//m_player = nullptr;
+		m_player = std::make_unique<Player>(m_player->getPlayerXpos(), m_player->getPlayerYpos(),m_player->getPlayerDx(), m_player->getPlayerDy());
+	}//פונקציה פרטית
+
 };

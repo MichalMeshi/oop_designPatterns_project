@@ -3,7 +3,7 @@
 #include "Level.h"
 
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
-	:m_window(window), m_player(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40)),
+	:m_window(window), m_player(std::make_unique<Player>(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40))),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
 	m_crumbPic(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, {500,100}), m_crumbAnimation(m_crumbPic,500,100)
 {
@@ -39,7 +39,7 @@ void Board::draw(std::vector<int> infoVec)
 				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_MIDDLE])));
 			m_window.draw(rect);
 		}
-	m_player.draw(m_window);
+	m_player->draw(m_window);
 	for (int i = 0; i < m_enemiesVec.size(); i++)
 		m_enemiesVec[i]->draw(m_window);
 	for (int i = 0; i < m_territoryEaterVec.size(); i++)
@@ -50,11 +50,13 @@ void Board::draw(std::vector<int> infoVec)
 //------------------------------------------------
 bool Board::checkIfPassedAlready()
 {
-	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == MIDDLE) {
-		m_inFailure = true;
+	if (m_matrix[m_player->getPlayerYpos()][m_player->getPlayerXpos()] == MIDDLE )
+	{
+		updateFailure(true);
 		return true;
 	}
-	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == EMPTY) m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] = MIDDLE;
+	if (m_matrix[m_player->getPlayerYpos()][m_player->getPlayerXpos()] == EMPTY)
+		m_matrix[m_player->getPlayerYpos()][m_player->getPlayerXpos()] = MIDDLE;
 	return false;
 }
 //-------------------------------------------------
@@ -64,9 +66,9 @@ bool Board::moveEnemies()
 	for(auto& enemy: m_enemiesVec)
 	{
 		enemy->move(*this);
-		if (m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
+		if ((typeid(*m_player)==typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
 		{
-			m_inFailure = true;
+			updateFailure(true);
 			isColide = true;
 		}
 	}
@@ -75,7 +77,7 @@ bool Board::moveEnemies()
 		territoryEater->move(*this);
 		if (m_matrix[territoryEater->getIndex().x][territoryEater->getIndex().y] == MIDDLE)
 		{
-			m_inFailure = true;
+			updateFailure(true);
 			isColide = true;
 		}
 	}
@@ -84,10 +86,10 @@ bool Board::moveEnemies()
 //-------------------------------------------------
 void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 {
-	if (m_matrix[m_player.getPlayerYpos()][m_player.getPlayerXpos()] == BLOCKED)
+	if (m_matrix[m_player->getPlayerYpos()][m_player->getPlayerXpos()] == BLOCKED)
 	{
-		m_player.setPlayerDx(ZERO);
-		m_player.setPlayerDy(ZERO);
+		m_player->setPlayerDx(ZERO);
+		m_player->setPlayerDy(ZERO);
 
 		for (int i = 0; i < m_enemiesVec.size() - (smartMonstersAmount + dombMonstersAmount); i++)
 			floodFill(m_enemiesVec[i]->getIndex());
@@ -111,7 +113,7 @@ void Board::handleSpaceBlockage(int smartMonstersAmount, int dombMonstersAmount)
 
 					}
 			}
-		m_inFailure = false;
+		updateFailure(false);
 	}
 
 }
@@ -127,7 +129,7 @@ void Board::floodFill(sf::Vector2i v)
 //------------------------------------------------------------
 void Board::movePlayer()
 {
-	m_player.moveP();
+	m_player->moveP();
 }
 //------------------------------------------------------------
 void Board::setDirection(sf::Keyboard::Key key)
@@ -136,23 +138,23 @@ void Board::setDirection(sf::Keyboard::Key key)
 	{
 	case sf::Keyboard::Key::Right:
 	{
-		m_player.setPlayerDx(1);m_player.setPlayerDy(0);
+		m_player->setPlayerDx(1);m_player->setPlayerDy(0);
 		break;
 	}
 	case sf::Keyboard::Key::Left:
 	{
-		m_player.setPlayerDx(-1);m_player.setPlayerDy(0);
+		m_player->setPlayerDx(-1);m_player->setPlayerDy(0);
 		break;
 	}
 
 	case sf::Keyboard::Key::Down:
 	{
-		m_player.setPlayerDx(0);m_player.setPlayerDy(1);
+		m_player->setPlayerDx(0);m_player->setPlayerDy(1);
 		break;
 	}
 	case sf::Keyboard::Key::Up:
 	{
-		m_player.setPlayerDx(0);m_player.setPlayerDy(-1);
+		m_player->setPlayerDx(0);m_player->setPlayerDy(-1);
 		break;
 	}
 	default:
@@ -173,16 +175,16 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 {
 	sf::Vector2f pos = { 0,0 };
 
-	if (m_player.isRight(x))
+	if (m_player->isRight(x))
 		pos.x = 1;
-	else if (m_player.isLeft(x))
+	else if (m_player->isLeft(x))
 		pos.x = -1;
 
-	else if (m_player.isUp(y))
+	else if (m_player->isUp(y))
 		pos.y = -1;
-	else if (m_player.isDown(y))
+	else if (m_player->isDown(y))
 		pos.y = 1;
-	if (m_player.isUp(y) && m_player.isRight(x))
+	if (m_player->isUp(y) && m_player->isRight(x))
 	{
 		pos.x = 1;
 		pos.y = 0;
@@ -207,24 +209,16 @@ void Board::eatCellInMatrix(int i, int j)
 void Board::handleCollision()
 {
 	for (int i = 0; i < m_enemiesVec.size(); i++)
-		if (colide(*m_enemiesVec[i], m_player))
-		{
-			if(m_player.getTexture()==&Graphics::getGraphics().getTexture(KILLING_PLAYER))
-				m_enemiesVec.erase(m_enemiesVec.begin() + i);
-			else
-			{
-				processCollision(*m_enemiesVec[i], m_player);
-				m_inFailure = true;
-			}
-		}
+		if (colide(*m_enemiesVec[i], *m_player))
+			processCollision(*m_enemiesVec[i], *m_player);
 	for (int i = 0; i < m_giftsVec.size(); i++)
-		if (colide(*m_giftsVec[i], m_player))
+		if (colide(*m_giftsVec[i], *m_player))
 		{
-			processCollision(*m_giftsVec[i], m_player);
-			m_giftsVec.erase(m_giftsVec.begin() + i);
+			processCollision(*m_giftsVec[i], *m_player);
 			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
-
+	std::erase_if(m_enemiesVec, [](const auto& enemy) { return enemy->isDead(); });
+	std::erase_if(m_giftsVec, [](const auto& gift) { return gift->isDead(); });
 }
 //-------------------------------------------------------------
 bool Board::colide(Object& obj1, Object& obj2)const
@@ -279,4 +273,10 @@ void Board::handleAnimationCrumb(int i,int j)//לשים אולי באוביקט כזה
 	/*posAnimation.x += 100;
 	if (posAnimation.x == 500)
 		posAnimation.x = 0;*/
+}
+
+void Board::setPlayer()
+{
+	if (typeid(*m_player) != typeid(Player))
+		setBackPlayer();
 }

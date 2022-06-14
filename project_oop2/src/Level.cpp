@@ -42,52 +42,47 @@ enum EndOfLevelCondition Level::runLevel()
             }
         }
         m_board.movePlayer();
-
-        if (m_board.moveEnemies())
-        {
-            m_infoOfLevel[LIFE_AMOUNT]--;
-            m_board.setPlayerPositionToBegining();
-           // handleAnimationExplosion();
-        }
-        if (m_board.checkIfPassedAlready())
-        {
-            m_infoOfLevel[LIFE_AMOUNT]--;
-            m_board.setPlayerPositionToBegining();
-           // handleAnimationExplosion();
-        }
+        if (m_board.moveEnemies()) { reduceLife(); }
+        if (m_board.checkIfPassedAlready()) { reduceLife();}
         m_board.handleSpaceBlockage(m_infoOfLevel[SMART_MONSTER], m_infoOfLevel[DOMB_MONSTER]);
-   
+
         m_board.handleCreateGifts(gift_num, rand_time, this);
         m_board.rotateGifts();
         if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
             Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->play();
-
         if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
         {
-            m_infoOfLevel[LIFE_AMOUNT]--;
             Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->pause();
-            m_board.setPlayerPositionToBegining();
-           // handleAnimationExplosion();
+            reduceLife();
             clock.restart();
         }
-        //
         if (m_percentage >= m_infoOfLevel[PERCENTAGE])
             return FINISHLEVEL;
         m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
-        m_infoMenu.setPercentage(m_percentage, m_infoOfLevel[PERCENTAGE]);/////
+        m_infoMenu.setPercentage(m_percentage, m_infoOfLevel[PERCENTAGE]);
         m_board.handleCollision();
+
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
+        {
             return FAIL_LEVEL;
+        }
         if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
         {
             m_board.unFreezeEnemies();
-            m_board.setTexturePlayer();
+            m_board.setPlayer();
         }
         m_window.clear();
         drawing();
         m_window.display();
     }
     return FINISHLEVEL; // жд сън
+}
+void Level::reduceLife()
+{
+    --m_infoOfLevel[LIFE_AMOUNT]; 
+    handleAnimationExplosion();
+    m_board.setPlayerPositionToBegining();
+    Graphics::getGraphics().getSoundVec()[FAILURE_SOUND]->play();
 }
 void Level::drawing()
 {

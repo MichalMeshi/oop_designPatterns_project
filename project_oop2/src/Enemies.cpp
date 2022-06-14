@@ -16,3 +16,9 @@ void Enemies::move(Board& b)
 void Enemies::reduceLife() { m_level->reduceLife(); }
 
 void Enemies::playAnimation() { m_level->handleAnimationExplosion(); }
+
+void Enemies::updateFailure(bool b)
+{
+	m_level->updateFailure(b);
+
+}

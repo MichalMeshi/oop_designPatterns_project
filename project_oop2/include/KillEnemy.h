@@ -8,7 +8,7 @@ public:
 		m_display.update(0, 30);
 	}
 	virtual ~KillEnemy() override {}
-	void kill() { m_level->restartClockForGift(); }
+	void kill() { m_level->restartClockForGift(); m_level->changePlayerToKilling(); }
 
 
 private:

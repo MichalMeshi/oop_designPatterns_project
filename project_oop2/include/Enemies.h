@@ -15,9 +15,13 @@ public:
 	void freeze() { m_move = NULL; }
 	void unFreeze() { m_move = m_prevMove; }
 	void playAnimation(); 
+	void deleted() { m_isDeleted = true; }
+	bool isDead()const { return m_isDeleted; }
+	void updateFailure(bool b); 
 protected:	
 	std::shared_ptr<Move> m_move;
 	std::shared_ptr<Move> m_prevMove;
 	Level* m_level;
+	bool m_isDeleted=false;
 };
 

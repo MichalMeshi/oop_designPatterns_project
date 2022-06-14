@@ -12,7 +12,10 @@ public:
 	 {
 		 m_animation.handleAnimation();
 	 }
+	 void deleted() { m_isDeleted = true; }
+	 bool isDead()const { return m_isDeleted; }
 protected:
 	Level* m_level;
 	Animation m_animation;
+	bool m_isDeleted = false;
 };

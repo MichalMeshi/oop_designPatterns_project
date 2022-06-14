@@ -13,6 +13,7 @@
                                              "Noise.cpp" 
                                              "Board.cpp" 
                                              "Gift.cpp" 
+                                             "ImmunetyGift.cpp" 
                                              "Controller.cpp" 
                                              "Life.cpp" 
                                              "AddTime.cpp" 

@@ -11,6 +11,7 @@ Graphics::Graphics()
 	m_tex[PLAY].loadFromFile("play.png");
 	m_tex[PLAYER].loadFromFile("player.png");
 	m_tex[KILLING_PLAYER].loadFromFile("killingPlayer.png");
+	m_tex[IMMUNE_PLAYER].loadFromFile("immunePlayer.png");
 	m_tex[SOUND].loadFromFile("sound.png");
 	m_tex[UN_SOUND].loadFromFile("unSound.png");
 	m_tex[NOISE].loadFromFile("noise.png");
@@ -19,7 +20,7 @@ Graphics::Graphics()
 	m_tex[EXIT].loadFromFile("exit.png");
 	m_tex[INSTRUCTIONS].loadFromFile("instructions.png");
 	m_tex[SEA].loadFromFile("sea.png");
-	m_tex[SETTING_VIEW].loadFromFile("settingsView.jpg");
+	m_tex[SETTING_VIEW].loadFromFile("settingsView.png");
 	m_tex[SETTING].loadFromFile("settings.png");
 	m_tex[CLOCKPICTURE].loadFromFile("clock.png");
 	m_tex[BACK].loadFromFile("back.png");
@@ -43,14 +44,19 @@ Graphics::Graphics()
 	m_tex[ADD_TIME].loadFromFile("addTime.png");
 	m_tex[HEART_ICON].loadFromFile("heartIcon.png");
 	m_tex[SMART_SPIDER].loadFromFile("smartSpider.png");
+	m_tex[LEVEL_UP].loadFromFile("levelUp.png");
+
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
 	m_soundBufferVec[WIN_SOUND].loadFromFile("winSound.ogg");
 	m_soundBufferVec[CLICK_SOUND].loadFromFile("click.ogg");
 	m_soundBufferVec[GIFT_SOUND].loadFromFile("gift.ogg");
 	m_soundBufferVec[CLOCK_SOUND].loadFromFile("clock.ogg");
+	m_soundBufferVec[FAILURE_SOUND].loadFromFile("failureSound.ogg");
+
 	
 
 	m_font = sf::Font();
-	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");
+	m_font.loadFromFile("C:/Windows/Fonts/Impact.ttf");
+
 }
