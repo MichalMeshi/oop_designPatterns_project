@@ -2,8 +2,6 @@
 #include "InfoOfLevel.h"
 void GameController::runTheGame()
 {
-	Graphics::getGraphics().getSoundVec()[WIN_SOUND] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(WIN_SOUND));
-
 	enum EndOfLevelCondition endLevelCondition;
 	int curentLevel = 1;
 	while (curentLevel <= LEVELS_AMOUNT )   //לטפל בזה...

@@ -19,7 +19,6 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
 enum EndOfLevelCondition Level::runLevel()
 {
     sf::Clock clock;
-    Graphics::getGraphics().getSoundVec()[CLOCK_SOUND] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(CLOCK_SOUND));
     int gift_num = (rand() % 6) + 4;
     int rand_time = (rand() % 6) + 5;
     m_window.setFramerateLimit(1000);
