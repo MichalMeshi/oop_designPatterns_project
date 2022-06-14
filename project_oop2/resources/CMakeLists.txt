@@ -31,6 +31,9 @@ configure_file ("level3_middle_tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("spider.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("explosionAnimation.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("crumbAnimation.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("freezeEnemies.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("addTime.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("heartIcon.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)

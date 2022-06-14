@@ -5,7 +5,7 @@
 class FreezeEnemies :public Gift
 {
 public:
-	FreezeEnemies(Level* l) :Gift(Graphics::getGraphics().getTexture(SEA), { 20,20 },l) {	}
+	FreezeEnemies(Level* l) :Gift(Graphics::getGraphics().getTexture(FREEZE_ENEMIES), { 270,30 },l) {	}
 	virtual	~FreezeEnemies()override {}
 	void freezeEnemies() { m_level->freezeEnemies(); }
 

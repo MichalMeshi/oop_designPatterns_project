@@ -9,8 +9,8 @@
 
 //---------------------------------------------------------------------------------------
 InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
-	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(60, 60))
-	, m_heartPicture(Graphics::getGraphics().getTexture(HEART), sf::Vector2f(20, 200), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
+	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(100, 100))
+	, m_heartPicture(Graphics::getGraphics().getTexture(HEART_ICON), sf::Vector2f(20, 200), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
 	initializeLevelTxt();
 	initializeNumLevelTxt(levelNum);
 	initializeTimeLeftTxt();
@@ -24,7 +24,6 @@ void InformationMenu::drawInfoMenu(int lifeAmount)
 	m_clockPicture.draw(m_window);
 	for (int i = 0; i < lifeAmount; i++)
 	{
-
 		m_heartPicture.setPosition(sf::Vector2f(xPos, 200));
 		m_heartPicture.draw(m_window);
 		xPos += 40;
@@ -63,7 +62,7 @@ void InformationMenu::initializePercentagLeftTxt()
 {
 	m_percentageTxt.setFont(Graphics::getGraphics().getFont());
 	m_percentageTxt.setString("%");
-	m_percentageTxt.setPosition(20, 100);
+	m_percentageTxt.setPosition(1360, 800);
 	m_percentageTxt.setCharacterSize(40);
 	m_percentageTxt.setColor(sf::Color::Black);
 }
@@ -81,7 +80,7 @@ void InformationMenu::initializeTimeLeftTxt()
 {
 	m_timeLeftTxt.setFont(Graphics::getGraphics().getFont());
 	m_timeLeftTxt.setString(std::to_string(m_timeLeftInLevel));
-	m_timeLeftTxt.setPosition(20,30);
+	m_timeLeftTxt.setPosition(1415,78);
 	m_timeLeftTxt.setCharacterSize(40);
 	m_timeLeftTxt.setColor(sf::Color::Black);
 }
