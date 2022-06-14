@@ -38,6 +38,9 @@ Graphics::Graphics()
 	m_tex[TERRITORY_EATER_PIC].loadFromFile("territoryEater.png");
 	m_tex[EXPLOSION_ANIMATION].loadFromFile("explosionAnimation.png");
 	m_tex[CRUMB_ANIMATION].loadFromFile("crumbAnimation.png");
+	m_tex[FREEZE_ENEMIES].loadFromFile("freezeEnemies.png");
+	m_tex[ADD_TIME].loadFromFile("addTime.png");
+	m_tex[HEART_ICON].loadFromFile("heartIcon.png");
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
 	m_soundBufferVec[WIN_SOUND].loadFromFile("winSound.ogg");

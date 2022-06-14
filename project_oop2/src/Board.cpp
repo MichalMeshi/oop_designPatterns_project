@@ -260,7 +260,7 @@ void Board::unFreezeEnemies()
 void Board::rotateGifts()
 {
 	for (int i = 0; i < m_giftsVec.size(); i++)
-		m_giftsVec[i]->rotate();
+		m_giftsVec[i]->handleAnimation();
 }
 //-------------------------------------------------------------
 void Board::handleAnimationCrumb(int i,int j)//לשים אולי באוביקט כזה
