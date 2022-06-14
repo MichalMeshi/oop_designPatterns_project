@@ -50,6 +50,7 @@ Graphics::Graphics()
 	m_soundBufferVec[GIFT_SOUND].loadFromFile("gift.ogg");
 	m_soundBufferVec[CLOCK_SOUND].loadFromFile("clock.ogg");
 	
+
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Calibri.ttf");
 }

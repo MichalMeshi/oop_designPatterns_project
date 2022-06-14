@@ -2,9 +2,8 @@
 //---------------------------------
 void Controller::run() 
 {
-	sf::Sound music(Graphics::getGraphics().getSound(FIRST_MUSIC));
-	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]= music;
-	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC].play(); 
+	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(FIRST_MUSIC));
+	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->play();
 
 	StartMenu m(m_gameController);
 	m.run();
