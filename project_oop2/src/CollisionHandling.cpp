@@ -4,6 +4,7 @@
 #include "Life.h"
 #include "AddTime.h"
 #include "FreezeEnemies.h"
+#include "KillEnemy.h"
 
 namespace // anonymous namespace — the standard way to make function "static"
 {
@@ -23,6 +24,14 @@ namespace // anonymous namespace — the standard way to make function "static"
         AddTime& addTimeGift = static_cast<AddTime&>(addTime);
         addTimeGift.addTime();
     }
+    void playerKillEnemy(Object& killEnemy, Object& player)
+    {
+        KillEnemy& killEnemyGift = static_cast<KillEnemy&>(killEnemy);
+        Player& p = static_cast<Player&>(player);
+
+        killEnemyGift.kill();
+    }
+ 
     void playerFreezeEnemies(Object& freezeEnemies, Object& player)
     {
         FreezeEnemies& freezeEnemiesGift = static_cast<FreezeEnemies&>(freezeEnemies);

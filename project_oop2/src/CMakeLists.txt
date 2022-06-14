@@ -16,6 +16,7 @@
                                              "Controller.cpp" 
                                              "Life.cpp" 
                                              "AddTime.cpp" 
+                                             "KillEnemy.cpp" 
                                              "Enemies.cpp" 
                                              "BackSound.cpp" 
                                              "FreezeEnemies.cpp" 

@@ -12,7 +12,8 @@ public:
 	void reduceLife() { --m_infoOfLevel[LIFE_AMOUNT]; m_board.setPlayerPositionToBegining(); }
 	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
 	void addTime() { m_timeForLevel += ((rand() % 5) +6); }
-	void freezeEnemies() { m_board.freezeEnemies(); m_clockForGift.restart(); }
+	void freezeEnemies() {m_board.freezeEnemies(); restartClockForGift();}
+	void restartClockForGift(){ m_clockForGift.restart(); }
 	int getPercentage()const { return m_percentage; }
 	void setPercentage(int percent) {  m_percentage= percent; }
 	void handleAnimationExplosion();
