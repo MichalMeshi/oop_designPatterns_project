@@ -13,7 +13,7 @@ void GameController::runTheGame()
 		endLevelCondition = level.runLevel();
 		if (endLevelCondition == FAIL_LEVEL)
 		{
-			m_window.close();
+			//m_window.close();להעביר לבסוף
 			break;
 		}
 		else if (endLevelCondition == CLOSE)
@@ -28,11 +28,9 @@ void GameController::runTheGame()
 
 	//if(curentLevel<4)
 	//	//תמונה של כשלון
-	// וטבלת שיאים 
 	/*else*/ if(curentLevel==4)
 		m_window.close();
 	//	//תמונה של ניצחון
-	//וטבלת שיאים
-	// או טבלת שיאים אחת
-	//	//השהייה לחלון ולסגור את החלון
+
+	//בכל מקרה, סגירת חלון
 }
