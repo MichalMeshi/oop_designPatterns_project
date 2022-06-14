@@ -207,12 +207,16 @@ void Board::eatCellInMatrix(int i, int j)
 void Board::handleCollision()
 {
 	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(GIFT_SOUND));
-
-	for (auto& enemy : m_enemiesVec)
-		if (colide(*enemy, m_player))
+	for (int i = 0; i < m_enemiesVec.size(); i++)
+		if (colide(*m_enemiesVec[i], m_player))
 		{
-			processCollision(*enemy, m_player);
-			m_inFailure = true;
+			if(m_player.getTexture()==&Graphics::getGraphics().getTexture(KILLING_PLAYER))
+				m_enemiesVec.erase(m_enemiesVec.begin() + i);
+			else
+			{
+				processCollision(*m_enemiesVec[i], m_player);
+				m_inFailure = true;
+			}
 		}
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], m_player))
@@ -221,6 +225,7 @@ void Board::handleCollision()
 			m_giftsVec.erase(m_giftsVec.begin() + i);
 			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
+
 }
 //-------------------------------------------------------------
 bool Board::colide(Object& obj1, Object& obj2)const
