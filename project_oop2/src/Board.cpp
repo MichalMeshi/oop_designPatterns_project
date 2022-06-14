@@ -206,26 +206,20 @@ void Board::eatCellInMatrix(int i, int j)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
-	sf::Sound music(Graphics::getGraphics().getSound(GIFT_SOUND));
-	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = music;
+	Graphics::getGraphics().getSoundVec()[GIFT_SOUND] = std::make_unique< sf::Sound>(Graphics::getGraphics().getSound(GIFT_SOUND));
 
-	for (int i = 0; i < m_enemiesVec.size(); i++)
-		if (colide(*m_enemiesVec[i], m_player))
+	for (auto& enemy : m_enemiesVec)
+		if (colide(*enemy, m_player))
 		{
-			if(m_player.getTexture() == &Graphics::getGraphics().getTexture(KILLING_PLAYER))
-				m_enemiesVec.erase(m_enemiesVec.begin() + i);
-			else
-			{
-				processCollision(*m_enemiesVec[i], m_player);
-				m_inFailure = true;
-			}
+			processCollision(*enemy, m_player);
+			m_inFailure = true;
 		}
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], m_player))
 		{
 			processCollision(*m_giftsVec[i], m_player);
 			m_giftsVec.erase(m_giftsVec.begin() + i);
-			Graphics::getGraphics().getSoundVec()[GIFT_SOUND].play();
+			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
 }
 //-------------------------------------------------------------
