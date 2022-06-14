@@ -190,7 +190,7 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 	return pos;
 }
 //--------------------------------------------------------
-void Board::eatCellInMatrix(int i, int j,Level* level)
+void Board::eatCellInMatrix(int i, int j)
 {
 	if ((!(i <= ZERO || i >= MATRIX_SIZE-1 || j <= ZERO || j >= MATRIX_SIZE - 1))
 		&& (m_matrix[i][j] == BLOCKED || m_matrix[i][j] == MIDDLE)){
@@ -200,7 +200,7 @@ void Board::eatCellInMatrix(int i, int j,Level* level)
 			m_blockCounter = AMOUNT_FOR_ONE_PERCENT;
 		}
 		m_matrix[i][j] = EMPTY;
-		handleAnimationCrumb(i,j,level);
+		handleAnimationCrumb(i,j);
 	}
 }
 //---------------------------------------------------------
@@ -213,12 +213,6 @@ void Board::handleCollision()
 		if (colide(*enemy, m_player))
 		{
 			processCollision(*enemy, m_player);
-			m_inFailure = true;
-		}
-	for (auto& territoryEater : m_territoryEaterVec)
-		if (colide(*territoryEater, m_player))
-		{
-			processCollision(*territoryEater, m_player);
 			m_inFailure = true;
 		}
 	for (int i = 0; i < m_giftsVec.size(); i++)
@@ -269,20 +263,16 @@ void Board::rotateGifts()
 		m_giftsVec[i]->rotate();
 }
 //-------------------------------------------------------------
-void Board::handleAnimationCrumb(int i,int j,Level* level)
+void Board::handleAnimationCrumb(int i,int j)//לשים אולי באוביקט כזה
 {
 	sf::Vector2f pos;
 	pos.x = 20*j+350-15;
 	pos.y = 20*i+50-15;
 	m_crumbAnimation.setPosition(pos);
-	//for (int index = 0; index < 5; index++)
-	//{
-		m_crumbAnimation.update(posAnimation.x,100);
-		m_crumbAnimation.draw(m_window);
-		m_window.display();
-		posAnimation.x += 100;
-		if (posAnimation.x == 500)
-			posAnimation.x = 0;
-	//}
-
+	m_crumbAnimation.update(posAnimation.x,100);
+	m_crumbAnimation.draw(m_window);
+	m_window.display();
+	posAnimation.x += 100;
+	if (posAnimation.x == 500)
+		posAnimation.x = 0;
 }

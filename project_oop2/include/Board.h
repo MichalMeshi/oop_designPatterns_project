@@ -21,7 +21,7 @@ public:
 	bool checkIfBlocked(sf::Vector2i pos) const{ return (m_matrix[pos.x][pos.y] == BLOCKED); }
 	bool checkIUnfBlocked(sf::Vector2i pos)const { return (m_matrix[pos.x][pos.y] == EMPTY || m_matrix[pos.x][pos.y] == MIDDLE); }
 	void handleCreateGifts(int& gift_num, int rand_time, Level* l);
-	void eatCellInMatrix(int i, int j, Level*level);
+	void eatCellInMatrix(int i, int j);
 	sf::Vector2f findDirectionToMove(int x, int y);
 	void createEnemiesInBoard(int, Level*, std::vector<int>);
 	void createTerritoryEnemiesInBoard(int, Level*, std::vector<int>);
@@ -31,7 +31,7 @@ public:
 	void unFreezeEnemies();
 	void setPlayerPositionToBegining() { m_player.setPlayerPosition(sf::Vector2f(0, 0)); }//לשנות למרכז למטה
 	void rotateGifts();
-	void handleAnimationCrumb(int i, int j, Level* level);
+	void handleAnimationCrumb(int i, int j);
 private:
 	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;
