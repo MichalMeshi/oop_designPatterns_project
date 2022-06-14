@@ -41,11 +41,12 @@ private:
 	std::vector<std::unique_ptr<TerritoryEater>> m_territoryEaterVec;
 	Player m_player;
 	Display m_backgroundGame;
-	Display m_crumbAnimation;
+	Display m_crumbPic;
 	//int dx = 0, dy = 0, x = 0, y = 0;
 	sf::Clock clockForGifts;
 	int& m_percentage;
 	int m_blockCounter = 0;
 	bool m_inFailure = false;
-	sf::Vector2f posAnimation = { 0,0 };
+	//sf::Vector2f posAnimation = { 0,0 };
+	Animation m_crumbAnimation;
 };

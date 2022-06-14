@@ -1,7 +1,7 @@
 #include "Level.h"
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
-        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionAnimation(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900})
+        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900}), m_explosionAnimation(m_explosionPic,4500,900)
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
@@ -97,15 +97,16 @@ void Level::drawing()
 
 void Level::handleAnimationExplosion()
 {
-    m_animationPos.x = 0;
-    m_animationPos.y = 0;
+  /*  m_animationPos.x = 0;
+    m_animationPos.y = 0;*/
     for (int i = 0; i < 5; i++)
     {
         m_window.clear();
         drawing();
-        m_explosionAnimation.update(m_animationPos.x, 900);
-        m_explosionAnimation.draw(m_window);
+        m_explosionAnimation.handleAnimation();
+       // m_explosionPic.update(m_animationPos.x, 900);
+        m_explosionPic.draw(m_window);
         m_window.display();
-        m_animationPos.x += 900;
+       // m_animationPos.x += 900;
     }
 }
