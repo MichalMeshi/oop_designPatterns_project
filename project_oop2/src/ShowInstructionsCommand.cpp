@@ -3,9 +3,8 @@
 
 ShowInstructionsCommand::ShowInstructionsCommand()
 	:Command(),m_instructions(Graphics::getGraphics().getTexture(INSTRUCTIONS),
-		sf::Vector2f(0, 0), sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW)),
-	m_back(Graphics::getGraphics().getTexture(BACK),
-		sf::Vector2f(10, 10), sf::Vector2f(100, 70)){}
+		BEGGINING_WINDOW, sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW)),
+	m_back(Graphics::getGraphics().getTexture(BACK), BEGGINING_WINDOW, BACK_BOTTON_SIZE){}
 //פונקציה האחראית על ביצוע הפקודה של הדפסת הוראות המשחק
 void ShowInstructionsCommand::execute(sf::RenderWindow& window, Display& d)
 {

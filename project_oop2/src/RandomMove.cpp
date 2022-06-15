@@ -18,8 +18,8 @@ sf::Vector2f RandomMove::move(Board& b)
 		moveDifferently();
 	m_y += m_direction.y * (m_dy);
 	m_x += m_direction.x * (m_dx);
-	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b) ||
-		(m_x <= 370) || (m_x >= 1230) || (m_y <= 70) || (m_y >= 930))
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - BEGGINING_OF_BOARD_Y) / BOARD_GAME_CELL_SIZE, (m_x - BEGGINING_OF_BOARD_X) / BOARD_GAME_CELL_SIZE), b) ||
+		(m_x <= LEFT_LIMIT) || (m_x >= RIGHT_LIMIT) || (m_y <= TOP_LIMIT) || (m_y >= BOTTOM_LIMIT))
 	{
 		m_x -= m_direction.x * (m_dx);
 		m_y -= m_direction.y * (m_dy);
@@ -35,19 +35,18 @@ sf::Vector2f RandomMove::move(Board& b)
 void RandomMove::moveDifferently()
 {
 	m_direction = -m_direction;
-	if (m_direction == sf::Vector2i(0, 1) || m_direction == sf::Vector2i(0, -1))
+	if (m_direction == DOWN || m_direction == UP)
 	{
-		if ( (m_x <= 800) && (m_x + 20) < 1230)
-			m_x += 20;
-		else if ((m_x > 800) && (m_x - 20) > 370)
-			m_x -= 20;
+		if ( (m_x <= MIDDLE_BOARD_X) && (m_x + BOARD_GAME_CELL_SIZE) < RIGHT_LIMIT)
+			m_x += BOARD_GAME_CELL_SIZE;
+		else if ((m_x > MIDDLE_BOARD_X) && (m_x - BOARD_GAME_CELL_SIZE) > LEFT_LIMIT)
+			m_x -= BOARD_GAME_CELL_SIZE;
 	}
-	else if (m_direction == sf::Vector2i(1, 0) || m_direction == sf::Vector2i(-1, 0))
+	else if (m_direction ==RIGHT || m_direction == LEFT)
 	{
-		if ( (m_y <= 500) && (m_y + 20) < 930)
-			m_y += 20;
-		else if ((m_y > 500) && (m_y - 20) > 70)
-			m_y -= 20;
+		if ( (m_y <= MIDDLE_BOARD_Y) && (m_y + BOARD_GAME_CELL_SIZE) < BOTTOM_LIMIT)
+			m_y += BOARD_GAME_CELL_SIZE;
+		else if ((m_y > MIDDLE_BOARD_Y) && (m_y - BOARD_GAME_CELL_SIZE) > TOP_LIMIT)
+			m_y -= BOARD_GAME_CELL_SIZE;
 	}
-
 }

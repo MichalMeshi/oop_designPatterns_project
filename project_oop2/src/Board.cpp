@@ -237,14 +237,8 @@ void Board::handleCollision()
 void Board::handleEnemiesCollision(std::vector<std::unique_ptr<Enemies>>& vec, Player& player)
 {
 	for (int i = 0; i < vec.size(); i++)
-		if (colideWithEnemy(*vec[i], player))    //לשנות?
+		if (colide(*vec[i], player))    //לשנות?
 			processCollision(*vec[i], player);
-}
-//פונקציה הבודקת האם היתה התנגשות
-//-------------------------------------------------------------
-bool Board::colideWithEnemy(Object& obj1, Object& obj2)const
-{
-	return obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition());
 }
 //פונקציה הבודקת האם היתה התנגשות
 //-------------------------------------------------------------

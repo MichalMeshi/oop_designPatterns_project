@@ -68,7 +68,6 @@ private:
 	template <typename enemyVec>
 	void freezeEnemies(std::vector<typename enemyVec>& vec);
 	void handleEnemiesCollision(std::vector<std::unique_ptr<Enemies>>& vec, Player& );
-	bool colideWithEnemy(Object& obj1, Object& obj2)const;
 	bool colide(Object& obj1, Object& obj2)const;
 	template <typename enemyVec>
 	void drawVec(std::vector<typename enemyVec>&);

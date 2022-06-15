@@ -13,7 +13,6 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLev
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
-    sf::Clock clock;
     while (m_window.isOpen())
     {
         if (handleEvents() == CLOSE)
@@ -23,7 +22,7 @@ enum EndOfLevelCondition Level::runLevel()
         handlePlayer();
         m_board.handleSpaceBlockage();
         m_board.handleCreateGifts(m_gift_num, m_rand_time, this);
-        handleTime(clock);
+        handleTime();
 
         if (m_infoOfLevel[LIFE_AMOUNT] < ZERO)
             return FAIL_LEVEL;
@@ -64,18 +63,18 @@ enum EndOfLevelCondition Level::handleEvents()
 }
 //פונקציה האחראית על כל מה שקשור לזמן של השלב
 //------------------------------------------------
-void Level::handleTime(sf::Clock& clock)
+void Level::handleTime()
 {
-    if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
+    if (int(m_timeForLevel - m_clock.getElapsedTime().asSeconds()) == 10)
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->play();
-    if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0 ||  (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) > 10) )
+    if (float(m_timeForLevel - m_clock.getElapsedTime().asSeconds()) <= 0 ||  (int(m_timeForLevel - m_clock.getElapsedTime().asSeconds()) > 10) )
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->pause();
-    if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
+    if (float(m_timeForLevel - m_clock.getElapsedTime().asSeconds()) <= 0)
     {
         handleFailure();
-        clock.restart();
+        m_clock.restart();
     }
-    m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
+    m_infoMenu.setTimer(float(m_timeForLevel - m_clock.getElapsedTime().asSeconds()));
 
     if (m_clockForGift.getElapsedTime().asSeconds() >= FIVE_SECONDS)
     {

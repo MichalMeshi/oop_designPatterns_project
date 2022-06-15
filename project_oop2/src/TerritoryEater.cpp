@@ -8,7 +8,7 @@ void TerritoryEater::move(Board& b)
 	{
 		pos = m_move->move(b);
 		m_display.setPosition(pos);
-		b.eatCellInMatrix((pos.y-50)/20,(pos.x-350)/20);
+		b.eatCellInMatrix((pos.y-BEGGINING_OF_BOARD_Y)/ BOARD_GAME_CELL_SIZE,(pos.x-BEGGINING_OF_BOARD_X)/BOARD_GAME_CELL_SIZE);
 	}
 }
 

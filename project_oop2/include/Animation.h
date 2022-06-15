@@ -8,7 +8,7 @@ public:
 	void handleAnimation();
 private:
 	Display& m_display;
-	sf::Vector2i m_pos = { ZERO,ZERO };
+	sf::Vector2i m_pos = BEGGIN_WINDOW;
 	int m_sizeOfSpriteSheet;
 	int m_spriteSize;
 };

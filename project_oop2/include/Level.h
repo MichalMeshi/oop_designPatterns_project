@@ -27,6 +27,8 @@ private:
 	sf::RenderWindow& m_window;
 	InformationDisplay m_infoMenu;
 	sf::Clock m_clockForGift;
+	sf::Clock m_clock;
+
 	int m_timeForLevel;
 	int m_percentage = ZERO;
 	std::vector<int> m_infoOfLevel;
@@ -37,7 +39,7 @@ private:
 	int m_rand_time = (rand() % SIX) + FIVE;
 
 	enum EndOfLevelCondition handleEvents();
-	void handleTime(sf::Clock& clock);
+	void handleTime();
 	void movesObjects();
 	enum EndOfLevelCondition handlePercentage();
 	void handlePlayer();

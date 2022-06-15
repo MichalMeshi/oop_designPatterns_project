@@ -11,8 +11,8 @@ sf::Vector2f SmartMove::move(Board& b)
 	m_y += direction.y * std::abs(m_dy);
 	m_x += direction.x * std::abs(m_dx);
 
-	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - 50) / 20, (m_x - 350) / 20), b) ||
-		(m_x < 370) || (m_x > 1230)|| (m_y < 70) || (m_y > 930))
+	if (!m_placeToMove->ableToMoveToPlace(sf::Vector2i((m_y - BEGGINING_OF_BOARD_Y) / BOARD_GAME_CELL_SIZE, (m_x - BEGGINING_OF_BOARD_X) / BOARD_GAME_CELL_SIZE), b) ||
+		(m_x < LEFT_LIMIT) || (m_x > RIGHT_LIMIT)|| (m_y < TOP_LIMIT) || (m_y > BOTTOM_LIMIT))
 	{
 		m_x -= direction.x * std::abs(m_dx);
 		m_y -= direction.y * std::abs(m_dy);

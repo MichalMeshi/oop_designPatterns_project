@@ -8,5 +8,4 @@ public:
 	DynamicObj(sf::Texture& t, sf::Vector2f f):Object(t,f){}
 	~DynamicObj() {}
 	virtual void move(Board& b) = 0;
-protected:
 };
