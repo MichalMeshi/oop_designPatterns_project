@@ -32,6 +32,8 @@ private:
 	std::vector<int> m_infoOfLevel;
 	Display m_explosionPic;
 	Animation m_explosionAnimation;
+	Display m_levelUp;
+	int m_gift_num = (rand() % 6) + 4;
 
 	enum EndOfLevelCondition handleEvents();
 	void handleTime(sf::Clock& clock);

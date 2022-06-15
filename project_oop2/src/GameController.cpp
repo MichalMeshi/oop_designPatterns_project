@@ -24,8 +24,7 @@ void GameController::runTheGame()
 		else if (endLevelCondition == FINISHLEVEL)
 		{
 			Graphics::getGraphics().getSoundVec()[WIN_SOUND]->play();
-			m_levelUp.draw(m_window);
-			m_window.display();
+
 			sf::sleep(sf::Time(sf::seconds(3)));
 			curentLevel++;
 		}

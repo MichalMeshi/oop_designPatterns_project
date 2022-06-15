@@ -2,17 +2,18 @@
 //---------------------------------
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
-        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900}), m_explosionAnimation(m_explosionPic,4500,900)
+        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900}), m_explosionAnimation(m_explosionPic,4500,900),
+        m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(800, 500), sf::Vector2f(500, 150))
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
+    m_levelUp.setOrigin(250, 75);
 }
 //פוקנציה האחראית על ריצת כל שלב
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
     sf::Clock clock;
-    int gift_num = (rand() % 6) + 4;
     int rand_time = (rand() % 6) + 5;
     while (m_window.isOpen())
     {
@@ -27,18 +28,19 @@ enum EndOfLevelCondition Level::runLevel()
 
         m_board.handleSpaceBlockage();
         
-        m_board.handleCreateGifts(gift_num, rand_time, this);
+        m_board.handleCreateGifts(m_gift_num, rand_time, this);
 
         handleTime(clock);
 
-
         if (m_infoOfLevel[LIFE_AMOUNT] < 0)
             return FAIL_LEVEL;
-
-        if (handlePercentage() == FINISHLEVEL)
-            return FINISHLEVEL;
-
         drawing();
+        if (handlePercentage() == FINISHLEVEL)
+        {
+            drawing();
+            return FINISHLEVEL;
+        }
+
     }
     return FINISHLEVEL; // זה סתם
 }
@@ -63,7 +65,7 @@ enum EndOfLevelCondition Level::handleEvents()
         }
         }
     }
-    return FINISHLEVEL;//for visual
+    return JUST_FOR_VISUAL;//for visual
 }
 //פונקציה האחראית על כל מה שקשור לזמן של השלב
 //------------------------------------------------
@@ -92,6 +94,7 @@ enum EndOfLevelCondition Level::handlePercentage()
     m_infoMenu.setPercentage(m_percentage, m_infoOfLevel[PERCENTAGE]);
     if (m_percentage >= m_infoOfLevel[PERCENTAGE])
         return FINISHLEVEL;
+    return JUST_FOR_VISUAL;
 }
 //פונקציה האחראית על כישלון של השחקן
 //------------------------------------------------
@@ -116,6 +119,8 @@ void Level::drawing()
     m_window.clear();
     m_board.draw(m_infoOfLevel);
     m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
+    if (m_percentage >= m_infoOfLevel[PERCENTAGE])
+        m_levelUp.draw(m_window);
     m_window.display();
 }
 //פונקציה האחראית על אנימצית ההתפוצצות 
