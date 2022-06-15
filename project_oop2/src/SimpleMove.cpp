@@ -1,4 +1,6 @@
 #include "SimpleMove.h"
+
+//פונקציה המבצעת תזוזה רגילה
 sf::Vector2f SimpleMove::move(Board& b)
 {
 	m_x += m_dx;
@@ -17,5 +19,3 @@ sf::Vector2f SimpleMove::move(Board& b)
 	}
 	return sf::Vector2f(m_x, m_y);
 }
-//כשקטן לעשות +
-//כשגדול לעשות קטן

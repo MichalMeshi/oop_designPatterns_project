@@ -3,7 +3,6 @@
 
 void Menu::run()
 {
-
 	while (m_window.isOpen())
 	{
 		handleBoard();
@@ -25,6 +24,7 @@ void Menu::run()
 		}
 	}
 }
+//פונקציה המנהלת את תוזת העכבר על התפריט
 //-------------------------------------------------------------
 void  Menu::handleMouseMove(sf::Vector2f move_position)
 {
@@ -47,6 +47,7 @@ void Menu::handleBoard()
 		m_menu[i].second.draw(m_window);
 	m_window.display();
 }
+//פונקציה המנהלת את כל הקשור בלחיצות על כפתורי התפריט
 //---------------------------------------------------------------------
 void Menu::handlePress(sf::Vector2f press_position)
 {

@@ -6,12 +6,5 @@ class StartMenu:public Menu
 {
 public:
 	StartMenu(GameController& );
-	~StartMenu() {}
-private:
+	~StartMenu() = default;
 };
-
-
-//בתפריט הראשוני יש וקטור של שניים- סטינגס ומשחק חדש.
-//בתפריט השני יש וקטור של כל השאר. 
-//של מוזיקה - שתיים
-//של טבלת שיאים ושל הוראות

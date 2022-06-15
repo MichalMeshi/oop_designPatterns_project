@@ -1,5 +1,9 @@
 #include "SmartMove.h"
 #include "Board.h"
+
+SmartMove::SmartMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove)
+	:Move(pos, std::move(placeToMove)) { m_dx = SIX; m_dy = SIX; }
+//פונקציה המבצעת את התזוזה החכמה הישרה הרודפת אחרי השחקן 
 sf::Vector2f SmartMove::move(Board& b)
 {
 	sf::Vector2f direction;

@@ -1,48 +1,48 @@
 #include "Level.h"
 //---------------------------------
-Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> i)
-    :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % 30) + 35), m_infoMenu(char(curentLevel + 48),
-        m_window, m_timeForLevel), m_infoOfLevel(i), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), {350,50},{4500,900}), m_explosionAnimation(m_explosionPic,4500,900),
-        m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(800, 500), sf::Vector2f(500, 150))
+Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLevelVec)
+    :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
+        m_window, m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
+        m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(MIDDLE_BOARD_X, MIDDLE_BOARD_Y), LEVEL_UP_SIZE)
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
-    m_levelUp.setOrigin(250, 75);
+    m_levelUp.setOrigin(LEVEL_UP_SIZE.x /2, LEVEL_UP_SIZE.y /2);
 }
 //פוקנציה האחראית על ריצת כל שלב
 //---------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
     sf::Clock clock;
-    int rand_time = (rand() % 6) + 5;
     while (m_window.isOpen())
     {
         if (handleEvents() == CLOSE)
             return CLOSE;
 
         movesObjects();
-
-        if (m_board.checkIfPassedAlready()) 
-            handleFailure();
-        m_board.handleCollision();
-
+        handlePlayer();
         m_board.handleSpaceBlockage();
-        
-        m_board.handleCreateGifts(m_gift_num, rand_time, this);
-
+        m_board.handleCreateGifts(m_gift_num, m_rand_time, this);
         handleTime(clock);
 
-        if (m_infoOfLevel[LIFE_AMOUNT] < 0)
+        if (m_infoOfLevel[LIFE_AMOUNT] < ZERO)
             return FAIL_LEVEL;
-        drawing();
+        drawWindow();
         if (handlePercentage() == FINISHLEVEL)
         {
-            drawing();
+            drawWindow();
             return FINISHLEVEL;
         }
-
     }
-    return FINISHLEVEL; // זה סתם
+    return JUST_FOR_VISUAL; 
+}
+//פונקציה האחראית על ניהול השחקן בכל איטרציה
+//------------------------------------------------
+void Level::handlePlayer()
+{
+    if (m_board.checkIfPassedAlready())
+        handleFailure();
+    m_board.handleCollision();
 }
 //פונקציה המטפלת בלולאת האירועים 
 //------------------------------------------------
@@ -53,19 +53,14 @@ enum EndOfLevelCondition Level::handleEvents()
     {
         switch (event.type)
         {
-        case sf::Event::Closed:
-        {
+        case sf::Event::Closed: {
             m_window.close();
-            return CLOSE;
-        }
-        case sf::Event::KeyPressed:
-        {
-            m_board.setDirection(event.key.code);
-            break;
-        }
+            return CLOSE;}
+        case sf::Event::KeyPressed: {
+            m_board.setDirection(event.key.code);break;}
         }
     }
-    return JUST_FOR_VISUAL;//for visual
+    return JUST_FOR_VISUAL;
 }
 //פונקציה האחראית על כל מה שקשור לזמן של השלב
 //------------------------------------------------
@@ -73,15 +68,16 @@ void Level::handleTime(sf::Clock& clock)
 {
     if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->play();
+    if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0 ||  (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) > 10) )
+        Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->pause();
     if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
     {
-        Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->pause();
         handleFailure();
         clock.restart();
     }
     m_infoMenu.setTimer(float(m_timeForLevel - clock.getElapsedTime().asSeconds()));
 
-    if (m_clockForGift.getElapsedTime().asSeconds() >= 5)
+    if (m_clockForGift.getElapsedTime().asSeconds() >= FIVE_SECONDS)
     {
         m_board.unFreezeEnemies();
         m_board.setPlayer();
@@ -114,7 +110,7 @@ void Level::movesObjects()
 }
 //פונקציה האחראית על ההדפסה 
 //------------------------------------------------
-void Level::drawing()
+void Level::drawWindow()
 {
     m_window.clear();
     m_board.draw(m_infoOfLevel);
@@ -130,7 +126,7 @@ void Level::handleAnimationExplosion()
     for (int i = 0; i < 5; i++)
     {
         m_window.clear();
-        drawing();
+        drawWindow();
         m_explosionAnimation.handleAnimation();
         m_explosionPic.draw(m_window);
         m_window.display();

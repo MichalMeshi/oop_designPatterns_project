@@ -3,16 +3,13 @@
 class Player :public Object{
 public:
 	
-	Player(sf::Texture& t, sf::Vector2f f,int x, int y, int dx, int dy) : Object(t, f), m_x(x), m_y(y), m_dx(dx), m_dy(dy)
-	{
-		m_display.setOrigin(20, 40);  //to be changed
-	}
+	Player(sf::Texture& t, sf::Vector2f f, int x, int y, int dx, int dy);
 	Player(sf::Texture& t, sf::Vector2f f) :Player(t,f,0,0,0,0){}
 	Player(int dx, int dy) :Player(Graphics::getGraphics().getTexture(PLAYER), { 40,40 },0,0,dx,dy){}
 	Player(int x,int y,int dx, int dy) :Player(Graphics::getGraphics().getTexture(PLAYER), { 40,40 }, x, y, dx, dy) {}
 
 	~Player() {}
-	void moveP();
+	void move();
 	int getPlayerXpos()const { return m_x; }
 	int getPlayerYpos()const { return m_y; }
 	int getPlayerDx()const { return m_dx; }

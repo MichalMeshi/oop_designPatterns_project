@@ -10,12 +10,14 @@
 
 namespace // anonymous namespace — the standard way to make function "static"
 {
+    //פונקצית ניהול התנגשות של שחקן עם אויב
     void playerEnemy(Object& enemy,Object& player)
     {
         Enemies& anEnemy= static_cast<Enemies&>(enemy);
         anEnemy.reduceLife();
         anEnemy.updateFailure(true);
     }
+    //פונקצית ניהול התנגשות של שחקן ומתנת חיים
     //---------------------------------------------------------
     void playerLife(Object& life, Object& player)
     {
@@ -23,6 +25,7 @@ namespace // anonymous namespace — the standard way to make function "static"
         lifeGift.addLife();
         lifeGift.deleted();
     }
+    //פונקצית ניהול התנגשות של שחקן ומתנת תוספת זמן
     //---------------------------------------------------------
     void playerAddTime(Object& addTime, Object& player)
     {
@@ -30,6 +33,7 @@ namespace // anonymous namespace — the standard way to make function "static"
         addTimeGift.addTime();
         addTimeGift.deleted();
     }
+    //פונקצית ניהול התנגשות של שחקן ומתנת הפיכת השחקן לשחקן שהורג את מי שנתקל בו
     //---------------------------------------------------------
     void playerKillEnemy(Object& killEnemy, Object& player)
     {
@@ -37,6 +41,7 @@ namespace // anonymous namespace — the standard way to make function "static"
         killEnemyGift.kill();
         killEnemyGift.deleted();
     }
+    //פונקצית ניהול התנגשות של שחקן והמתנה שהופכת את השחקן להיות חסין מאויביו
     //---------------------------------------------------------
     void playerImmunetyGift(Object& Immunety, Object& player)
     {
@@ -44,6 +49,7 @@ namespace // anonymous namespace — the standard way to make function "static"
         immunetyGift.immune();
         immunetyGift.deleted();
     }
+    //פונקצית ניהול התנגשות של השחקן והמתנה שמקפיאה את האויבים
     //---------------------------------------------------------
     void playerFreezeEnemies(Object& freezeEnemies, Object& player)
     {
@@ -51,12 +57,14 @@ namespace // anonymous namespace — the standard way to make function "static"
         freezeEnemiesGift.freezeEnemies();
         freezeEnemiesGift.deleted();
     }
+    //פונקצית ניהול התנגשות של "שחקן הורג" ושל אויב
     //---------------------------------------------------------
     void KillPlayerEnemy(Object& enemy, Object& KillPlayer)
     {
         Enemies& anEnemy = static_cast<Enemies&>(enemy);
         anEnemy.deleted();
     }
+    //פונקצית ניהול התנגשות של "שחקן מחוסן" ושל אויב
     //---------------------------------------------------------
     void ImmuneplayerEnemy(Object& enemy, Object& ImmunePlayer) { return; }
     //---------------------------------------------------------

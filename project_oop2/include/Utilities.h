@@ -2,13 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "SFML/Audio.hpp"
 //------------------------------
-const int WIDTH_WINDOW = 1600;
-const int HIGTH_WINDOW = 1000;
-const int PICS_AMOUNT = 38;
-const int SPRITE_SIZE = 70;
-const int LEVEL_NUMBER_INDEX = 5;
-const int AMOUNT_OF_GIFTS = 5;
-const int LEVELS_AMOUNT = 3;
+
 const sf::Vector2f CLOCK_ICON_POSITION = { 1400,45 };
 const sf::Vector2f LEVEL_TXT_POSITION = { 20,20 };
 const sf::Vector2f NUM_LEVEL_TXT_POSITION = { 120,10 };
@@ -16,6 +10,12 @@ const sf::Vector2f TIME_LEFT_TXT_POSITION = { 105,130 };
 const sf::Vector2f FIRST_HEART_POSITION = { 10, 5 };
 const sf::Vector2f BOARD_GAME_CELL = { 20,20 };
 const sf::Vector2f GIFT_SPRITE_SHEET_SIZE = { 270,30 };
+const sf::Vector2f PLAYER_SPRITE_SIZE = { 40,40 }; 
+const sf::Vector2f CRUMS_SPRITE_SHEET_SIZE = { 500,100 }; 
+const sf::Vector2f LEVEL_UP_SIZE = { 500, 150 };
+const sf::Vector2f EXPLOSION_SPRITE_SHEET_SIZE = { 4500,900 };
+const sf::Vector2f BEGGINIG_OF_MATRIX = { 350,50 };
+
 const int AMOUNT_OF_SOUNDS = 6;
 const int MIDDLE_BOARD_X = 800;
 const int MIDDLE_BOARD_Y = 500;
@@ -23,7 +23,8 @@ const int DIRECTIONS_AMOUNT = 4;
 const int MATRIX_SIZE = 45;
 const int ZERO = 0;
 const int ENEMY_PIC_SIZE = 30;
-const int HALF_ENEMY_PIC_SIZE = 30;
+const int GIFT_PIC_SIZE = 30;
+const int HALF_ENEMY_PIC_SIZE = 15;
 const int BEGGINING_OF_BOARD_X = 350;
 const int BEGGINING_OF_BOARD_Y = 50;
 const int BOARD_GAME_LENGTH = 900;
@@ -34,16 +35,32 @@ const int TO_UP = -1;
 const int TO_DOWN = 1;
 const int TO_RIGHT = 1;
 const int TO_LEFT =-1;
-
-//const int FRAME_LIMIT_SPEED = 10;
+const int WIDTH_WINDOW = 1600;
+const int HIGTH_WINDOW = 1000;
+const int PICS_AMOUNT = 41;
+const int SPRITE_SIZE = 70;
+const int LEVEL_NUMBER_INDEX = 5;
+const int AMOUNT_OF_GIFTS = 5;
+const int THREE = 3;
+const int FIVE = 5;
+const int FIVE_SECONDS = 5;
+const int SIX = 6;
+const int SEVEN = 7;
+const int TWELVE = 12;
+const int LEVELS_AMOUNT = 3;
+const int HALF_MINUTE = 30;
+const int FOR_ASCII_CONVERSION = 48;
+const int BIG_JUMP_PIXELS =10;
+const int FIFTY_SECONDS =50;
 
 
 //-------------------------
 enum Texture {
-	HELP = 0, PLAY, PLAYER, KILLING_PLAYER,IMMUNE_PLAYER, SOUND,UN_SOUND, START_VIEW, EXIT, INSTRUCTIONS, SEA, SETTING_VIEW, SETTING, CLOCKPICTURE,BACK,BALL,SPIDER,SMART_SPIDER, HEART,
+	HELP = 0, PLAY, PLAYER, KILLING_PLAYER,IMMUNE_PLAYER, SOUND,UN_SOUND, START_VIEW, EXIT, INSTRUCTIONS, SKY, SETTING_VIEW, SETTING, CLOCKPICTURE,BACK,BALL,SPIDER,SMART_SPIDER, HEART,
 	NOISE,UN_NOISE, TERRITORY_EATER_PIC, EXPLOSION_ANIMATION, CRUMB_ANIMATION,GUN_ANIMATION,
 	LEVEL1_EMPTY_TILE,LEVEL1_BLOCKED_TILE,LEVEL1_MIDDLE_TILE, LEVEL2_EMPTY_TILE, LEVEL2_BLOCKED_TILE, LEVEL2_MIDDLE_TILE, LEVEL3_EMPTY_TILE, LEVEL3_BLOCKED_TILE,
-	LEVEL3_MIDDLE_TILE,FREEZE_ENEMIES,ADD_TIME,HEART_ICON, LEVEL_UP
+	LEVEL3_MIDDLE_TILE,FREEZE_ENEMIES,ADD_TIME,HEART_ICON, LEVEL_UP, WIN_GAME, GAME_OVER,IMMUNE_ANIMATION
+
 };
 //-------------------------
 enum Sounds {

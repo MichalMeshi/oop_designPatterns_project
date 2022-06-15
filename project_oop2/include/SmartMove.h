@@ -5,8 +5,7 @@
 class SmartMove :public Move
 {
 public:
-	SmartMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) :Move(pos, std::move(placeToMove)) { m_dx = 6; m_dy = 6; }
-	~SmartMove() {}
+	SmartMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove);
 	virtual sf::Vector2f move(Board& b) override;
 private:
 	static bool m_register;

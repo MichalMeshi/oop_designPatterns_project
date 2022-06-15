@@ -5,5 +5,4 @@ public:
 	NoiseCommand() :Command() {}
 	~NoiseCommand() = default;
 	virtual void execute(sf::RenderWindow& window, Display& d) override;
-private:
 };
