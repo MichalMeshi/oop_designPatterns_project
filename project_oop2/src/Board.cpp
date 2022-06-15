@@ -295,11 +295,16 @@ void Board::freezeEnemies()
 //-------------------------------------------------------------
 void Board::unFreezeEnemies()
 {
-	for (auto& enemy : m_ballsVec)
-		enemy->unFreeze();
-	for (auto& enemy : m_spidersVec)
-		enemy->unFreeze();
-	for (auto& enemy : m_territoryEaterVec)
+	unFreezeEnemies(m_ballsVec);
+	unFreezeEnemies(m_spidersVec);
+	unFreezeEnemies(m_territoryEaterVec);
+}
+//פונקציה המבטלת הקפאת וקטור של אויבים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::unFreezeEnemies(std::vector<typename enemyVec>& vec)
+{
+	for (auto& enemy : vec)
 		enemy->unFreeze();
 }
 //פוקנציה האחראית לתזוזת המתנות על הלוח
@@ -314,8 +319,8 @@ void Board::rotateGifts()
 void Board::handleAnimationCrumb(int i, int j)
 {
 	sf::Vector2f pos;
-	pos.x = 20 * j + 350 - 15;
-	pos.y = 20 * i + 50 - 15;
+	pos.x = BOARD_GAME_CELL_SIZE * j + BEGGINING_OF_BOARD_X - HALF_ENEMY_PIC_SIZE;
+	pos.y = BOARD_GAME_CELL_SIZE * i + BEGGINING_OF_BOARD_Y - HALF_ENEMY_PIC_SIZE;
 	m_crumbPic.setPosition(pos);
 	m_crumbAnimation.handleAnimation();
 	m_crumbPic.draw(m_window);

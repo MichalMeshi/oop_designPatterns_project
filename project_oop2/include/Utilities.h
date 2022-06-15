@@ -22,6 +22,8 @@ const int MIDDLE_BOARD_Y = 500;
 const int DIRECTIONS_AMOUNT = 4;
 const int MATRIX_SIZE = 45;
 const int ZERO = 0;
+const int ENEMY_PIC_SIZE = 30;
+const int HALF_ENEMY_PIC_SIZE = 30;
 const int BEGGINING_OF_BOARD_X = 350;
 const int BEGGINING_OF_BOARD_Y = 50;
 const int BOARD_GAME_LENGTH = 900;
@@ -32,6 +34,7 @@ const int TO_UP = -1;
 const int TO_DOWN = 1;
 const int TO_RIGHT = 1;
 const int TO_LEFT =-1;
+
 //const int FRAME_LIMIT_SPEED = 10;
 
 

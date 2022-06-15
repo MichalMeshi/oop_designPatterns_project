@@ -64,5 +64,7 @@ private:
 	void floodFill();
 	void floodFill(sf::Vector2i);
 	template<typename enemyVec>
-		void floodFillOnEnemy(std::vector<typename enemyVec>& vec);
+	void floodFillOnEnemy(std::vector<typename enemyVec>& vec);
+	template <typename enemyVec>
+	void unFreezeEnemies(std::vector<typename enemyVec>& vec);
 };
