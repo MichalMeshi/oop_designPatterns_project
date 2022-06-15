@@ -5,5 +5,5 @@ int main()
 	srand(static_cast<unsigned>(time(nullptr)));
 	Controller c;
 	c.run();
-	return 0;
+	return EXIT_SUCCESS;
 }

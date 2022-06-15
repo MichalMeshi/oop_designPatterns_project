@@ -1,5 +1,5 @@
 #include "BackSoundCommand.h"
-
+//פונקציה האחראית על ביצוע הפעולה של השתקת או הפעלת מוזיקת הרקע של המשחק
 void BackSoundCommand::execute(sf::RenderWindow& window, Display& d)
 {
 	if (Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->getVolume() == VOLUME)

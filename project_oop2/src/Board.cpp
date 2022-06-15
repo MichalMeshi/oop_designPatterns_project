@@ -3,9 +3,9 @@
 #include "Level.h"
 //-----------------------------------------------
 Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
-	:m_window(window), m_player(std::make_unique<Player>(Graphics::getGraphics().getTexture(PLAYER), sf::Vector2f(40, 40))),
-	m_backgroundGame(Graphics::getGraphics().getTexture(SEA), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
-	m_crumbPic(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, { 500,100 }), m_crumbAnimation(m_crumbPic, 500, 100)
+	:m_window(window), m_player(std::make_unique<Player>(Graphics::getGraphics().getTexture(PLAYER), PLAYER_SPRITE_SIZE)),
+	m_backgroundGame(Graphics::getGraphics().getTexture(SKY), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
+	m_crumbPic(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, CRUMS_SPRITE_SHEET_SIZE), m_crumbAnimation(m_crumbPic, CRUMS_SPRITE_SHEET_SIZE.x, CRUMS_SPRITE_SHEET_SIZE.y)
 {
 	clockForGifts.restart();
 	createBoard();
@@ -30,8 +30,8 @@ void Board::draw(std::vector<int> infoVec)
 	m_backgroundGame.draw(m_window);
 	drawTiles(infoVec);
 	m_player->draw(m_window);
-	drawEnemies();
-	drawGifts();
+	drawObjects();
+
 }
 //הדפסת אריחים
 //------------------------------------------------
@@ -53,21 +53,20 @@ void Board::drawTiles(std::vector<int> infoVec)
 }
 //הדפסת אויבים
 //------------------------------------------------
-void Board::drawEnemies()
+void Board::drawObjects()
 {
-	for (int i = 0; i < m_ballsVec.size(); i++)
-		m_ballsVec[i]->draw(m_window);
-	for (int i = 0; i < m_spidersVec.size(); i++)
-		m_spidersVec[i]->draw(m_window);
-	for (int i = 0; i < m_territoryEaterVec.size(); i++)
-		m_territoryEaterVec[i]->draw(m_window);
+	drawVec(m_ballsVec);
+	drawVec(m_spidersVec);
+	drawVec(m_territoryEaterVec);
+	drawVec(m_giftsVec);
 }
-//הדפסת מתנות
-//------------------------------------------------
-void Board::drawGifts()
+//פונקציה האחראית על הדפסת וקטורי האוביקטים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::drawVec(std::vector<typename enemyVec>& vec)
 {
-	for (int i = 0; i < m_giftsVec.size(); i++)
-		m_giftsVec[i]->draw(m_window);
+	for (int i = 0; i < vec.size(); i++)
+		vec[i]->draw(m_window);
 }
 //פוקנציה הבודקת האם השחקן חזר למקום שכבר היה בו
 //------------------------------------------------
@@ -86,37 +85,28 @@ bool Board::checkIfPassedAlready()
 //-------------------------------------------------
 bool Board::moveEnemies()
 {
-	bool isColideWithMiddle = false;
-	for (auto& enemy : m_ballsVec)
-	{
-		enemy->move(*this);
-		if ((typeid(*m_player) == typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
-		{
-			updateFailure(true);
-			isColideWithMiddle = true;
-		}
-	}
-	for (auto& enemy : m_spidersVec)
-	{
-		enemy->move(*this);
-		if ((typeid(*m_player) == typeid(Player)) && m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE)
-		{
-			updateFailure(true);
-			isColideWithMiddle = true;
-		}
-	}
-	for (auto& territoryEater : m_territoryEaterVec)
-	{
-		territoryEater->move(*this);
-		if (m_matrix[territoryEater->getIndex().x][territoryEater->getIndex().y] == MIDDLE)
-		{
-			updateFailure(true);
-			isColideWithMiddle = true;
-		}
-	}
-	return isColideWithMiddle;
+	bool isColideWithMiddleTile = false;
+	moveEnemiesVec(m_ballsVec,isColideWithMiddleTile);
+	moveEnemiesVec(m_spidersVec, isColideWithMiddleTile);
+	moveEnemiesVec(m_territoryEaterVec, isColideWithMiddleTile);
+	return isColideWithMiddleTile;
 }
-//פוקנציה האחראית על כבישת האריחים
+//פונקציה האחראית על תזוזה של וקטור אויבים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::moveEnemiesVec(std::vector<typename enemyVec>& enemiesVec,bool& isColideWithMiddleTile)
+{
+	for (auto& enemy : enemiesVec)
+	{
+		enemy->move(*this);
+		if ((typeid(Player) == typeid(*m_player)) && (m_matrix[enemy->getIndex().x][enemy->getIndex().y] == MIDDLE))
+		{
+			updateFailure(true);
+			isColideWithMiddleTile = true;
+		}
+	}
+}
+//פוקנציה האחראית על כיבוש האריחים
 //-------------------------------------------------
 void Board::handleSpaceBlockage()
 {
@@ -124,10 +114,7 @@ void Board::handleSpaceBlockage()
 	{
 		m_player->setPlayerDx(ZERO);
 		m_player->setPlayerDy(ZERO);
-		if (m_ballsVec.size() == 0)
-			m_matrix[0][0] = EMPTY;
 		floodFill();
-		
 		handleConditionTile();
 		updateFailure(false);
 	}
@@ -157,16 +144,16 @@ void Board::handleConditionTile()
 void Board::floodFill(sf::Vector2i v)
 {
 	if (v.x >= ZERO && v.x <= MATRIX_SIZE - 1 && v.y >= ZERO && v.y <= MATRIX_SIZE - 1 && m_matrix[v.x][v.y] == EMPTY) m_matrix[v.x][v.y] = AROUND_ENEMY;
-	if (((v.x - 1) >= 0) && v.y >= 0 && v.y <= 44 && m_matrix[v.x - 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x - 1, v.y));
-	if (((v.x + 1) <= 44) && v.y >= 0 && v.y <= 44 && m_matrix[v.x + 1][v.y] == EMPTY) floodFill(sf::Vector2i(v.x + 1, v.y));
-	if (((v.y - 1) >= 0) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y - 1] == EMPTY) floodFill(sf::Vector2i(v.x, v.y - 1));
-	if (((v.y + 1) <= 44) && v.x >= 0 && v.x <= 44 && m_matrix[v.x][v.y + 1] == EMPTY) floodFill(sf::Vector2i(v.x, v.y + 1));
+	if (((v.x + TO_LEFT) >= ZERO) && v.y >= 0 && v.y <= MATRIX_SIZE - 1 && m_matrix[v.x + TO_LEFT][v.y] == EMPTY) floodFill(sf::Vector2i(v.x+TO_LEFT, v.y));
+	if (((v.x + TO_RIGHT) <= MATRIX_SIZE-1) && v.y >= ZERO && v.y <= MATRIX_SIZE - 1 && m_matrix[v.x + TO_RIGHT][v.y] == EMPTY) floodFill(sf::Vector2i(v.x + TO_RIGHT, v.y));
+	if (((v.y + TO_UP) >= ZERO) && v.x >= 0 && v.x <= MATRIX_SIZE - 1 && m_matrix[v.x][v.y + TO_UP] == EMPTY) floodFill(sf::Vector2i(v.x, v.y +TO_UP));
+	if (((v.y + TO_DOWN) <= MATRIX_SIZE - 1) && v.x >= ZERO && v.x <= MATRIX_SIZE - 1 && m_matrix[v.x][v.y +TO_DOWN] == EMPTY) floodFill(sf::Vector2i(v.x, v.y + TO_DOWN));
 }
 //הזזת השחקן
 //------------------------------------------------------------
 void Board::movePlayer()
 {
-	m_player->moveP();
+	m_player->move();
 }
 //פונקציה האחראית על כיוון התזוזה 
 //------------------------------------------------------------
@@ -174,21 +161,13 @@ void Board::setDirection(sf::Keyboard::Key key)
 {
 	switch (key){
 	case sf::Keyboard::Key::Right:{
-		m_player->setPlayerDx(1); m_player->setPlayerDy(0);
-		break;
-	}
+		m_player->setPlayerDx(TO_RIGHT); m_player->setPlayerDy(ZERO);break;}
 	case sf::Keyboard::Key::Left:{
-		m_player->setPlayerDx(-1); m_player->setPlayerDy(0);
-		break;
-	}
+		m_player->setPlayerDx(TO_LEFT); m_player->setPlayerDy(ZERO);break;}
 	case sf::Keyboard::Key::Down:{
-		m_player->setPlayerDx(0); m_player->setPlayerDy(1);
-		break;
-	}
+		m_player->setPlayerDx(ZERO); m_player->setPlayerDy(TO_DOWN);break;}
 	case sf::Keyboard::Key::Up:{
-		m_player->setPlayerDx(0); m_player->setPlayerDy(-1);
-		break;
-	}
+		m_player->setPlayerDx(ZERO); m_player->setPlayerDy(TO_UP);break;}
 	default:
 		return;
 	}
@@ -218,8 +197,7 @@ sf::Vector2f Board::findDirectionToMove(int x, int y)
 		pos.y = TO_UP;
 	else if (m_player->isDown(y))
 		pos.y = TO_DOWN;
-	if (m_player->isUp(y) && m_player->isRight(x))
-	{
+	if (m_player->isUp(y) && m_player->isRight(x)){
 		pos.x = TO_RIGHT;
 		pos.y = ZERO;
 	}
@@ -244,12 +222,8 @@ void Board::eatCellInMatrix(int i, int j)
 //---------------------------------------------------------
 void Board::handleCollision()
 {
-	for (int i = 0; i < m_ballsVec.size(); i++)
-		if (colide(*m_ballsVec[i], *m_player))
-			processCollision(*m_ballsVec[i], *m_player);
-	for (int i = 0; i < m_spidersVec.size(); i++)
-		if (colide(*m_spidersVec[i], *m_player))
-			processCollision(*m_spidersVec[i], *m_player);
+	handleEnemiesCollision(m_ballsVec, *m_player);
+	handleEnemiesCollision(m_spidersVec, *m_player);
 	for (int i = 0; i < m_giftsVec.size(); i++)
 		if (colide(*m_giftsVec[i], *m_player))
 		{
@@ -257,7 +231,20 @@ void Board::handleCollision()
 			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
 	eraseDeletedObjects();
-
+}
+//פונקציה האחראית על ההתנגשויות עם האויבים
+//---------------------------------------------------------
+void Board::handleEnemiesCollision(std::vector<std::unique_ptr<Enemies>>& vec, Player& player)
+{
+	for (int i = 0; i < vec.size(); i++)
+		if (colideWithEnemy(*vec[i], player))    //לשנות?
+			processCollision(*vec[i], player);
+}
+//פונקציה הבודקת האם היתה התנגשות
+//-------------------------------------------------------------
+bool Board::colideWithEnemy(Object& obj1, Object& obj2)const
+{
+	return obj1.getDisplay().getSprite().getGlobalBounds().contains(obj2.getDisplay().getSprite().getPosition());
 }
 //פונקציה הבודקת האם היתה התנגשות
 //-------------------------------------------------------------
@@ -284,22 +271,32 @@ void Board::createTerritoryEnemiesInBoard(int curentLevel, Level* l, std::vector
 //-------------------------------------------------------------
 void Board::freezeEnemies()
 {
-	for (auto& enemy : m_ballsVec)
-		enemy->freeze();
-	for (auto& enemy : m_spidersVec)
-		enemy->freeze();
-	for (auto& enemy : m_territoryEaterVec)
+	freezeEnemies(m_ballsVec);
+	freezeEnemies(m_spidersVec);
+	freezeEnemies(m_territoryEaterVec);
+}
+//פונקציה המקפיאה וקטור של אויבים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::freezeEnemies(std::vector<typename enemyVec>& vec)
+{
+	for (auto& enemy : vec)
 		enemy->freeze();
 }
 //פונקציה המבטלת את הקפאת האויבים
 //-------------------------------------------------------------
 void Board::unFreezeEnemies()
 {
-	for (auto& enemy : m_ballsVec)
-		enemy->unFreeze();
-	for (auto& enemy : m_spidersVec)
-		enemy->unFreeze();
-	for (auto& enemy : m_territoryEaterVec)
+	unFreezeEnemies(m_ballsVec);
+	unFreezeEnemies(m_spidersVec);
+	unFreezeEnemies(m_territoryEaterVec);
+}
+//פונקציה המבטלת הקפאת וקטור של אויבים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::unFreezeEnemies(std::vector<typename enemyVec>& vec)
+{
+	for (auto& enemy : vec)
 		enemy->unFreeze();
 }
 //פוקנציה האחראית לתזוזת המתנות על הלוח
@@ -314,8 +311,8 @@ void Board::rotateGifts()
 void Board::handleAnimationCrumb(int i, int j)
 {
 	sf::Vector2f pos;
-	pos.x = 20 * j + 350 - 15;
-	pos.y = 20 * i + 50 - 15;
+	pos.x = BOARD_GAME_CELL_SIZE * j + BEGGINING_OF_BOARD_X - HALF_ENEMY_PIC_SIZE;
+	pos.y = BOARD_GAME_CELL_SIZE * i + BEGGINING_OF_BOARD_Y - HALF_ENEMY_PIC_SIZE;
 	m_crumbPic.setPosition(pos);
 	m_crumbAnimation.handleAnimation();
 	m_crumbPic.draw(m_window);

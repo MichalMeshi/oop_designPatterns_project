@@ -8,9 +8,7 @@ public:
 	Enemies(sf::Texture& t, std::shared_ptr<Move> m, Level* l);
 	~Enemies() {}
 	virtual void move(Board& b)override;
-	sf::Vector2i getIndex()const {
-		return m_prevMove->getIndex();
-	}
+	sf::Vector2i getIndex()const {return m_prevMove->getIndex();}
 	void reduceLife();
 	void freeze() { m_move = NULL; }
 	void unFreeze() { m_move = m_prevMove; }

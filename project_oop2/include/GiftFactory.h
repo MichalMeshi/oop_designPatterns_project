@@ -6,6 +6,5 @@ public:
 	static bool registerGift(giftFunc mf);
 	static std::unique_ptr<Gift> createGift(Level*);
 	static std::vector<giftFunc>& getGiftVec();
-
 private:
 };

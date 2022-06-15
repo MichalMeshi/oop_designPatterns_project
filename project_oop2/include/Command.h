@@ -8,5 +8,3 @@ public:
 	virtual void execute(sf::RenderWindow& window,Display& d) = 0{}
 private:
 };
-
-

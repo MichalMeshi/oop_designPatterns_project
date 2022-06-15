@@ -28,7 +28,6 @@ public:
 	void createEnemiesInBoard(int, Level*, std::vector<int>);
 	void createTerritoryEnemiesInBoard(int, Level*, std::vector<int>);
 	void handleCollision();
-	bool colide(Object& obj1, Object& obj2)const;
 	void freezeEnemies();
 	void unFreezeEnemies();
 	void rotateGifts();
@@ -50,19 +49,30 @@ private:
 	Display m_crumbPic;
 	sf::Clock clockForGifts;
 	int& m_percentage;
-	int m_blockCounter = 0;
+	int m_blockCounter = ZERO;
 	bool m_inFailure = false;
 	Animation m_crumbAnimation;
 	
 	void createBoard();
 	void setBackPlayer(); 
 	void drawTiles(std::vector<int> infoVec);
-	void drawEnemies();
-	void drawGifts();
+	void drawObjects();
 	void handleConditionTile();
 	void eraseDeletedObjects();
 	void floodFill();
 	void floodFill(sf::Vector2i);
 	template<typename enemyVec>
-		void floodFillOnEnemy(std::vector<typename enemyVec>& vec);
+	void floodFillOnEnemy(std::vector<typename enemyVec>& vec);
+	template <typename enemyVec>
+	void unFreezeEnemies(std::vector<typename enemyVec>& vec);
+	template <typename enemyVec>
+	void freezeEnemies(std::vector<typename enemyVec>& vec);
+	void handleEnemiesCollision(std::vector<std::unique_ptr<Enemies>>& vec, Player& );
+	bool colideWithEnemy(Object& obj1, Object& obj2)const;
+	bool colide(Object& obj1, Object& obj2)const;
+	template <typename enemyVec>
+	void drawVec(std::vector<typename enemyVec>&);
+	template <typename enemyVec>
+	void moveEnemiesVec(std::vector<typename enemyVec>& enemiesVec, bool&);
+
 };

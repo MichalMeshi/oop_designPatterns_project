@@ -10,5 +10,4 @@ public:
 private:
 	GameController m_gameController;
 	void createSounds();
-
 };

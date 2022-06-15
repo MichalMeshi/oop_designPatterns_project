@@ -13,9 +13,8 @@ public:
 	void initializeNumLevelTxt(char nameFile);
 	void initializeTimeLeftTxt();
 	void initializePercentagLeftTxt();
-	
 private:
-	float m_timeLeftInLevel; //to be changed
+	float m_timeLeftInLevel;
 	Display m_heartPicture;
 	Display m_clockPicture;
 	sf::Text m_timeLeftTxt;

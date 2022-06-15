@@ -3,29 +3,18 @@
 
 RandomMove::RandomMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) :Move(pos, std::move(placeToMove))
 {
-	m_dx = 10;
-	m_dy = 10;
+	m_dx = BIG_JUMP_PIXELS;
+	m_dy = BIG_JUMP_PIXELS;
 	m_clockForMove.restart();
-	//להפוך לסוויצ
-	std::vector<sf::Vector2i> directionsVec = { { 0, -1 }, { 0,1 }, { 1,0 }, { -1,0 } };
-
-	m_directions = directionsVec;
-	m_direction = m_directions[rand() % 4];
-	/*if (m_directionEnum == UP)
-	m_direction = { 0,-1 };
-	if (m_directionEnum == DOWN)
-	m_direction = { 0,1 };
-	if (m_directionEnum == RIGHT)
-	m_direction = { 1,0 };
-	if (m_directionEnum == LEFT)
-	m_direction = { -1,0 };*/
+	m_direction = m_directions[rand() % DIRECTIONS_AMOUNT];
 }
-
+//פונקציה האחראית על תזוזה רנדומלית לא אלכסונית
+//------------------------------------------------------------------------------
 sf::Vector2f RandomMove::move(Board& b)
 {
-	int index = rand() % 4;
-	int f = m_clockForMove.getElapsedTime().asMilliseconds();
-	if (f % 50 == 0)
+	int index = rand() % DIRECTIONS_AMOUNT;
+	int delteTime = m_clockForMove.getElapsedTime().asMilliseconds();
+	if (delteTime % FIFTY_SECONDS == ZERO)
 		moveDifferently();
 	m_y += m_direction.y * (m_dy);
 	m_x += m_direction.x * (m_dx);
@@ -35,13 +24,14 @@ sf::Vector2f RandomMove::move(Board& b)
 		m_x -= m_direction.x * (m_dx);
 		m_y -= m_direction.y * (m_dy);
 		if ( m_direction == m_directions[index])
-			m_direction = m_directions[(index + 1) % 4];
+			m_direction = m_directions[(index + 1) % DIRECTIONS_AMOUNT];
 		else
 			m_direction = m_directions[index];
 	}
 	return sf::Vector2f(m_x, m_y);
 }
-
+//פונקציה האחראית על שינוי כיוון התזוזה הרנדומלית
+//------------------------------------------------------------------------------
 void RandomMove::moveDifferently()
 {
 	m_direction = -m_direction;

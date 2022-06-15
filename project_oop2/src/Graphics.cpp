@@ -1,4 +1,9 @@
 #include "Graphics.h"
+Graphics& Graphics::getGraphics()
+{
+	static Graphics m_graphics;
+	return m_graphics;
+}
 //=====================================================================
 //בנאי המחלקה
 //---------------------------------------------------------------------------------------
@@ -19,7 +24,7 @@ Graphics::Graphics()
 	m_tex[START_VIEW].loadFromFile("startView.png");
 	m_tex[EXIT].loadFromFile("exit.png");
 	m_tex[INSTRUCTIONS].loadFromFile("instructions.png");
-	m_tex[SEA].loadFromFile("sea.png");
+	m_tex[SKY].loadFromFile("sea.png");
 	m_tex[SETTING_VIEW].loadFromFile("settingsView.png");
 	m_tex[SETTING].loadFromFile("settings.png");
 	m_tex[CLOCKPICTURE].loadFromFile("clock.png");
@@ -45,6 +50,8 @@ Graphics::Graphics()
 	m_tex[HEART_ICON].loadFromFile("heartIcon.png");
 	m_tex[SMART_SPIDER].loadFromFile("smartSpider.png");
 	m_tex[LEVEL_UP].loadFromFile("levelUp.png");
+	m_tex[GAME_OVER].loadFromFile("gameOver.png");
+	m_tex[WIN_GAME].loadFromFile("winGame.png");
 
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");

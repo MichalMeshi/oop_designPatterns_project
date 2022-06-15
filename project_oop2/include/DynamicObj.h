@@ -9,6 +9,4 @@ public:
 	~DynamicObj() {}
 	virtual void move(Board& b) = 0;
 protected:
-	//Animation m_animation;
-
 };

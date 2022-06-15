@@ -7,11 +7,7 @@ class Gift: public StaticObj
 public:
 	Gift(sf::Texture& t, sf::Vector2f f, Level* level) ;
 	 virtual ~Gift() = 0 {}
-	// virtual void rotate() { m_display.rotate(); }
-	 void handleAnimation()
-	 {
-		 m_animation.handleAnimation();
-	 }
+	 void handleAnimation()	{ m_animation.handleAnimation();}
 	 void deleted() { m_isDeleted = true; }
 	 bool isDead()const { return m_isDeleted; }
 protected:
