@@ -41,6 +41,7 @@ configure_file ("smartSpider.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("levelUp.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("winGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gameOver.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("immuneAnimation.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 configure_file ("music.ogg" ${CMAKE_BINARY_DIR} COPYONLY)

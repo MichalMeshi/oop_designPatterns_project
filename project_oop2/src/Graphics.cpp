@@ -52,6 +52,7 @@ Graphics::Graphics()
 	m_tex[LEVEL_UP].loadFromFile("levelUp.png");
 	m_tex[GAME_OVER].loadFromFile("gameOver.png");
 	m_tex[WIN_GAME].loadFromFile("winGame.png");
+	m_tex[IMMUNE_ANIMATION].loadFromFile("immuneAnimation.png");
 
 
 	m_soundBufferVec[FIRST_MUSIC].loadFromFile("music.ogg");
