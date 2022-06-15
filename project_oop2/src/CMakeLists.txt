@@ -15,6 +15,7 @@
                                              "Gift.cpp" 
                                              "ImmunetyGift.cpp" 
                                              "Controller.cpp" 
+                                             "Animation.cpp" 
                                              "Life.cpp" 
                                              "AddTime.cpp" 
                                              "KillEnemy.cpp" 

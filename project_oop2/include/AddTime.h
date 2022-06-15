@@ -1,6 +1,7 @@
 #pragma once
 #include "GiftFactory.h"
 #include "Level.h"
+//-----------------------------------
 class AddTime :public Gift
 {
 public:

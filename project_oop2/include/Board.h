@@ -9,8 +9,8 @@
 #include <algorithm>
 class Enemies;
 class Gift;
-class Board
-{
+//-----------------------------------
+class Board {
 public:
 	Board(sf::RenderWindow& window, int, int&);
 	~Board() {}
@@ -21,8 +21,8 @@ public:
 	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
-	bool checkIfBlocked(sf::Vector2i pos) const{ return (m_matrix[pos.x][pos.y] == BLOCKED); }
-	bool checkIUnfBlocked(sf::Vector2i pos)const { return (m_matrix[pos.x][pos.y] == EMPTY || m_matrix[pos.x][pos.y] == MIDDLE); }
+	bool checkIfBlocked(sf::Vector2i pos) const;
+	bool checkIUnfBlocked(sf::Vector2i pos)const;
 	void handleCreateGifts(int& gift_num, int rand_time, Level* l);
 	void eatCellInMatrix(int i, int j);
 	sf::Vector2f findDirectionToMove(int x, int y);
@@ -35,20 +35,13 @@ public:
 	void rotateGifts();
 	void updateFailure(bool b) { m_inFailure = b; }
 	void handleAnimationCrumb(int i, int j);
-	void setPlayerPositionToBegining() { m_player->setPlayerPosition(sf::Vector2f(22, 0)); }//לשנות למרכז למטה
-	void immuneThePlayer() {
-		//m_player = nullptr;
-		m_player = std::make_unique < ImmunePlayer>(m_player->getPlayerXpos(), m_player->getPlayerYpos(), m_player->getPlayerDx(), m_player->getPlayerDy());
-	}
-	void changePlayerToKilling(){
-		//m_player = nullptr;
-		m_player = std::make_unique < KillingPlayer>(m_player->getPlayerXpos(), m_player->getPlayerYpos(), m_player->getPlayerDx(), m_player->getPlayerDy());
-	}
+	void setPlayerPositionToBegining();
+	void immuneThePlayer();
+	void changePlayerToKilling();
 	void setPlayer();
 private:
 	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;
-	sf::RectangleShape m_rec;
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
 	std::vector<std::unique_ptr<Enemies>> m_ballsVec;
 	std::vector<std::unique_ptr<Enemies>> m_spidersVec;
@@ -56,17 +49,18 @@ private:
 	std::unique_ptr<Player> m_player;
 	Display m_backgroundGame;
 	Display m_crumbPic;
-	//int dx = 0, dy = 0, x = 0, y = 0;
 	sf::Clock clockForGifts;
 	int& m_percentage;
 	int m_blockCounter = 0;
 	bool m_inFailure = false;
-	//sf::Vector2f posAnimation = { 0,0 };
 	Animation m_crumbAnimation;
+	
+	void createBoard();
+	void setBackPlayer(); 
+	void drawTiles(std::vector<int> infoVec);
+	void drawEnemies();
+	void drawGifts();
+	void handleConditionTile();
 
-	void setBackPlayer() { 
-		//m_player = nullptr;
-		m_player = std::make_unique<Player>(m_player->getPlayerXpos(), m_player->getPlayerYpos(),m_player->getPlayerDx(), m_player->getPlayerDy());
-	}//פונקציה פרטית
 
 };

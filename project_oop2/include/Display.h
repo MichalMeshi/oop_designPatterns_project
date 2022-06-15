@@ -1,5 +1,6 @@
 #pragma once
 #include "Graphics.h"
+//------------------------------------------
 class Display{
 public:
 	Display(const sf::Texture& t, sf::Vector2f position, sf::Vector2f scale);
@@ -17,5 +18,4 @@ public:
 	void update(float posX,int length) { m_sprite.setTextureRect(sf::IntRect(posX, 0, length, length)); }
 private:
 	sf::Sprite m_sprite;
-
 };
