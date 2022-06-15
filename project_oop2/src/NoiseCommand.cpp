@@ -1,6 +1,6 @@
-#include "Noise.h"
+#include "NoiseCommand.h"
 
-void Noise::execute(sf::RenderWindow& window, Display& d)
+void NoiseCommand::execute(sf::RenderWindow& window, Display& d)
 {
 	if (d.getTexture() == &Graphics::getGraphics().getTexture(NOISE))
 	{

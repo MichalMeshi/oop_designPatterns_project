@@ -1,11 +1,11 @@
 #pragma once
 #include "Display.h"
 #include "Board.h"
-class InformationMenu
+class InformationDisplay
 {
 public:
-	InformationMenu(char ,sf::RenderWindow& window,int);
-	~InformationMenu()=default;
+	InformationDisplay(char ,sf::RenderWindow& window,int);
+	~InformationDisplay()=default;
 	void drawInfoMenu(int life);
 	void setTimer(float time);
 	void setPercentage(int, int);

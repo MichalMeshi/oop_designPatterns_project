@@ -1,13 +1,13 @@
-#include "ShowInstructions.h"
-#include "Settings.h"
+#include "ShowInstructionsCommand.h"
+#include "SettingsCommand.h"
 
-ShowInstructions::ShowInstructions()
+ShowInstructionsCommand::ShowInstructionsCommand()
 	:Command(),m_instructions(Graphics::getGraphics().getTexture(INSTRUCTIONS),
 		sf::Vector2f(0, 0), sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW)),
 	m_back(Graphics::getGraphics().getTexture(BACK),
 		sf::Vector2f(10, 10), sf::Vector2f(100, 70)){}
 
-void ShowInstructions::execute(sf::RenderWindow& window, Display& d)
+void ShowInstructionsCommand::execute(sf::RenderWindow& window, Display& d)
 {
 	while (window.isOpen())
 	{

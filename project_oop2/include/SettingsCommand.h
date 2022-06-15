@@ -1,9 +1,9 @@
 #include "Command.h"
-class Settings :public Command
+class SettingsCommand :public Command
 {
 public:
-	Settings():Command(){}
-	~Settings() = default;
+	SettingsCommand():Command(){}
+	~SettingsCommand() = default;
 	virtual void execute(sf::RenderWindow& window, Display& d)override;
 private:
 

@@ -3,7 +3,7 @@
 #include "Utilities.h"
 #include <vector>
 #include <utility>
-#include "Settings.h"
+#include "SettingsCommand.h"
 class Menu
 {
 public:

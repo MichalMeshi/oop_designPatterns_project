@@ -1,8 +1,8 @@
 #pragma once
 #include "Menu.h"
-#include "ShowInstructions.h"
-#include "Noise.h"
-#include "BackSound.h"
+#include "ShowInstructionsCommand.h"
+#include "NoiseCommand.h"
+#include "BackSoundCommand.h"
 class SettingsMenu:public Menu
 {
 public:

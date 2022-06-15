@@ -1,6 +1,6 @@
 #pragma once
 #include "Board.h"
-#include "InformationMenu.h"
+#include "InformationDisplay.h"
 #include "InfoOfLevel.h"
 
 class Level{
@@ -25,7 +25,7 @@ public:
 private:
 	Board m_board;
 	sf::RenderWindow& m_window;
-	InformationMenu m_infoMenu;
+	InformationDisplay m_infoMenu;
 	sf::Clock m_clockForGift;
 	int m_timeForLevel;
 	int m_percentage = 0;

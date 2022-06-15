@@ -2,11 +2,11 @@
 #include "GiftFactory.h"
 #include "Level.h"
 //-----------------------------------
-class AddTime :public Gift
+class AddTimeGift :public Gift
 {
 public:
-	AddTime(Level* l) :Gift(Graphics::getGraphics().getTexture(ADD_TIME), {270,30},l) {}
-	virtual ~AddTime() override{}
+	AddTimeGift(Level* l); 
+	virtual ~AddTimeGift() override{}
 	void addTime() { m_level->addTime(); }
 
 private:

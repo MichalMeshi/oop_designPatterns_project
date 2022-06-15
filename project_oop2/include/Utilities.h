@@ -15,6 +15,7 @@ const sf::Vector2f NUM_LEVEL_TXT_POSITION = { 120,10 };
 const sf::Vector2f TIME_LEFT_TXT_POSITION = { 105,130 };
 const sf::Vector2f FIRST_HEART_POSITION = { 10, 5 };
 const sf::Vector2f BOARD_GAME_CELL = { 20,20 };
+const sf::Vector2f GIFT_SPRITE_SHEET_SIZE = { 270,30 };
 const int AMOUNT_OF_SOUNDS = 6;
 const int MIDDLE_BOARD_X = 800;
 const int MIDDLE_BOARD_Y = 500;
@@ -26,6 +27,11 @@ const int BEGGINING_OF_BOARD_Y = 50;
 const int BOARD_GAME_LENGTH = 900;
 const int BOARD_GAME_CELL_SIZE = 20;
 const int AMOUNT_FOR_ONE_PERCENT = 18;
+const int VOLUME = 100;
+const int TO_UP = -1;
+const int TO_DOWN = 1;
+const int TO_RIGHT = 1;
+const int TO_LEFT =-1;
 //const int FRAME_LIMIT_SPEED = 10;
 
 
@@ -60,4 +66,4 @@ enum  EndOfLevelCondition {
 enum  InfoOfLevelEnum {
 	TERRITORY_EATER = 0,DOMB_MONSTER,SMART_MONSTER, PERCENTAGE,LIFE_AMOUNT, INDEX_OF_BLOCKED, INDEX_OF_EMPTY, INDEX_OF_MIDDLE
 };
-;
+ 

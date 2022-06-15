@@ -1,4 +1,4 @@
-#include "InformationMenu.h"
+#include "InformationDisplay.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iomanip>
@@ -8,7 +8,7 @@
 #include <string>
 
 //---------------------------------------------------------------------------------------
-InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int time)
+InformationDisplay::InformationDisplay(char levelNum, sf::RenderWindow& window,int time)
 	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(100, 100))
 	, m_heartPicture(Graphics::getGraphics().getTexture(HEART_ICON), sf::Vector2f(50, 50), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
 	initializeLevelTxt();
@@ -17,7 +17,7 @@ InformationMenu::InformationMenu(char levelNum, sf::RenderWindow& window,int tim
 	initializePercentagLeftTxt();
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::drawInfoMenu(int lifeAmount)
+void InformationDisplay::drawInfoMenu(int lifeAmount)
 {
 	float xPos = 50;
     m_window.draw(m_levelTxt);
@@ -33,7 +33,7 @@ void InformationMenu::drawInfoMenu(int lifeAmount)
 	m_window.draw(m_numLevelTxt);
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::setTimer(float time)
+void InformationDisplay::setTimer(float time)
 {
 	m_timeLeftInLevel = time;
 	std::stringstream stream;
@@ -41,7 +41,7 @@ void InformationMenu::setTimer(float time)
 	m_timeLeftTxt.setString(stream.str());
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::setPercentage(int percent,int max_per)
+void InformationDisplay::setPercentage(int percent,int max_per)
 {
 	std::string per = std::to_string(percent);
 	std::string max = std::to_string(max_per);
@@ -49,7 +49,7 @@ void InformationMenu::setPercentage(int percent,int max_per)
 
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::initializeLevelTxt()
+void InformationDisplay::initializeLevelTxt()
 {
 	m_levelTxt.setFont(Graphics::getGraphics().getFont());
 	m_levelTxt.setString("LEVEL");
@@ -58,7 +58,7 @@ void InformationMenu::initializeLevelTxt()
 	m_levelTxt.setColor(sf::Color::Black);
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::initializePercentagLeftTxt()
+void InformationDisplay::initializePercentagLeftTxt()
 {
 	m_percentageTxt.setFont(Graphics::getGraphics().getFont());
 	m_percentageTxt.setString("%");
@@ -67,7 +67,7 @@ void InformationMenu::initializePercentagLeftTxt()
 	m_percentageTxt.setColor(sf::Color::Black);
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::initializeNumLevelTxt(char nameFile)
+void InformationDisplay::initializeNumLevelTxt(char nameFile)
 {
 	m_numLevelTxt.setString(nameFile);
 	m_numLevelTxt.setFont(Graphics::getGraphics().getFont());
@@ -76,7 +76,7 @@ void InformationMenu::initializeNumLevelTxt(char nameFile)
 	m_numLevelTxt.setColor(sf::Color::Black);
 }
 //---------------------------------------------------------------------------------------
-void InformationMenu::initializeTimeLeftTxt()
+void InformationDisplay::initializeTimeLeftTxt()
 {
 	m_timeLeftTxt.setFont(Graphics::getGraphics().getFont());
 	m_timeLeftTxt.setString(std::to_string(m_timeLeftInLevel));

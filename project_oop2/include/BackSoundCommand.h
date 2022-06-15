@@ -1,10 +1,10 @@
 #pragma once
 #include "Command.h"
 //-----------------------------------
-class BackSound:public Command {
+class BackSoundCommand:public Command {
 public:
-	BackSound() :Command() {}
-	~BackSound() = default;
+	BackSoundCommand() :Command() {}
+	~BackSoundCommand() = default;
 	virtual void execute(sf::RenderWindow& window, Display&) override;
 private:
 };

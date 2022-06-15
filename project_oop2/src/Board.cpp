@@ -126,11 +126,8 @@ void Board::handleSpaceBlockage()
 		m_player->setPlayerDy(ZERO);
 		if (m_ballsVec.size() == 0)
 			m_matrix[0][0] = EMPTY;
-
-		for (int i = 0; i < m_ballsVec.size(); i++)
-			floodFill(m_ballsVec[i]->getIndex());
-		for (int i = 0; i < m_territoryEaterVec.size(); i++)
-			floodFill(m_territoryEaterVec[i]->getIndex());
+		floodFill();
+		
 		handleConditionTile();
 		updateFailure(false);
 	}
@@ -212,20 +209,19 @@ void Board::handleCreateGifts(int& gift_num, int rand_time, Level* l)
 //--------------------------------------------
 sf::Vector2f Board::findDirectionToMove(int x, int y)
 {
-	sf::Vector2f pos = { 0,0 };
-
+	sf::Vector2f pos = { ZERO,ZERO };
 	if (m_player->isRight(x))
-		pos.x = 1;
+		pos.x = TO_RIGHT;
 	else if (m_player->isLeft(x))
-		pos.x = -1;
+		pos.x = TO_LEFT;
 	else if (m_player->isUp(y))
-		pos.y = -1;
+		pos.y = TO_UP;
 	else if (m_player->isDown(y))
-		pos.y = 1;
+		pos.y = TO_DOWN;
 	if (m_player->isUp(y) && m_player->isRight(x))
 	{
-		pos.x = 1;
-		pos.y = 0;
+		pos.x = TO_RIGHT;
+		pos.y = ZERO;
 	}
 	return pos;
 }
@@ -260,9 +256,8 @@ void Board::handleCollision()
 			processCollision(*m_giftsVec[i], *m_player);
 			Graphics::getGraphics().getSoundVec()[GIFT_SOUND]->play();
 		}
-	std::erase_if(m_ballsVec, [](const auto& ball) { return ball->isDead(); });
-	std::erase_if(m_spidersVec, [](const auto& spider) { return spider->isDead(); });
-	std::erase_if(m_giftsVec, [](const auto& gift) { return gift->isDead(); });
+	eraseDeletedObjects();
+
 }
 //פונקציה הבודקת האם היתה התנגשות
 //-------------------------------------------------------------
@@ -369,4 +364,26 @@ void Board::setBackPlayer()
 {
 	m_player = std::make_unique<Player>(m_player->getPlayerXpos(), m_player->getPlayerYpos(), m_player->getPlayerDx(), m_player->getPlayerDy());
 }
-
+//פונקציה המוחקת את האוביקטים שהשחקן נפגש בהם וצריכים להיפגש
+//-------------------------------------------------------------
+void Board::eraseDeletedObjects()
+{
+	std::erase_if(m_ballsVec, [](const auto& ball) { return ball->isDead(); });
+	std::erase_if(m_spidersVec, [](const auto& spider) { return spider->isDead(); });
+	std::erase_if(m_giftsVec, [](const auto& gift) { return gift->isDead(); });
+}
+//פונקציה האחראית על צביעת השטח שנכבש ע"י השחקן
+//-------------------------------------------------------------
+void Board::floodFill()
+{
+	floodFillOnEnemy(m_ballsVec);
+	floodFillOnEnemy(m_territoryEaterVec);
+}
+//פונקציה האחראית על הפעלת אלגוריתם הפלוד_פיל על האויבים
+//-------------------------------------------------------------
+template <typename enemyVec>
+void Board::floodFillOnEnemy(std::vector<typename enemyVec>& vec)
+{
+	for (int i = 0; i < vec.size(); i++)
+		floodFill(vec[i]->getIndex());
+}

@@ -1,10 +1,10 @@
 #include "CollisionHandling.h"
 #include "TerritoryEater.h"
 #include "Player.h"
-#include "Life.h"
-#include "AddTime.h"
-#include "FreezeEnemies.h"
-#include "KillEnemy.h"
+#include "LifeGift.h"
+#include "AddTimeGift.h"
+#include "FreezeEnemiesGift.h"
+#include "KillEnemyGift.h"
 #include "ImmunetyGift.h"
 #include "Graphics.h"
 
@@ -19,21 +19,21 @@ namespace // anonymous namespace — the standard way to make function "static"
     //---------------------------------------------------------
     void playerLife(Object& life, Object& player)
     {
-        Life& lifeGift = static_cast<Life&>(life);
+        LifeGift& lifeGift = static_cast<LifeGift&>(life);
         lifeGift.addLife();
         lifeGift.deleted();
     }
     //---------------------------------------------------------
     void playerAddTime(Object& addTime, Object& player)
     {
-        AddTime& addTimeGift = static_cast<AddTime&>(addTime);
+        AddTimeGift& addTimeGift = static_cast<AddTimeGift&>(addTime);
         addTimeGift.addTime();
         addTimeGift.deleted();
     }
     //---------------------------------------------------------
     void playerKillEnemy(Object& killEnemy, Object& player)
     {
-        KillEnemy& killEnemyGift = static_cast<KillEnemy&>(killEnemy);
+        KillEnemyGift& killEnemyGift = static_cast<KillEnemyGift&>(killEnemy);
         killEnemyGift.kill();
         killEnemyGift.deleted();
     }
@@ -47,7 +47,7 @@ namespace // anonymous namespace — the standard way to make function "static"
     //---------------------------------------------------------
     void playerFreezeEnemies(Object& freezeEnemies, Object& player)
     {
-        FreezeEnemies& freezeEnemiesGift = static_cast<FreezeEnemies&>(freezeEnemies);
+        FreezeEnemiesGift& freezeEnemiesGift = static_cast<FreezeEnemiesGift&>(freezeEnemies);
         freezeEnemiesGift.freezeEnemies();
         freezeEnemiesGift.deleted();
     }
@@ -72,18 +72,18 @@ namespace // anonymous namespace — the standard way to make function "static"
         phm[Key(typeid(Enemies), typeid(KillingPlayer))] = &KillPlayerEnemy;
         phm[Key(typeid(Enemies), typeid(ImmunePlayer))] = &ImmuneplayerEnemy;
         phm[Key(typeid(Enemies), typeid(Player))] = &playerEnemy;
-        phm[Key(typeid(Life), typeid(Player))] = &playerLife;
-        phm[Key(typeid(Life), typeid(ImmunePlayer))] = &playerLife;
-        phm[Key(typeid(Life), typeid(KillingPlayer))] = &playerLife;
-        phm[Key(typeid(AddTime), typeid(Player))] = &playerAddTime;
-        phm[Key(typeid(AddTime), typeid(ImmunePlayer))] = &playerAddTime;
-        phm[Key(typeid(AddTime), typeid(KillingPlayer))] = &playerAddTime;
-        phm[Key(typeid(FreezeEnemies), typeid(Player))] = &playerFreezeEnemies;
-        phm[Key(typeid(FreezeEnemies), typeid(ImmunePlayer))] = &playerFreezeEnemies;
-        phm[Key(typeid(FreezeEnemies), typeid(KillingPlayer))] = &playerFreezeEnemies;
-        phm[Key(typeid(KillEnemy), typeid(Player))] = &playerKillEnemy;
-        phm[Key(typeid(KillEnemy), typeid(ImmunePlayer))] = &playerKillEnemy;
-        phm[Key(typeid(KillEnemy), typeid(KillingPlayer))] = &playerKillEnemy;
+        phm[Key(typeid(LifeGift), typeid(Player))] = &playerLife;
+        phm[Key(typeid(LifeGift), typeid(ImmunePlayer))] = &playerLife;
+        phm[Key(typeid(LifeGift), typeid(KillingPlayer))] = &playerLife;
+        phm[Key(typeid(AddTimeGift), typeid(Player))] = &playerAddTime;
+        phm[Key(typeid(AddTimeGift), typeid(ImmunePlayer))] = &playerAddTime;
+        phm[Key(typeid(AddTimeGift), typeid(KillingPlayer))] = &playerAddTime;
+        phm[Key(typeid(FreezeEnemiesGift), typeid(Player))] = &playerFreezeEnemies;
+        phm[Key(typeid(FreezeEnemiesGift), typeid(ImmunePlayer))] = &playerFreezeEnemies;
+        phm[Key(typeid(FreezeEnemiesGift), typeid(KillingPlayer))] = &playerFreezeEnemies;
+        phm[Key(typeid(KillEnemyGift), typeid(Player))] = &playerKillEnemy;
+        phm[Key(typeid(KillEnemyGift), typeid(ImmunePlayer))] = &playerKillEnemy;
+        phm[Key(typeid(KillEnemyGift), typeid(KillingPlayer))] = &playerKillEnemy;
         phm[Key(typeid(ImmunetyGift), typeid(Player))] = &playerImmunetyGift;
         phm[Key(typeid(ImmunetyGift), typeid(ImmunePlayer))] = &playerImmunetyGift;
         phm[Key(typeid(ImmunetyGift), typeid(KillingPlayer))] = &playerImmunetyGift;

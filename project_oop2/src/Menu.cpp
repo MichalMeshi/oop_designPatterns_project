@@ -1,5 +1,5 @@
 #include "StartMenu.h"
-#include "NewGame.h"
+#include "NewGameCommand.h"
 
 void Menu::run()
 {

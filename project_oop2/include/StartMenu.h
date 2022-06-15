@@ -1,5 +1,5 @@
 #pragma once
-#include "NewGame.h"
+#include "NewGameCommand.h"
 #include "Menu.h"
 
 class StartMenu:public Menu

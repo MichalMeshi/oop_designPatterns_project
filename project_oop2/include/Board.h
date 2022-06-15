@@ -18,7 +18,6 @@ public:
 	bool checkIfPassedAlready();
 	bool moveEnemies();
 	void handleSpaceBlockage();
-	void floodFill(sf::Vector2i);
 	void movePlayer();
 	void setDirection(sf::Keyboard::Key key);
 	bool checkIfBlocked(sf::Vector2i pos) const;
@@ -61,6 +60,9 @@ private:
 	void drawEnemies();
 	void drawGifts();
 	void handleConditionTile();
-
-
+	void eraseDeletedObjects();
+	void floodFill();
+	void floodFill(sf::Vector2i);
+	template<typename enemyVec>
+		void floodFillOnEnemy(std::vector<typename enemyVec>& vec);
 };

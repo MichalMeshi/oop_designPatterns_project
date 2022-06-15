@@ -1,9 +1,9 @@
 #pragma once
 #include "Command.h"
-class Noise :public Command {
+class NoiseCommand :public Command {
 public:
-	Noise() :Command() {}
-	~Noise() = default;
+	NoiseCommand() :Command() {}
+	~NoiseCommand() = default;
 	virtual void execute(sf::RenderWindow& window, Display& d) override;
 private:
 };

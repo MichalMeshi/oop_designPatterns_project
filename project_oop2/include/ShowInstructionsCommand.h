@@ -1,11 +1,11 @@
 #pragma once
 #include "Command.h"
-class ShowInstructions:public Command
+class ShowInstructionsCommand:public Command
 {
 
 public:
-	ShowInstructions();
-	~ShowInstructions() = default;
+	ShowInstructionsCommand();
+	~ShowInstructionsCommand() = default;
 	virtual void execute(sf::RenderWindow& window, Display& d) override;
 	void draw(sf::RenderWindow& window) {m_instructions.draw(window); m_back.draw(window);}
 private:
