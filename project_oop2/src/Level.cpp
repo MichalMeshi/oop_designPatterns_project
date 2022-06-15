@@ -68,7 +68,7 @@ void Level::handleTime(sf::Clock& clock)
 {
     if (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) == 10)
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->play();
-    if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0 ||  (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) > 10) )
+    if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0 ||  (int(m_timeForLevel - clock.getElapsedTime().asSeconds()) > 10) )
         Graphics::getGraphics().getSoundVec()[CLOCK_SOUND]->pause();
     if (float(m_timeForLevel - clock.getElapsedTime().asSeconds()) <= 0)
     {

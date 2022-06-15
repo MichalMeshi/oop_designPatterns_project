@@ -4,7 +4,7 @@
 Enemies::Enemies(sf::Texture& t, std::shared_ptr<Move> m, Level* l)
 	:DynamicObj(t, sf::Vector2f(30, 30)), m_move(m), m_prevMove(m_move), m_level(l)
 {
-	m_display.setOrigin();
+	m_display.setOrigin(ENEMY_PIC_SIZE/2,ENEMY_PIC_SIZE/2);
 }
 //פונקציה האחראית על תזוזת האויב
 //------------------------------------------------------------

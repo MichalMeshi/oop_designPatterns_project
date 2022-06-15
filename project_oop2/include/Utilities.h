@@ -13,8 +13,10 @@ const sf::Vector2f GIFT_SPRITE_SHEET_SIZE = { 270,30 };
 const sf::Vector2f PLAYER_SPRITE_SIZE = { 40,40 }; 
 const sf::Vector2f CRUMS_SPRITE_SHEET_SIZE = { 500,100 }; 
 const sf::Vector2f LEVEL_UP_SIZE = { 500, 150 };
+const sf::Vector2f GAME_OVER_SIZE = { 500, 150 };
 const sf::Vector2f EXPLOSION_SPRITE_SHEET_SIZE = { 4500,900 };
 const sf::Vector2f BEGGINIG_OF_MATRIX = { 350,50 };
+const sf::Vector2f MIDDLE_MATRIX = { 800,500 };
 
 const int AMOUNT_OF_SOUNDS = 6;
 const int MIDDLE_BOARD_X = 800;
@@ -52,6 +54,8 @@ const int HALF_MINUTE = 30;
 const int FOR_ASCII_CONVERSION = 48;
 const int BIG_JUMP_PIXELS =10;
 const int FIFTY_SECONDS =50;
+const int FIRST_LEVEL =1;
+const int THREE_SECONDS =3;
 
 
 //-------------------------
