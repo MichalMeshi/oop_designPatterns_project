@@ -12,7 +12,7 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLev
     m_winGame.setOrigin(WIN_SIZE.x/2, WIN_SIZE.y / 2);
 }
 //פוקנציה האחראית על ריצת כל שלב
-//---------------------------------
+//----------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
     while (m_window.isOpen())
