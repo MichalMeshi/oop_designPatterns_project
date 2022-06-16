@@ -4,11 +4,12 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLev
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
         m_window, m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
         m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(MIDDLE_BOARD_X, MIDDLE_BOARD_Y), LEVEL_UP_SIZE),m_currentLevel(curentLevel)
-    , m_winGame(Graphics::getGraphics().getTexture(WIN_GAME), BEGGINIG_OF_MATRIX, WIN_SIZE)
+    , m_winGame(Graphics::getGraphics().getTexture(WIN_GAME), { MIDDLE_BOARD_X ,MIDDLE_BOARD_Y}, WIN_SIZE)
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_levelUp.setOrigin(LEVEL_UP_SIZE.x /2, LEVEL_UP_SIZE.y /2);
+    m_winGame.setOrigin(WIN_SIZE.x/2, WIN_SIZE.y / 2);
 }
 //פוקנציה האחראית על ריצת כל שלב
 //---------------------------------
