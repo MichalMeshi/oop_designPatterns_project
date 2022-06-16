@@ -33,10 +33,12 @@ private:
 	int m_percentage = ZERO;
 	std::vector<int> m_infoOfLevel;
 	Display m_explosionPic;
+	Display m_winGame;
 	Animation m_explosionAnimation;
 	Display m_levelUp;
 	int m_gift_num = (rand() % AMOUNT_OF_GIFTS) + AMOUNT_OF_GIFTS;
 	int m_rand_time = (rand() % SIX) + FIVE;
+	int m_currentLevel;
 
 	enum EndOfLevelCondition handleEvents();
 	void handleTime();

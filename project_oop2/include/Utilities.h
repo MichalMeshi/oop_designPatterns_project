@@ -18,6 +18,7 @@ const sf::Vector2f GAME_OVER_SIZE = { 500, 150 };
 const sf::Vector2f EXPLOSION_SPRITE_SHEET_SIZE = { 4500,900 };
 const sf::Vector2f BEGGINIG_OF_MATRIX = { 350,50 };
 const sf::Vector2f MIDDLE_MATRIX = { 800,500 };
+const sf::Vector2f WIN_SIZE = { 800,500 };
 const sf::Vector2f COMMAND_PIC_SIZE = { 200, 200 };
 const sf::Vector2f HELP_POSITION = { 600, 400 };
 const sf::Vector2f SOUND_POSITION = { 820, 400 };
@@ -76,6 +77,7 @@ const int RIGHT_LIMIT =1230;
 const int TOP_LIMIT =70;
 const int BOTTOM_LIMIT =930;
 const int HALF_COMMAND_PIC_LENGTH =100;
+const int LAST_LEVEL =3;
 
 //-------------------------
 enum Texture {

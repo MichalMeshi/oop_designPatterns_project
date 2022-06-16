@@ -9,8 +9,6 @@ void GameController::runTheGame()
 	runGameLevels(curentLevel);
 	if (curentLevel < LEVELS_AMOUNT + 1)
 		m_gameOver.draw(m_window);
-	else if (curentLevel == LEVELS_AMOUNT + 1)
-		m_winGame.draw(m_window);
 	handleWindow();
 }
 //----------------------------------------------------------------

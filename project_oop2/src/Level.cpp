@@ -3,7 +3,8 @@
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLevelVec)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
         m_window, m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
-        m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(MIDDLE_BOARD_X, MIDDLE_BOARD_Y), LEVEL_UP_SIZE)
+        m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(MIDDLE_BOARD_X, MIDDLE_BOARD_Y), LEVEL_UP_SIZE),m_currentLevel(curentLevel)
+    , m_winGame(Graphics::getGraphics().getTexture(WIN_GAME), BEGGINIG_OF_MATRIX, WIN_SIZE)
 {
     m_board.createEnemiesInBoard(curentLevel, this, m_infoOfLevel);
     m_board.createTerritoryEnemiesInBoard(curentLevel, this, m_infoOfLevel);
@@ -114,8 +115,10 @@ void Level::drawWindow()
     m_window.clear();
     m_board.draw(m_infoOfLevel);
     m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
-    if (m_percentage >= m_infoOfLevel[PERCENTAGE])
+    if (m_percentage >= m_infoOfLevel[PERCENTAGE] && m_currentLevel!= LAST_LEVEL)
         m_levelUp.draw(m_window);
+    else if(m_percentage >= m_infoOfLevel[PERCENTAGE] && m_currentLevel == LAST_LEVEL)
+        m_winGame.draw(m_window);
     m_window.display();
 }
 //פונקציה האחראית על אנימצית ההתפוצצות 
