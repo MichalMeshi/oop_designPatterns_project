@@ -11,6 +11,7 @@ public:
 	sf::Texture& getTexture(int i) { return m_tex[i]; }//Cant be const
 	sf::SoundBuffer& getSound(int index) { return (m_soundBufferVec[index]); }//Cant be const
 	std::vector<std::unique_ptr<sf::Sound>>& getSoundVec() { return m_soundVec; }//Cant be const
+	sf::RenderWindow& getWindow() { return m_window; }
 private:
 	Graphics();
 	Graphics(const Graphics&) = default;

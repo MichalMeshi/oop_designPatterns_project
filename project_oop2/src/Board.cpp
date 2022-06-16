@@ -2,8 +2,8 @@
 #include "CollisionHandling.h"
 #include "Level.h"
 //-----------------------------------------------
-Board::Board(sf::RenderWindow& window, int curentLevel, int& percent)
-	:m_window(window), m_player(std::make_unique<Player>(Graphics::getGraphics().getTexture(PLAYER), PLAYER_SPRITE_SIZE)),
+Board::Board(int curentLevel, int& percent)
+	: m_player(std::make_unique<Player>(Graphics::getGraphics().getTexture(PLAYER), PLAYER_SPRITE_SIZE)),
 	m_backgroundGame(Graphics::getGraphics().getTexture(SKY), {}, { WIDTH_WINDOW, HIGTH_WINDOW }), m_percentage(percent),
 	m_crumbPic(Graphics::getGraphics().getTexture(CRUMB_ANIMATION), {}, CRUMS_SPRITE_SHEET_SIZE), m_crumbAnimation(m_crumbPic, CRUMS_SPRITE_SHEET_SIZE.x, CRUMS_SPRITE_SHEET_SIZE.y)
 {
@@ -27,9 +27,9 @@ void Board::createBoard()
 //-----------------------------------------------
 void Board::draw(std::vector<int> infoVec)
 {
-	m_backgroundGame.draw(m_window);
+	m_backgroundGame.draw();
 	drawTiles(infoVec);
-	m_player->draw(m_window);
+	m_player->draw();
 	drawObjects();
 
 }
@@ -48,7 +48,7 @@ void Board::drawTiles(std::vector<int> infoVec)
 				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_BLOCKED])));
 			if (m_matrix[i][j] == MIDDLE)
 				rect.setTexture(&(Graphics::getGraphics().getTexture(infoVec[INDEX_OF_MIDDLE])));
-			m_window.draw(rect);
+			Graphics::getGraphics().getWindow().draw(rect);
 		}
 }
 //הדפסת אויבים
@@ -66,7 +66,7 @@ template <typename enemyVec>
 void Board::drawVec(std::vector<typename enemyVec>& vec)
 {
 	for (int i = 0; i < vec.size(); i++)
-		vec[i]->draw(m_window);
+		vec[i]->draw();
 }
 //פוקנציה הבודקת האם השחקן חזר למקום שכבר היה בו
 //------------------------------------------------
@@ -309,8 +309,8 @@ void Board::handleAnimationCrumb(int i, int j)
 	pos.y = BOARD_GAME_CELL_SIZE * i + BEGGINING_OF_BOARD_Y - HALF_ENEMY_PIC_SIZE;
 	m_crumbPic.setPosition(pos);
 	m_crumbAnimation.handleAnimation();
-	m_crumbPic.draw(m_window);
-	m_window.display();
+	m_crumbPic.draw();
+	Graphics::getGraphics().getWindow().display();
 }
 //פונקציה שמעדכנת איזה שחקן משחק 
 //-------------------------------------------------------------

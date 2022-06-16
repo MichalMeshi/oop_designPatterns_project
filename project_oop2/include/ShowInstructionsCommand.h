@@ -6,8 +6,8 @@ class ShowInstructionsCommand:public Command
 public:
 	ShowInstructionsCommand();
 	~ShowInstructionsCommand() = default;
-	virtual void execute(sf::RenderWindow& window, Display& d) override;
-	void draw(sf::RenderWindow& window) {m_instructions.draw(window); m_back.draw(window);}
+	virtual void execute(Display& d) override;
+	void draw() {m_instructions.draw(); m_back.draw();}
 private:
 	Display m_instructions;
 	Display m_back;

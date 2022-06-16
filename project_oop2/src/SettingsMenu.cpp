@@ -1,6 +1,7 @@
 #include "SettingsMenu.h"
 SettingsMenu::SettingsMenu()
-	: Menu(sf::VideoMode(WIDTH_WINDOW, HIGTH_WINDOW), "SETTINGS", Display(Graphics::getGraphics().getTexture(SETTING_VIEW), BEGGINING_WINDOW, sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW)))
+	: Menu(Display(Graphics::getGraphics().getTexture(SETTING_VIEW), BEGGINING_WINDOW, sf::Vector2f(WIDTH_WINDOW, HIGTH_WINDOW))),
+	m_back(Graphics::getGraphics().getTexture(BACK), BEGGINING_WINDOW, BACK_BOTTON_SIZE)
 {
 	addCellToVec(std::make_pair(std::move(std::make_unique<ShowInstructionsCommand>()), Display(Graphics::getGraphics().getTexture(HELP), HELP_POSITION, COMMAND_PIC_SIZE)));
 	if (Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->getVolume() == VOLUME)
@@ -14,4 +15,33 @@ SettingsMenu::SettingsMenu()
 	m_menu[HELP].second.setOrigin(HALF_COMMAND_PIC_LENGTH, HALF_COMMAND_PIC_LENGTH);
 	m_menu[SOUND].second.setOrigin(HALF_COMMAND_PIC_LENGTH, HALF_COMMAND_PIC_LENGTH);
 	m_menu[NOISE].second.setOrigin(HALF_COMMAND_PIC_LENGTH, HALF_COMMAND_PIC_LENGTH);
+}
+//-----------------------------------------
+void SettingsMenu::run()
+{
+	while (Graphics::getGraphics().getWindow().isOpen())
+	{
+		Graphics::getGraphics().getWindow().clear();
+		handleBoard();
+		m_back.draw();
+		Graphics::getGraphics().getWindow().display();
+		if (auto event = sf::Event{}; Graphics::getGraphics().getWindow().waitEvent(event)) {
+			switch (event.type)
+			{
+			case sf::Event::Closed: {
+				Graphics::getGraphics().getWindow().close();
+				return;
+			}
+			case sf::Event::MouseButtonReleased: {
+				handlePress(Graphics::getGraphics().getWindow().mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
+			}
+			case sf::Event::MouseMoved: {
+				if (m_back.getSprite().getGlobalBounds().contains(Graphics::getGraphics().getWindow().mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
+					return;
+				handleMouseMove(Graphics::getGraphics().getWindow().mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y }));
+				break;
+			}
+			}
+		}
+	}
 }

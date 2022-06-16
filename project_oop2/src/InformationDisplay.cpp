@@ -8,8 +8,8 @@
 #include <string>
 
 //---------------------------------------------------------------------------------------
-InformationDisplay::InformationDisplay(char levelNum, sf::RenderWindow& window,int time)
-	:m_window(window), m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(100, 100))
+InformationDisplay::InformationDisplay(char levelNum,int time)
+	:m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(100, 100))
 	, m_heartPicture(Graphics::getGraphics().getTexture(HEART_ICON), sf::Vector2f(50, 50), sf::Vector2f(60, 60)),m_timeLeftInLevel(time) {
 	initializeLevelTxt();
 	initializeNumLevelTxt(levelNum);
@@ -20,17 +20,17 @@ InformationDisplay::InformationDisplay(char levelNum, sf::RenderWindow& window,i
 void InformationDisplay::drawInfoMenu(int lifeAmount)
 {
 	float xPos = 50;
-    m_window.draw(m_levelTxt);
-	m_clockPicture.draw(m_window);
+	Graphics::getGraphics().getWindow().draw(m_levelTxt);
+	m_clockPicture.draw();
 	for (int i = 0; i < lifeAmount; i++)
 	{
 		m_heartPicture.setPosition(sf::Vector2f(xPos, 100));
-		m_heartPicture.draw(m_window);
+		m_heartPicture.draw();
 		xPos += 40;
 	}
-	m_window.draw(m_timeLeftTxt);
-	m_window.draw(m_percentageTxt);
-	m_window.draw(m_numLevelTxt);
+	Graphics::getGraphics().getWindow().draw(m_timeLeftTxt);
+	Graphics::getGraphics().getWindow().draw(m_percentageTxt);
+	Graphics::getGraphics().getWindow().draw(m_numLevelTxt);
 }
 //---------------------------------------------------------------------------------------
 void InformationDisplay::setTimer(float time)

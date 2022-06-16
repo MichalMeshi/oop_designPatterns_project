@@ -1,8 +1,8 @@
 #include "Level.h"
 //----------------------------------
-Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLevelVec)
-    :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
-        m_window, m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
+Level::Level(int curentLevel, std::vector<int> infoLevelVec)
+    :m_board(curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
+         m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
         m_levelUp(Graphics::getGraphics().getTexture(LEVEL_UP), sf::Vector2f(MIDDLE_BOARD_X, MIDDLE_BOARD_Y), LEVEL_UP_SIZE),m_currentLevel(curentLevel)
     , m_winGame(Graphics::getGraphics().getTexture(WIN_GAME), { MIDDLE_BOARD_X ,MIDDLE_BOARD_Y}, WIN_SIZE)
 {
@@ -15,7 +15,7 @@ Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLev
 //----------------------------------
 enum EndOfLevelCondition Level::runLevel()
 {
-    while (m_window.isOpen())
+    while (Graphics::getGraphics().getWindow().isOpen())
     {
         if (handleEvents() == CLOSE)
             return CLOSE;
@@ -50,12 +50,12 @@ void Level::handlePlayer()
 enum EndOfLevelCondition Level::handleEvents()
 {
     sf::Event event;
-    while (m_window.pollEvent(event))
+    while (Graphics::getGraphics().getWindow().pollEvent(event))
     {
         switch (event.type)
         {
         case sf::Event::Closed: {
-            m_window.close();
+            Graphics::getGraphics().getWindow().close();
             return CLOSE;}
         case sf::Event::KeyPressed: {
             m_board.setDirection(event.key.code);break;}
@@ -113,14 +113,14 @@ void Level::movesObjects()
 //------------------------------------------------
 void Level::drawWindow()
 {
-    m_window.clear();
+    Graphics::getGraphics().getWindow().clear();
     m_board.draw(m_infoOfLevel);
     m_infoMenu.drawInfoMenu(m_infoOfLevel[LIFE_AMOUNT]);
     if (m_percentage >= m_infoOfLevel[PERCENTAGE] && m_currentLevel!= LAST_LEVEL)
-        m_levelUp.draw(m_window);
+        m_levelUp.draw();
     else if(m_percentage >= m_infoOfLevel[PERCENTAGE] && m_currentLevel == LAST_LEVEL)
-        m_winGame.draw(m_window);
-    m_window.display();
+        m_winGame.draw();
+    Graphics::getGraphics().getWindow().display();
 }
 //פונקציה האחראית על אנימצית ההתפוצצות 
 //------------------------------------------------
@@ -128,10 +128,10 @@ void Level::handleAnimationExplosion()
 {
     for (int i = 0; i < 5; i++)
     {
-        m_window.clear();
+        Graphics::getGraphics().getWindow().clear();
         drawWindow();
         m_explosionAnimation.handleAnimation();
-        m_explosionPic.draw(m_window);
-        m_window.display();
+        m_explosionPic.draw();
+        Graphics::getGraphics().getWindow().display();
     }
 }

@@ -12,7 +12,7 @@ class Gift;
 //-----------------------------------
 class Board {
 public:
-	Board(sf::RenderWindow& window, int, int&);
+	Board(int, int&);
 	~Board() {}
 	void draw(std::vector<int>);
 	bool checkIfPassedAlready();
@@ -38,7 +38,6 @@ public:
 	void changePlayerToKilling();
 	void setPlayer();
 private:
-	sf::RenderWindow& m_window;
 	std::vector< std::vector<int>>m_matrix;
 	std::vector<std::unique_ptr<Gift>> m_giftsVec;
 	std::vector<std::unique_ptr<Enemies>> m_ballsVec;

@@ -6,7 +6,7 @@
 class Level{
 public:
 
-	Level(sf::RenderWindow& window, int curentLevel, std::vector<int>);
+	Level(int curentLevel, std::vector<int>);
 	~ Level()= default;
 	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
 	void addTime() { m_timeForLevel += (rand() % FIVE) + SEVEN; }
@@ -24,11 +24,9 @@ public:
 
 private:
 	Board m_board;
-	sf::RenderWindow& m_window;
 	InformationDisplay m_infoMenu;
 	sf::Clock m_clockForGift;
 	sf::Clock m_clock;
-
 	int m_timeForLevel;
 	int m_percentage = ZERO;
 	std::vector<int> m_infoOfLevel;

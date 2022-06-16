@@ -7,4 +7,6 @@ class StartMenu:public Menu
 public:
 	StartMenu(GameController& );
 	~StartMenu() = default;
+	virtual void run()override;
+private:
 };

@@ -4,7 +4,7 @@
 class InformationDisplay
 {
 public:
-	InformationDisplay(char ,sf::RenderWindow& window,int);
+	InformationDisplay(char ,int);
 	~InformationDisplay()=default;
 	void drawInfoMenu(int life);
 	void setTimer(float time);
@@ -22,7 +22,6 @@ private:
 	sf::Text m_numLevelTxt;
 	sf::Text m_percentageTxt;
 	sf::Vector2f m_firstHeartPosition = FIRST_HEART_POSITION;
-	sf::RenderWindow& m_window;
 };
 
 

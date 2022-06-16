@@ -4,5 +4,5 @@ class NoiseCommand :public Command {
 public:
 	NoiseCommand() :Command() {}
 	~NoiseCommand() = default;
-	virtual void execute(sf::RenderWindow& window, Display& d) override;
+	virtual void execute(Display& d) override;
 };

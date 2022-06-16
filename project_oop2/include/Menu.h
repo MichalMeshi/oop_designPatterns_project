@@ -7,12 +7,11 @@
 class Menu
 {
 public:
-	Menu(sf::VideoMode v, std::string s, Display d) :m_window(v, s), m_View(d) { }
+	Menu(Display d) : m_View(d){ }
 	~Menu() = default;
 	void addCellToVec(std::pair<std::unique_ptr<Command>, Display>&& p) { m_menu.emplace_back(std::move(p)); }
-	void run();
+	virtual void run() = 0;
 protected:
-	sf::RenderWindow m_window;
 	std::vector <std::pair<std::unique_ptr<Command>, Display>> m_menu;
 	Display m_View;
 	void handleBoard();

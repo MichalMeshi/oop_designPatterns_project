@@ -8,5 +8,7 @@ class SettingsMenu:public Menu
 public:
 	SettingsMenu();
 	~SettingsMenu()=default;
+	virtual void run()override;
 private:
+	Display m_back;
 };

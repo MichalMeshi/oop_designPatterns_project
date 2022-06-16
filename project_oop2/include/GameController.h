@@ -11,7 +11,6 @@ public:
 	~GameController() {}
 	void runTheGame();
 private:
-	sf::RenderWindow m_window;
 	InfoOfLevel m_infoOfLevel;
 	Display m_gameOver;
 	void handleWindow();
