@@ -1,5 +1,5 @@
 #include "Level.h"
-//---------------------------------
+//----------------------------------
 Level::Level(sf::RenderWindow& window, int curentLevel, std::vector<int> infoLevelVec)
     :m_window(window), m_board(window, curentLevel, m_percentage), m_timeForLevel((rand() % HALF_MINUTE) + HALF_MINUTE+ FIVE_SECONDS), m_infoMenu(char(curentLevel + FOR_ASCII_CONVERSION),
         m_window, m_timeForLevel), m_infoOfLevel(infoLevelVec), m_explosionPic(Graphics::getGraphics().getTexture(EXPLOSION_ANIMATION), BEGGINIG_OF_MATRIX, EXPLOSION_SPRITE_SHEET_SIZE), m_explosionAnimation(m_explosionPic, EXPLOSION_SPRITE_SHEET_SIZE.x, EXPLOSION_SPRITE_SHEET_SIZE.y),
