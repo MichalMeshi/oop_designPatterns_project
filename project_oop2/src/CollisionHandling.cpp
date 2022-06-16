@@ -115,7 +115,9 @@ void processCollision(Object& object1,Object& object2)
 {
     auto phf = lookup(typeid(object1), typeid(object2));
     if (!phf)
-        throw;
+    {
+        throw UnknownCollision(object1, object2);
+    }
     phf(object1, object2);
 }
 
