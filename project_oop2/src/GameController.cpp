@@ -8,7 +8,11 @@ void GameController::runTheGame()
 	int curentLevel = FIRST_LEVEL;
 	runGameLevels(curentLevel);
 	if (curentLevel < LEVELS_AMOUNT + 1)
+	{
 		m_gameOver.draw();
+		Graphics::getGraphics().getWindow().display();
+		sf::sleep(sf::Time(sf::seconds(THREE_SECONDS)));
+	}
 	handleWindow();
 }
 //----------------------------------------------------------------
@@ -16,7 +20,6 @@ void GameController::runTheGame()
 void GameController::handleWindow()
 {
 	Graphics::getGraphics().getWindow().display();
-	sf::sleep(sf::Time(sf::seconds(THREE_SECONDS)));
 }
 //----------------------------------------------------------------
 //פוקנציה המנהלת את שלבי המשחק
