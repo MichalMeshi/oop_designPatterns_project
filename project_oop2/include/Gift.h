@@ -2,8 +2,8 @@
 #include "StaticObj.h"
 #include "Animation.h"
 class Level;
-class Gift: public StaticObj
-{
+//----------------------------------------------------------------
+class Gift: public StaticObj{
 public:
 	Gift(sf::Texture& t, sf::Vector2f f, Level* level) ;
 	 virtual ~Gift() = 0 {}

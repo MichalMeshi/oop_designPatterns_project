@@ -2,8 +2,8 @@
 #include "Animation.h"
 #include "Object.h"
 class Board;
-class DynamicObj :public Object
-{
+//-------------------------------------------
+class DynamicObj :public Object {
 public:
 	DynamicObj(sf::Texture& t, sf::Vector2f f):Object(t,f){}
 	~DynamicObj() {}

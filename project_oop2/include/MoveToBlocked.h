@@ -1,9 +1,8 @@
 #pragma once
 #include "CanMoveToPlace.h"
 #include "EnemyFactory.h"
-
-class MoveToBlocked:public CanMoveToPlace
-{
+//-----------------------------------------------
+class MoveToBlocked:public CanMoveToPlace{
 public:
 	MoveToBlocked() :CanMoveToPlace() {}
 	virtual ~MoveToBlocked() override{}

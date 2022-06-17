@@ -4,8 +4,8 @@
 #include <vector>
 #include <utility>
 #include "SettingsCommand.h"
-class Menu
-{
+//-----------------------------------------------
+class Menu{
 public:
 	Menu(Display d) : m_View(d){ }
 	~Menu() = default;

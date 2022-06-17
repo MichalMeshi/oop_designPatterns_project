@@ -1,7 +1,7 @@
 #pragma once
 #include "Display.h"
-class Object
-{
+//-----------------------------------------------
+class Object{
 public:
 	Object(sf::Texture& t, sf::Vector2f f) :m_display(t, f) {}
 	virtual ~Object() = 0{}

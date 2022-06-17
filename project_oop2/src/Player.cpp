@@ -1,5 +1,5 @@
 #include "Player.h"
-
+//------------------------------------------------------------
 Player::Player(sf::Texture& t, sf::Vector2f f, int x, int y, int dx, int dy)
 	: Object(t, f), m_x(x), m_y(y), m_dx(dx), m_dy(dy)
 {

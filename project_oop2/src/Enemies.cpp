@@ -1,6 +1,6 @@
 #include "Enemies.h"
 #include "Level.h"
-
+//------------------------------------------------------------
 Enemies::Enemies(sf::Texture& t, std::shared_ptr<Move> m, Level* l)
 	:DynamicObj(t, sf::Vector2f(30, 30)), m_move(m), m_prevMove(m_move), m_level(l)
 {
@@ -33,5 +33,4 @@ void Enemies::playAnimation()
 void Enemies::updateFailure(bool b)
 {
 	m_level->updateFailure(b);
-
 }

@@ -62,9 +62,10 @@ Graphics::Graphics()
 	m_soundBufferVec[CLOCK_SOUND].loadFromFile("clock.ogg");
 	m_soundBufferVec[FAILURE_SOUND].loadFromFile("failureSound.ogg");
 
-	
-
 	m_font = sf::Font();
 	m_font.loadFromFile("C:/Windows/Fonts/Impact.ttf");
-
+}
+//-----------------------------------------------
+void Graphics::createWindow() {
+	m_window.create(sf::VideoMode({ WIDTH_WINDOW,HIGTH_WINDOW }), "Xonix");
 }

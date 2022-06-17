@@ -72,5 +72,4 @@ private:
 	void drawVec(std::vector<typename enemyVec>&);
 	template <typename enemyVec>
 	void moveEnemiesVec(std::vector<typename enemyVec>& enemiesVec, bool&);
-
 };

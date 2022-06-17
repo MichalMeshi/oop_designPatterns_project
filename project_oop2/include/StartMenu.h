@@ -1,9 +1,8 @@
 #pragma once
 #include "NewGameCommand.h"
 #include "Menu.h"
-
-class StartMenu:public Menu
-{
+//-----------------------------------------------
+class StartMenu:public Menu{
 public:
 	StartMenu(GameController& );
 	~StartMenu() = default;

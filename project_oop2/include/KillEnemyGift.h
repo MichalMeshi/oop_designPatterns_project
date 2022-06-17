@@ -1,8 +1,8 @@
 #pragma once
 #include "GiftFactory.h"
 #include "Level.h"
-class KillEnemyGift :public Gift
-{
+//-----------------------------------------------
+class KillEnemyGift :public Gift{
 public:
 	KillEnemyGift(Level* l);
 	virtual ~KillEnemyGift() override {}

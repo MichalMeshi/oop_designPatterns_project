@@ -1,5 +1,6 @@
 #pragma once
 #include "CanMoveToPlace.h"
+//-----------------------------------------------
 class Move{
 public:
 	Move(sf::Vector2i pos,std::unique_ptr<CanMoveToPlace> placeToMove); 

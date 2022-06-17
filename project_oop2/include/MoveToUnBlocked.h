@@ -2,8 +2,8 @@
 #include "CanMoveToPlace.h"
 #include "EnemyFactory.h"
 #include "Board.h"
-class MoveToUnBlocked :public CanMoveToPlace
-{
+//-----------------------------------------------
+class MoveToUnBlocked :public CanMoveToPlace{
 public:
 	MoveToUnBlocked() :CanMoveToPlace() {}
 	virtual ~MoveToUnBlocked() override {}

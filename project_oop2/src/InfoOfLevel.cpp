@@ -1,4 +1,5 @@
 #include "InfoOfLevel.h"
+//------------------------------------------------------------
 InfoOfLevel::InfoOfLevel()
 {
 	m_amountEnemiesInLevelMatrix.resize(4);

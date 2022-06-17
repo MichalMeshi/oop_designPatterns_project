@@ -7,6 +7,7 @@ StartMenu::StartMenu(GameController& gameCon) : Menu(Display(Graphics::getGraphi
 	m_menu[0].second.setOrigin(NEW_GAME_SIZE.x / 2, NEW_GAME_SIZE.y / 2);
 	m_menu[1].second.setOrigin(SETTING_SIZE.x / 2, SETTING_SIZE.y / 2);
 }
+//פונקציה האחראית על הריצה של התפריט הראשוני
 //-----------------------------------------
 void StartMenu::run()
 {

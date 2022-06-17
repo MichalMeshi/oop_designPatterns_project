@@ -1,9 +1,8 @@
 #pragma once
 #include "Move.h"
 #include "EnemyFactory.h"
-
-class SmartMove :public Move
-{
+//-----------------------------------------------
+class SmartMove :public Move{
 public:
 	SmartMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove);
 	virtual sf::Vector2f move(Board& b) override;

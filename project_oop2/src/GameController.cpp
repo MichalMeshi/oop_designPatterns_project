@@ -1,6 +1,11 @@
 #include "GameController.h"
 #include "InfoOfLevel.h"
-
+//----------------------------------------------------------------
+GameController::GameController()
+	:m_gameOver(Graphics::getGraphics().getTexture(GAME_OVER), MIDDLE_MATRIX, GAME_OVER_SIZE)
+{
+	m_gameOver.setOrigin(GAME_OVER_SIZE.x / 2, GAME_OVER_SIZE.y / 2);
+}
 //פונקציה האחראית על הפעלת המשחק
 //----------------------------------------------------------------
 void GameController::runTheGame()

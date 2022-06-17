@@ -4,10 +4,12 @@
 //------------------------------------------
 class Controller {
 public:
-	Controller():m_gameController() {  }
+	Controller():m_gameController() {}
 	~Controller(){}
 	void run();
 private:
 	GameController m_gameController;
 	void createSounds();
+	void playBackSound();
+
 };

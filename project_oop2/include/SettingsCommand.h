@@ -1,6 +1,7 @@
+#pragma once
 #include "Command.h"
-class SettingsCommand :public Command
-{
+//-----------------------------------------------
+class SettingsCommand :public Command{
 public:
 	SettingsCommand():Command(){}
 	~SettingsCommand() = default;

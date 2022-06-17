@@ -4,10 +4,11 @@
 class Move;
 class Level;
 class CanMoveToPlace;
+//---------------------------------------------------------
 typedef std::shared_ptr<Move>(*moveFunc)(sf::Vector2i, std::unique_ptr<CanMoveToPlace>);
 typedef std::unique_ptr<CanMoveToPlace>(*WhereCanMoveFunc)();
-class EnemyFactory
-{
+//---------------------------------------------------------
+class EnemyFactory{
 public:
 	static std::vector<moveFunc>& getMoveVec();
 	static std::vector<WhereCanMoveFunc>& getWhereCanMoveVec();
@@ -18,4 +19,5 @@ public:
 	static std::unique_ptr<TerritoryEater> createTerritoryEater(sf::Vector2i pos, sf::Texture& t, enum MoveEnum e_move, enum WhereCanMoveEnum e_whereMove, Level* l);
 	static std::vector<std::unique_ptr<TerritoryEater>> createTerritoryEaters(int level_num, Level* l, std::vector<int> v);
 	static std::vector<std::unique_ptr<Enemies>> createSpiders(int level_num, Level* l, std::vector<int> v);
+private:
 };

@@ -1,5 +1,7 @@
 #include "NoiseCommand.h"
+//------------------------------------------------------------
 //פונקציה האחראית על ביצוע הפקודה של ניהול המוזיקה של האירועים במשחק
+//------------------------------------------------------------
 void NoiseCommand::execute(Display& d)
 {
 	if (d.getTexture() == &Graphics::getGraphics().getTexture(NOISE))

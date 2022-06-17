@@ -1,9 +1,8 @@
 #pragma once
 #include "Move.h"
 #include "EnemyFactory.h"
-
-class RandomMove :public Move
-{
+//-----------------------------------------------
+class RandomMove :public Move{
 public:
 	RandomMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove);
 	~RandomMove() = default;

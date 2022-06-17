@@ -2,10 +2,9 @@
 #include "Board.h"
 #include "InformationDisplay.h"
 #include "InfoOfLevel.h"
-
+//-----------------------------------------------
 class Level{
 public:
-
 	Level(int curentLevel, std::vector<int>);
 	~ Level()= default;
 	void addLife() { m_infoOfLevel[LIFE_AMOUNT]++; }
@@ -21,7 +20,6 @@ public:
 	void updateFailure(bool b) { m_board.updateFailure(b); }
 	enum EndOfLevelCondition runLevel();
 	void handleFailure();
-
 private:
 	Board m_board;
 	InformationDisplay m_infoMenu;

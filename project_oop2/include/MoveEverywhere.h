@@ -2,6 +2,7 @@
 #include "CanMoveToPlace.h"
 #include "EnemyFactory.h"
 #include "Board.h"
+//-----------------------------------------------
 class MoveEverywhere :public CanMoveToPlace
 {
 public:

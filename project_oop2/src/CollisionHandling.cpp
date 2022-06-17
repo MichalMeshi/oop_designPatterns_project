@@ -7,7 +7,7 @@
 #include "KillEnemyGift.h"
 #include "ImmunetyGift.h"
 #include "Graphics.h"
-
+//-------------------------------------------------------------
 namespace // anonymous namespace — the standard way to make function "static"
 {
     //פונקצית ניהול התנגשות של שחקן עם אויב

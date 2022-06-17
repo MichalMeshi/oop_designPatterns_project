@@ -1,13 +1,12 @@
 #pragma once
 #include "Object.h"
+//-----------------------------------------------
 class Player :public Object{
 public:
-	
 	Player(sf::Texture& t, sf::Vector2f f, int x, int y, int dx, int dy);
 	Player(sf::Texture& t, sf::Vector2f f) :Player(t,f,0,0,0,0){}
 	Player(int dx, int dy) :Player(Graphics::getGraphics().getTexture(PLAYER), { 40,40 },0,0,dx,dy){}
 	Player(int x,int y,int dx, int dy) :Player(Graphics::getGraphics().getTexture(PLAYER), { 40,40 }, x, y, dx, dy) {}
-
 	~Player() {}
 	void move();
 	int getPlayerXpos()const { return m_x; }

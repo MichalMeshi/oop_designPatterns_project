@@ -6,7 +6,6 @@
 #include <cmath>
 #include <sstream>
 #include <string>
-
 //---------------------------------------------------------------------------------------
 InformationDisplay::InformationDisplay(char levelNum,int time)
 	:m_clockPicture(Graphics::getGraphics().getTexture(CLOCKPICTURE), CLOCK_ICON_POSITION, sf::Vector2f(100, 100))
@@ -16,6 +15,7 @@ InformationDisplay::InformationDisplay(char levelNum,int time)
 	initializeTimeLeftTxt();
 	initializePercentagLeftTxt();
 }
+//פונקציה המדפיסה את המידע שבכל שלב
 //---------------------------------------------------------------------------------------
 void InformationDisplay::drawInfoMenu(int lifeAmount)
 {
@@ -32,6 +32,7 @@ void InformationDisplay::drawInfoMenu(int lifeAmount)
 	Graphics::getGraphics().getWindow().draw(m_percentageTxt);
 	Graphics::getGraphics().getWindow().draw(m_numLevelTxt);
 }
+//פונקציה המעדכנת את הטיימר
 //---------------------------------------------------------------------------------------
 void InformationDisplay::setTimer(float time)
 {
@@ -40,6 +41,7 @@ void InformationDisplay::setTimer(float time)
 	stream << std::fixed << std::setprecision(1) << time;
 	m_timeLeftTxt.setString(stream.str());
 }
+//פונקציה המעדכנת את האחוזים
 //---------------------------------------------------------------------------------------
 void InformationDisplay::setPercentage(int percent,int max_per)
 {

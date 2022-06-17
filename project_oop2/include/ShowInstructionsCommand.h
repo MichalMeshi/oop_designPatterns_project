@@ -1,8 +1,7 @@
 #pragma once
 #include "Command.h"
-class ShowInstructionsCommand:public Command
-{
-
+//-----------------------------------------------
+class ShowInstructionsCommand:public Command{
 public:
 	ShowInstructionsCommand();
 	~ShowInstructionsCommand() = default;

@@ -1,9 +1,8 @@
 #pragma once
 #include "Move.h"
 #include "EnemyFactory.h"
-
-class SimpleMove :public Move
-{
+//-----------------------------------------------
+class SimpleMove :public Move{
 public:
 	SimpleMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) :Move(pos,std::move(placeToMove)) {}
 	~SimpleMove() {}

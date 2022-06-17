@@ -1,8 +1,8 @@
 #pragma once
 #include "Display.h"
 #include "Board.h"
-class InformationDisplay
-{
+//--------------------------------------
+class InformationDisplay{
 public:
 	InformationDisplay(char ,int);
 	~InformationDisplay()=default;
