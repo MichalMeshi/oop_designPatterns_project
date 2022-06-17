@@ -14,6 +14,6 @@ void NoiseCommand::execute(Display& d)
 		d.setTexture(Graphics::getGraphics().getTexture(NOISE));
 		for (int i = 1; i < Graphics::getGraphics().getSoundVec().size(); i++)
 			if (Graphics::getGraphics().getSoundVec()[i] != nullptr)
-				Graphics::getGraphics().getSoundVec()[i]->setVolume(100);
+				Graphics::getGraphics().getSoundVec()[i]->setVolume(NOISE_VOLUME);
 	}	
 }

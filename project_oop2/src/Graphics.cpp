@@ -9,7 +9,6 @@ Graphics& Graphics::getGraphics()
 //---------------------------------------------------------------------------------------
 Graphics::Graphics()
 {
-	m_window.create(sf::VideoMode({ WIDTH_WINDOW,HIGTH_WINDOW }), "Xonix");
 	m_tex.resize(PICS_AMOUNT);
 	m_soundBufferVec.resize(AMOUNT_OF_SOUNDS);
 	m_soundVec.resize(AMOUNT_OF_SOUNDS);

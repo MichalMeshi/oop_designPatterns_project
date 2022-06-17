@@ -2,8 +2,12 @@
 //---------------------------------
 void Controller::run() 
 {
+	Graphics::getGraphics().createWindow();
+
 	createSounds();
+	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->setVolume(VOLUME);
 	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->play();
+	Graphics::getGraphics().getSoundVec()[FIRST_MUSIC]->setLoop(true);
 	StartMenu m(m_gameController);
 	m.run();
 }

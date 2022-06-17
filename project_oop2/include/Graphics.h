@@ -12,6 +12,9 @@ public:
 	sf::SoundBuffer& getSound(int index) { return (m_soundBufferVec[index]); }//Cant be const
 	std::vector<std::unique_ptr<sf::Sound>>& getSoundVec() { return m_soundVec; }//Cant be const
 	sf::RenderWindow& getWindow() { return m_window; }
+	void createWindow(){
+		m_window.create(sf::VideoMode({ WIDTH_WINDOW,HIGTH_WINDOW }), "Xonix");
+	}
 private:
 	Graphics();
 	Graphics(const Graphics&) = default;

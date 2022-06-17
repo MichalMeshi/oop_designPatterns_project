@@ -8,7 +8,7 @@ SettingsMenu::SettingsMenu()
 		addCellToVec(std::make_pair(std::move(std::make_unique<BackSoundCommand>()), Display(Graphics::getGraphics().getTexture(SOUND), SOUND_POSITION, COMMAND_PIC_SIZE)));
 	else
 		addCellToVec(std::make_pair(std::move(std::make_unique<BackSoundCommand>()), Display(Graphics::getGraphics().getTexture(UN_SOUND), SOUND_POSITION, COMMAND_PIC_SIZE)));
-	if (Graphics::getGraphics().getSoundVec()[CLICK_SOUND]->getVolume() == VOLUME)
+	if (Graphics::getGraphics().getSoundVec()[CLICK_SOUND]->getVolume() == NOISE_VOLUME)
 		addCellToVec(std::make_pair(std::move(std::make_unique<NoiseCommand>()), Display(Graphics::getGraphics().getTexture(NOISE), NOISE_POSITION, COMMAND_PIC_SIZE)));
 	else
 		addCellToVec(std::make_pair(std::move(std::make_unique<NoiseCommand>()), Display(Graphics::getGraphics().getTexture(UN_NOISE), NOISE_POSITION, COMMAND_PIC_SIZE)));
