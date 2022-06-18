@@ -34,7 +34,7 @@ std::unique_ptr<Enemies> EnemyFactory::createEnemy(sf::Vector2i pos, sf::Texture
 //----------------------------------------------------------------------------------------------
 std::vector<std::unique_ptr<Enemies>> EnemyFactory::createBalls(int level_num, Level* l)
 {
-	int num = (rand() % 5) + (level_num+2);
+	int num = (rand() % 5) + (level_num+1);
 	std::vector<std::unique_ptr<Enemies>> vec;
 	for (int i = 0; i < num; i++)
 		vec.emplace_back(EnemyFactory::createEnemy(sf::Vector2i(800, 500), Graphics::getGraphics().getTexture(BALL), SIMPLE_MOVE, MOVE_TO_UNBLOCKED, l));	

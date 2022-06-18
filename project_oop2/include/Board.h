@@ -54,7 +54,7 @@ private:
 	
 	void createBoard();
 	void setBackPlayer(); 
-	void drawTiles(std::vector<int> infoVec);
+	void drawTiles(std::vector<int> infoVec)const;
 	void drawObjects();
 	void handleConditionTile();
 	void eraseDeletedObjects();

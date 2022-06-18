@@ -9,7 +9,5 @@ public:
 private:
 	InfoOfLevel m_infoOfLevel;
 	Display m_gameOver;
-	void handleWindow();
 	void runGameLevels(int&);
-
 };

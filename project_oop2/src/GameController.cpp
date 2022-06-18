@@ -18,12 +18,6 @@ void GameController::runTheGame()
 		Graphics::getGraphics().getWindow().display();
 		sf::sleep(sf::Time(sf::seconds(THREE_SECONDS)));
 	}
-	handleWindow();
-}
-//----------------------------------------------------------------
-//פונקציה האחראית על ההדפסה הסופית של החלון בסיום המשחק
-void GameController::handleWindow()
-{
 	Graphics::getGraphics().getWindow().display();
 }
 //----------------------------------------------------------------

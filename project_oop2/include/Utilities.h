@@ -27,12 +27,9 @@ const sf::Vector2f BACK_BOTTON_SIZE = { 100, 100 };
 
 const sf::Vector2i LEFT = { -1, 0 };
 const sf::Vector2i RIGHT = { 1, 0 };
-const sf::Vector2i UP = { -1, 0 };
-const sf::Vector2i DOWN = { 1, 0 };
+const sf::Vector2i UP = { 0, -1 };
+const sf::Vector2i DOWN = { 0, 1 };
 const sf::Vector2i BEGGIN_WINDOW = { 0, 0 };
-
-
-
 
 const int AMOUNT_OF_SOUNDS = 6;
 const int MIDDLE_BOARD_X = 800;
@@ -48,7 +45,7 @@ const int BEGGINING_OF_BOARD_Y = 50;
 const int BOARD_GAME_LENGTH = 900;
 const int BOARD_GAME_CELL_SIZE = 20;
 const int AMOUNT_FOR_ONE_PERCENT = 18;
-const int VOLUME = 50;
+const int VOLUME = 17;
 const int NOISE_VOLUME = 100;
 const int TO_UP = -1;
 const int TO_DOWN = 1;

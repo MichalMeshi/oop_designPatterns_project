@@ -1,7 +1,8 @@
 #include "RandomMove.h"
 #include "Board.h"
 //------------------------------------------------------------
-RandomMove::RandomMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) :Move(pos, std::move(placeToMove))
+RandomMove::RandomMove(sf::Vector2i pos, std::unique_ptr<CanMoveToPlace> placeToMove) 
+	:Move(pos, std::move(placeToMove))
 {
 	m_dx = BIG_JUMP_PIXELS;
 	m_dy = BIG_JUMP_PIXELS;

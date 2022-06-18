@@ -35,7 +35,7 @@ void Board::draw(std::vector<int> infoVec)
 }
 //הדפסת אריחים
 //------------------------------------------------
-void Board::drawTiles(std::vector<int> infoVec)
+void Board::drawTiles(std::vector<int> infoVec)const
 {
 	for (int i = 0; i < MATRIX_SIZE; i++)
 		for (int j = 0; j < MATRIX_SIZE; j++)

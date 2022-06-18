@@ -13,13 +13,12 @@ public:
 	void restartClockForGift(){ m_clockForGift.restart(); }
 	int getPercentage()const { return m_percentage; }
 	void setPercentage(int percent) {  m_percentage= percent; }
-	void handleAnimationExplosion();
-	void drawWindow();
 	void immuneThePlayer(){m_board.immuneThePlayer();}
 	void changePlayerToKilling() { m_board.changePlayerToKilling(); }
 	void updateFailure(bool b) { m_board.updateFailure(b); }
 	enum EndOfLevelCondition runLevel();
 	void handleFailure();
+	void handleAnimationExplosion();
 private:
 	Board m_board;
 	InformationDisplay m_infoMenu;
@@ -41,6 +40,7 @@ private:
 	void movesObjects();
 	enum EndOfLevelCondition handlePercentage();
 	void handlePlayer();
+	void drawWindow();
 };
 
 
